@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Liberty Falls Map and Walkthrough — Black Ops 6 Zombies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1ea; --surface:#fffdf8; --surface2:#ece7da; --ink:#1c1a16; --muted:#5c564a;
+  --line:#d8d0bd; --accent:#b34700; --accent-ink:#fff; --teal:#0f6b5c; --gold:#8a6400;
+  --purple:#5b3a8e; --red:#a4261f; --chip:#e7e0cd; --pin:#b34700;
+  --shadow:0 2px 10px rgba(28,26,22,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#121110; --surface:#1d1b18; --surface2:#26231f; --ink:#f0ead9; --muted:#b3ab97;
+    --line:#3a362e; --accent:#ff7a1a; --accent-ink:#1a1206; --teal:#3ec9ae; --gold:#e8b93e;
+    --purple:#b18cff; --red:#ff7a6e; --chip:#2c2924; --pin:#ff7a1a;
+    --shadow:0 2px 12px rgba(0,0,0,.45);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important} }
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3,.cond{font-family:"Barlow Condensed","Barlow",sans-serif;letter-spacing:.02em}
+button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]){min-height:2.25rem}
+a{color:var(--accent)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 16px 64px}
+.hero{padding:28px 0 8px}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.02;margin:0 0 8px;text-transform:uppercase}
+.hero p{margin:0;max-width:68ch;color:var(--muted);font-size:1.05rem}
+.hero .game{font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;margin-bottom:6px}
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:2px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:8px 0;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:1.02rem;text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;border-radius:8px;min-height:2.25rem;display:flex;align-items:center}
+nav.tabs a:hover,nav.tabs a:focus-visible{background:var(--surface2)}
+section{padding:30px 0 6px}
+section>h2{font-size:clamp(1.6rem,4vw,2.2rem);text-transform:uppercase;margin:0 0 4px;border-bottom:3px solid var(--accent);padding-bottom:6px}
+section>.lede{color:var(--muted);margin:6px 0 16px;max-width:72ch}
+.progressbar{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;box-shadow:var(--shadow);margin:14px 0}
+.progressbar .track{flex:1;height:10px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progressbar .fill{height:100%;background:var(--accent);width:0%;transition:width .25s}
+.progressbar strong{font-family:"Barlow Condensed",sans-serif;font-size:1.1rem;white-space:nowrap}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:6px 14px;font:inherit;font-weight:600;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.mapbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:var(--shadow)}
+.mapbox svg{width:100%;height:auto;display:block}
+.zone{fill:var(--surface2);stroke:var(--line);stroke-width:1.5}
+.zone-label{font-family:"Barlow Condensed",sans-serif;font-weight:600;fill:var(--ink);text-transform:uppercase}
+.zone-sub{fill:var(--muted);font-size:11px}
+.road{stroke:var(--line);stroke-width:10;stroke-linecap:round;fill:none;opacity:.7}
+.pin{cursor:pointer}
+.pin circle{fill:var(--pin);stroke:var(--surface);stroke-width:2}
+.pin text{fill:#fff;font-weight:700;font-size:11px;text-anchor:middle;pointer-events:none}
+.pin.dim{opacity:.18}
+.pin.sel circle{stroke:var(--ink);stroke-width:3}
+.pin:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pin-detail{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+.pin-detail h3{margin:0 0 4px;font-size:1.35rem;text-transform:uppercase}
+.pin-detail p{margin:4px 0}
+.tag{display:inline-block;background:var(--chip);border-radius:99px;padding:1px 10px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-right:6px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;color:var(--muted);font-size:.9rem}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--pin);display:inline-block}
+.cards{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:720px){.cards{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 6px;font-size:1.3rem;text-transform:uppercase}
+.card p{margin:6px 0}
+.card .reward{color:var(--teal);font-weight:600}
+ol.steps,ul.plain{margin:8px 0 8px 20px;padding:0}
+ol.steps li,ul.plain li{margin:7px 0}
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.checklist li{margin:0}
+.check{display:flex;gap:12px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;color:var(--ink);cursor:pointer;box-shadow:var(--shadow);align-items:flex-start}
+.check .box{flex:0 0 auto;width:26px;height:26px;border:2px solid var(--muted);border-radius:7px;margin-top:2px;display:grid;place-items:center;font-weight:800;color:transparent}
+.check[aria-pressed="true"] .box{background:var(--teal);border-color:var(--teal);color:#fff}
+.check[aria-pressed="true"] .ct{color:var(--muted)}
+.check .ct{font-weight:700;display:block}
+.check .cd{display:block;color:var(--muted);font-size:.94rem;margin-top:2px}
+.check .cd b{color:var(--ink)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.05em;background:var(--surface2)}
+tr:last-child td{border-bottom:none}
+.tablewrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow)}
+.note{background:var(--surface2);border-radius:10px;padding:12px 14px;margin:12px 0}
+.note b{color:var(--accent)}
+.warn{border:1px solid var(--red);border-radius:10px;padding:12px 14px;margin:12px 0}
+.warn b{color:var(--red)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px 16px;margin:10px 0;box-shadow:var(--shadow)}
+summary{cursor:pointer;font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:1.15rem;text-transform:uppercase;padding:8px 0}
+footer{color:var(--muted);font-size:.9rem;padding:28px 0 0;border-top:1px solid var(--line);margin-top:30px}
+.small{font-size:.9rem;color:var(--muted)}
+.kbd{background:var(--chip);border-radius:5px;padding:0 6px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="game">Call of Duty: Black Ops 6 — Zombies</div>
+  <h1>Liberty Falls: Map &amp; Complete Walkthrough</h1>
+  <p>Every secret in the town, in the order you should grab it: the main quest <em>“Bye-Bye, Dark Aether,”</em> the Jet Gun and LTG builds, the bank vault, bowling, Aetherella, all 8 free power-ups, free Deadshot, and all 18 Intel. Tap any step to tick it off as you play — the counter at the top of each list keeps score for this session.</p>
+</header>
+
+<nav class="tabs" aria-label="Guide sections">
+  <a href="#map">Map</a>
+  <a href="#main-quest">Main Quest</a>
+  <a href="#jet-gun">Jet Gun &amp; LTG</a>
+  <a href="#side-eggs">Side Easter Eggs</a>
+  <a href="#powerups">Power-Ups &amp; Perks</a>
+  <a href="#intel">Intel (18)</a>
+  <a href="#one-run">One-Run Order</a>
+</nav>
+
+<section id="map">
+  <h2>The Map — Schematic</h2>
+  <p class="lede">Liberty Falls is a small West Virginia town. You spawn on the rooftop above <strong>Pump &amp; Pay</strong> in the south, and the <strong>Dark Aether Church</strong> with Pack-a-Punch sits at the top of the hill in the north. The bank rooftop — <strong>The Alamo</strong> — is the zipline hub that ties the whole town together. This is a schematic layout (zones in their real relative positions, not to scale). Tap a numbered pin for what’s there.</p>
+
+  <div class="filters" id="mapFilters" role="group" aria-label="Filter map pins">
+    <button data-f="all" aria-pressed="true">All pins</button>
+    <button data-f="perk" aria-pressed="false">Perks &amp; Pack-a-Punch</button>
+    <button data-f="quest" aria-pressed="false">Quest items</button>
+    <button data-f="secret" aria-pressed="false">Secrets</button>
+    <button data-f="utility" aria-pressed="false">Utilities</button>
+  </div>
+
+  <div class="mapbox">
+  <svg viewBox="0 0 800 640" role="group" aria-label="Schematic map of Liberty Falls with numbered points of interest">
+    <!-- roads -->
+    <path class="road" d="M120 560 L120 330 L400 330 L400 130"/>
+    <path class="road" d="M120 330 L640 330 L640 470"/>
+    <path class="road" d="M400 330 L640 200"/>
+    <!-- zones -->
+    <rect class="zone" x="300" y="18" width="200" height="104" rx="10"/>
+    <text class="zone-label" x="400" y="48" text-anchor="middle" font-size="19">Dark Aether Church</text>
+    <text class="zone-sub" x="400" y="68" text-anchor="middle">Hilltop · Pack-a-Punch inside</text>
+
+    <rect class="zone" x="24" y="18" width="216" height="118" rx="10"/>
+    <text class="zone-label" x="132" y="48" text-anchor="middle" font-size="18">Cemetery</text>
+    <text class="zone-sub" x="132" y="68" text-anchor="middle">Deadshot cans · storm portal</text>
+
+    <rect class="zone" x="24" y="150" width="216" height="86" rx="10"/>
+    <text class="zone-label" x="132" y="180" text-anchor="middle" font-size="14">Groundskeeper's Yard</text>
+    <text class="zone-sub" x="132" y="199" text-anchor="middle">Toolshed · projector · yard house</text>
+
+    <rect class="zone" x="540" y="18" width="236" height="104" rx="10"/>
+    <text class="zone-label" x="658" y="48" text-anchor="middle" font-size="18">Hill Street</text>
+    <text class="zone-sub" x="658" y="68" text-anchor="middle">White house · route to church</text>
+
+    <rect class="zone" x="256" y="140" width="200" height="76" rx="10"/>
+    <text class="zone-label" x="356" y="168" text-anchor="middle" font-size="17">Hilltop Stairs</text>
+    <text class="zone-sub" x="356" y="187" text-anchor="middle">PhD Flopper · Aether trap · projector</text>
+
+    <rect class="zone" x="256" y="248" width="264" height="66" rx="10"/>
+    <text class="zone-label" x="388" y="276" text-anchor="middle" font-size="17">Washington Avenue</text>
+    <text class="zone-sub" x="388" y="295" text-anchor="middle">Speed Cola · Lily's Flowerpot · Buzz's Cuts</text>
+
+    <rect class="zone" x="300" y="352" width="190" height="96" rx="10"/>
+    <text class="zone-label" x="395" y="382" text-anchor="middle" font-size="17">Savings &amp; Loan Bank</text>
+    <text class="zone-sub" x="395" y="401" text-anchor="middle">Jugger-Nog · Vault · Alamo roof above</text>
+
+    <rect class="zone" x="24" y="352" width="240" height="82" rx="10"/>
+    <text class="zone-label" x="144" y="382" text-anchor="middle" font-size="17">West Main Street</text>
+    <text class="zone-sub" x="144" y="401" text-anchor="middle">Benson Funeral Services</text>
+
+    <rect class="zone" x="540" y="150" width="236" height="164" rx="10"/>
+    <text class="zone-label" x="658" y="180" text-anchor="middle" font-size="18">Riverside</text>
+    <text class="zone-sub" x="658" y="199" text-anchor="middle">Olly's Comics · Radio House · telescopes</text>
+    <text class="zone-sub" x="658" y="216" text-anchor="middle">Frank's Hardware · storm portal</text>
+
+    <rect class="zone" x="24" y="462" width="240" height="110" rx="10"/>
+    <text class="zone-label" x="144" y="492" text-anchor="middle" font-size="15">Fuller's Liberty Lanes</text>
+    <text class="zone-sub" x="144" y="511" text-anchor="middle">Pool table · gauge panel</text>
+
+    <rect class="zone" x="288" y="476" width="200" height="96" rx="10"/>
+    <text class="zone-label" x="388" y="506" text-anchor="middle" font-size="17">Motor Lodge</text>
+    <text class="zone-sub" x="388" y="525" text-anchor="middle">Room 202 Jet Gun bench · vending machine</text>
+
+    <rect class="zone" x="512" y="462" width="264" height="110" rx="10"/>
+    <text class="zone-label" x="644" y="492" text-anchor="middle" font-size="17">Pump &amp; Pay — Spawn</text>
+    <text class="zone-sub" x="644" y="511" text-anchor="middle">East Main St · you start on the roof above</text>
+    <text class="zone-sub" x="644" y="528" text-anchor="middle">Exfil · 2nd Aether Canister spawns here</text>
+
+    <g id="pins"></g>
+  </svg>
+  </div>
+  <div class="legend">
+    <span><span class="dot"></span> Tap a pin — details appear below</span>
+    <span>Two routes to the church: west via Liberty Lanes &amp; Hilltop Stairs, or east via Riverside → Washington Ave → Cemetery</span>
+  </div>
+  <div class="pin-detail" id="pinDetail" aria-live="polite">
+    <h3>Start here: Pump &amp; Pay rooftop (Spawn)</h3>
+    <p><span class="tag">Spawn</span> You begin every game on the Abandoned Rooftop above the Pump &amp; Pay gas station on East Main Street. Before you drop down, turn around: the free <strong>Max Ammo</strong> is on the bridge behind you (pin 22). The first bowling shoes are on the gas station counter directly below you (pin 17).</p>
+  </div>
+
+  <h3 class="cond" style="font-size:1.4rem;margin:22px 0 6px">Key utilities, so you never hunt for them</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Utility</th><th>Where</th><th>Notes</th></tr>
+    <tr><td><strong>Pack-a-Punch</strong></td><td>Inside Dark Aether Church, raised area at the back</td><td>Tier 1: 5,000 · Tier 2: 15,000 · Tier 3: 30,000 Essence</td></tr>
+    <tr><td><strong>Der Wunderfizz</strong></td><td>Alamo — rooftop of the Savings &amp; Loan Bank</td><td>Only appears from <strong>Round 25</strong>. Sells every perk, including ones with no machine (Deadshot, Elemental Pop…)</td></tr>
+    <tr><td><strong>Mystery Box</strong></td><td>Rotates between marked spots (first near Motor Lodge / East Main St)</td><td>Can pull the Jet Gun and Ray Gun — but crafting the Jet Gun is guaranteed</td></tr>
+    <tr><td><strong>The Arsenal</strong></td><td>Multiple — incl. Riverside and West Main St</td><td>Spend Salvage to raise weapon rarity and add Ammo Mods (Napalm Burst lives here — you need it for the church fire trap)</td></tr>
+    <tr><td><strong>Crafting Tables</strong></td><td>Motor Lodge Alley, Groundskeeper's Yard, Riverside backstreet &amp; more</td><td>Mangler Cannon (1,250 Salvage), Chopper Gunner, Mutant Injection, Semtex, Decoys, Self-Revives</td></tr>
+    <tr><td><strong>GobbleGum machines</strong></td><td>Scattered — incl. opposite Speed Cola on Washington Ave</td><td>One free GobbleGum per machine per game cycle</td></tr>
+    <tr><td><strong>Ziplines</strong></td><td>Hub on the Alamo (bank roof)</td><td>Fastest way across town once the roof is open; also how you reach the LTG bench and the Yummy Freeze projector</td></tr>
+    <tr><td><strong>Dark Aether Field Generator traps</strong></td><td>Hilltop Stairs (by Speed Cola hill), Washington Ave, and by Pump &amp; Pay</td><td>These are the “Aether traps” the main quest charges canisters on — 1,000 Essence to fire… only fire it when the glowing HVT is standing in it</td></tr>
+    <tr><td><strong>S.A.M. Trials</strong></td><td>Terminals that activate around the map</td><td>Timed challenges; rewards include Loot Keys, Aether Tools and perks</td></tr>
+    <tr><td><strong>Exfil</strong></td><td>Pump &amp; Pay parking area, East Main St</td><td>Available from Round 11, then every 5 rounds</td></tr>
+  </table></div>
+</section>
+
+<section id="main-quest">
+  <h2>Main Quest — “Bye-Bye, Dark Aether”</h2>
+  <p class="lede">The full story quest, in order. Rewards: the <strong>Bye-Bye, Dark Aether</strong> achievement/trophy, <strong>5,000 XP</strong>, the <strong>Liberty Falls Quest Complete calling card</strong>, and the <strong>Ray Gun PJ-SRU skin</strong>. You can do it solo or in co-op, in Standard or Directed Mode. Do the Jet Gun build first (next section) — almost every step after that needs it.</p>
+  <div class="progressbar"><strong data-count-for="mainQuestList">0 / 10 done</strong><div class="track"><div class="fill" data-fill-for="mainQuestList"></div></div></div>
+  <ul class="checklist" id="mainQuestList">
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">1. Open the town and reach the Church</span><span class="cd">From spawn, open either route — west through the Motor Lodge → Liberty Lanes → Hilltop Stairs, or east through Riverside → Olly's Comics → Washington Ave → Cemetery. Clear the Dimensional Membrane door into the <b>Dark Aether Church</b> at the top of the hill. Pack-a-Punch is inside at the back.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">2. Build the Jet Gun (Thrustodyne M23)</span><span class="cd">Full part locations are in the <b>Jet Gun &amp; LTG</b> section below. Don't skip this — the LTG parts, Aetherella figures and several Intel items can only be vacuumed up with it.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">3. Start the quest at the SDG Generator</span><span class="cd">Inside the church, next to Pack-a-Punch, interact with the <b>SDG Generator</b>. You'll get the cutscene/dialogue with <b>Dr. Panos</b>. This makes the three LTG parts appear around town.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">4. Vacuum up the 3 LTG parts and build the LTG</span><span class="cd">Church balcony (left of Panos) · Olly's Comics ceiling hole · Buzz's Cuts upstairs window from the white truck on Washington Ave. Then build the <b>LTG Device</b> at the workbench on the <b>Alamo (bank roof)</b>. Details in the next section.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">5. Charge the FIRST Aether Canister</span><span class="cd">Take an empty canister from the SDG Generator. Place it <b>next to a Dark Aether Field Generator trap</b> — use the trap at the bottom of the church hill by Speed Cola if your portal is the Cemetery, or the Washington Ave trap for the Riverside portal. Carry the LTG to the <b>purple Aether storm cloud</b> (Cemetery or Riverside — either works first), place it, and <b>defend it for ~60 seconds</b> until a named elite — an HVT Mangler or Abomination — spawns.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">6. Trap the HVT — the step everyone messes up</span><span class="cd">Shoot the HVT until its health is low and it starts <b>glowing purple</b>. Then STOP shooting. Lure it into the trap where you left the canister and activate the trap (1,000 Essence). The blast captures its energy into the canister. If you kill it outside the trap, you have to redo the portal defense. Pick up the charged canister and <b>slot it back into the SDG Generator</b> in the church.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">7. Calibrate the 3 Strauss Counter projectors</span><span class="cd">Pick up the <b>Strauss Counter</b> from the SDG Generator (it takes your Tactical slot). Visit all 3 projectors: <b>(a)</b> Hilltop Stairs — grass patch beside the bus, facing Liberty Lanes; <b>(b)</b> Groundskeeper's Yard — by the toolshed; <b>(c)</b> Yummy Freeze lower roof — from the Alamo, pay 750 Essence to break the board marked with a red X and drop down. At each one, hold out the Counter and read its color, then set the projector to the <b>OPPOSITE</b>: Counter red → projector <b>green</b>; Counter green → projector <b>red</b>; Counter yellow → projector <b>yellow</b> (leave it). Readings are random each game — always check, never memorize.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">8. Charge the SECOND Aether Canister</span><span class="cd">With all 3 projectors set, a second canister appears by the <b>broken, smoking trap next to Pump &amp; Pay</b> at spawn. Grab it, place it at the <b>other</b> Aether trap, pick your LTG back up from the first portal, and place it at the <b>other storm cloud</b> (whichever of Cemetery / Riverside you didn't use). Defend it, weaken the new HVT until it glows purple, lure it to the trap, fire the trap, and carry the charged canister back to the SDG Generator.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">9. Gear up BEFORE you touch the generator again</span><span class="cd">Interacting with the SDG Generator now starts the final fight with no way out. First: Pack-a-Punch Tier 2–3 on your main gun, full armor plates, Jugger-Nog + Speed Cola + Stamin-Up, a Self-Revive, and a strong Field Upgrade. The Jet Gun is weak in the boss fight — keep a real gun as your primary.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">10. Survive the final encounter in the Church</span><span class="cd">Interact with the SDG Generator. You're locked in the Dark Aether church for <b>3 waves</b> of zombies with Manglers and Abominations mixed in. Keep moving around the pews, use the church fire trap (see Side Easter Eggs) if you've lit it, and burn your killstreaks on the elites. Survive the last wave for the ending cutscene — Panos has been using you — then collect your rewards and choose to keep playing (you'll respawn at spawn with bonus loot and perks) or exfil.</span></span></button></li>
+  </ul>
+  <div class="warn"><b>Directed Mode note:</b> Directed Mode caps rounds and walks you through these same steps with on-screen objectives, sometimes in a slightly different order. Everything in this guide still applies — the locations never change.</div>
+</section>
+
+<section id="jet-gun">
+  <h2>Jet Gun &amp; LTG — The Two Builds</h2>
+  <p class="lede">The <strong>Thrustodyne M23 Jet Gun</strong> is Liberty Falls' Wonder Weapon. Its suction (hold primary fire) pulls in loot, power-ups, LTG parts and Aetherella figures; its blast (secondary) shoves crowds back. You can pull it from the Mystery Box or the vault, but crafting it is free and guaranteed.</p>
+  <div class="progressbar"><strong data-count-for="jetList">0 / 6 done</strong><div class="track"><div class="fill" data-fill-for="jetList"></div></div></div>
+  <ul class="checklist" id="jetList">
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Open Room 202, Motor Lodge (the build room)</span><span class="cd">Go up the Motor Lodge stairs by the Liberty Lanes door and walk the top walkway. A door bursts open and zombies pour out — clear them. Inside is the <b>Jet Gun workbench</b> (and the “Scientist and the Moonshiner” audio log by the pizza box). You'll come back here to build.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Part 1 — Handbrake (Cemetery → Toolshed)</span><span class="cd">In the <b>Cemetery</b>, kill zombies until a special one named <b>The Groundskeeper</b> spawns (usually the round after you first enter the cemetery). He drops the <b>Toolshed Key</b>. Take it to the wooden shed in <b>Groundskeeper's Yard</b> (below the cemetery) and open it — the <b>Handbrake</b> is on the table inside, right of the door.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Part 2 — Water Pressure Gauge (Flowerpot → Liberty Lanes)</span><span class="cd">On Washington Ave, take the <b>Water Valve</b> from the tap outside <b>Lily's Flowerpot</b> (across from Speed Cola). In <b>Fuller's Liberty Lanes</b>, melee the panel on the wall by the lanes to smash the cover off, install the valve, then <b>hold interact</b> to build pressure while zombies spawn endlessly — use a Decoy, Aether Shroud or a teammate to cover you. When the meter fills, the <b>Water Pressure Gauge</b> drops to the floor. Pick it up.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Part 3 — Electrical Wires (Radio House)</span><span class="cd">You need a <b>Mangler Cannon</b>: shoot a Mangler's cannon arm off and pick it up, craft one for 1,250 Salvage, use a Mutant Injection, or bait a Mangler into shooting the door for you. Blast open the door of <b>Radio House Electronics</b> in Riverside, across from Olly's Comics. Inside, search the debris piles until the <b>Electrical Wires</b> pop out. (Mind the Vermin jumpscare in there.)</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Build the Jet Gun</span><span class="cd">Back to <b>Room 202, Motor Lodge</b> — hold interact at the workbench with all 3 parts. Done. It can be Pack-a-Punched like any weapon.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Then: the 3 LTG parts (for the main quest)</span><span class="cd">After starting the quest at the SDG Generator: <b>(1)</b> Church — floating part on the balcony, left of Panos; <b>(2)</b> Olly's Comics — inside the hole in the ceiling above the counter; <b>(3)</b> Buzz's Cuts — stand on the white truck on Washington Ave and vacuum the part out of the barber shop's upstairs window. Build the <b>LTG</b> at the workbench on the <b>Alamo (bank roof)</b>.</span></span></button></li>
+  </ul>
+</section>
+
+<section id="side-eggs">
+  <h2>Side Easter Eggs — Every Secret in Town</h2>
+  <p class="lede">Fourteen side secrets beyond the main quest. None of them are required to finish the story — all of them pay out in loot, perks, power-ups or achievements, and several feed each other (the Mangler Cannon alone unlocks three of them).</p>
+  <div class="progressbar"><strong data-count-for="sideList">0 / 14 done</strong><div class="track"><div class="fill" data-fill-for="sideList"></div></div></div>
+  <ul class="checklist" id="sideList">
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Bank Vault — crack the Savings &amp; Loan</span><span class="cd">The code is <b>random every game</b>, split across 3 sticky notes — always in this input order: <b>1st:</b> Bank — behind the front counter, right side, by the lamp in front of the vault door. <b>2nd:</b> Olly's Comics — hop into the central counter area and crouch; the note is under the counter facing the Aetherella trap. <b>3rd:</b> Liberty Lanes — shoot/melee the ice bucket of bottles on the snack bar counter to reveal it. Enter the 6 digits at the vault door. Inside: grab the free 500 Essence and the “Money Talks” audio log, then spend your <b>Loot Keys</b> (dropped by Manglers &amp; Abominations; Green → Blue → Purple → Orange, better key = better loot, up to perks and the Ray Gun) on safe deposit boxes before the ~45-second timer ejects you. The vault door stays open all game — you can re-enter, but you're only safe inside briefly each time.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Mr. Peeks' Disco Bowling — shoot 5 pairs of shoes</span><span class="cd"><b>1.</b> Pump &amp; Pay — on the counter by the register (at spawn). <b>2.</b> Frank's Hardware, Riverside — back-right shelf, opposite Olly's Comics. <b>3.</b> Hill Street white house — look through the spawn window by the AK wall-buy; shoes are under the chair on the right. <b>4.</b> Cemetery — back fence by the Tier 3 Armor wall-buy; shoes hang on a tree branch outside the map. <b>5.</b> Benson Funeral Services, West Main St — on the coffin, opposite Liberty Lanes. Shooting the 5th pair teleports everyone into Liberty Lanes: charge your bowling ball and knock down zombies crossing the lanes. Higher score = better trophy loot (Ray Gun possible). <b>300 points</b> earns the “Strike!” calling card / Dark Ops challenge. To play again: wait ~6 rounds, then shoot the shoes sitting in the toilet in the Liberty Lanes bathroom barrier by the pool table — up to 3 replays.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Aetherella — vacuum 9 figures, become the statue (World Domination)</span><span class="cd">Needs the <b>Jet Gun</b>. Four are inside <b>Olly's Comics</b>: shelf beside the Aetherella standee · shop window beside the radio · shelf above Quick Revive · unit right of the blue double doors to the parking lot. Five more: <b>Motor Lodge sign</b> at spawn (stand on the car) · <b>Washington Ave rooftops</b> — in the window across the hill · <b>beneath the Liberty Lanes sign</b> — stand on the bus roof, it's face-down on the ledge · <b>Church front window ledge</b>, right of the main entrance · <b>behind the right-hand vent</b> on the rooftop past the Alamo — zipline from the Washington Ave rooftops to the bank roof, drop to the lower section and line up the shot. The 9th figure transforms you into a giant Aetherella for ~90 seconds: invincible, with laser eyes. Bonus: activate the Aetherella trap in Olly's Comics while transformed to turn blue and move much faster. Unlocks the <b>World Domination</b> achievement/trophy.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Music — “Destroy Something Beautiful” (3 Mr. Peeks headsets)</span><span class="cd">Interact with all 3 headsets: <b>1.</b> Motor Lodge Alley — on the ground at the top of the stairs by the fence, between the motel and Liberty Lanes. <b>2.</b> Washington Ave — under the bench by the steps down toward Olly's Comics. <b>3.</b> Dark Aether Church — on the left-hand pews as you enter. The Kevin Sherwood song plays once per game.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Free Deadshot Daiquiri — the 5 cans</span><span class="cd">Deadshot has no machine on this map (Wunderfizz only, Round 25+) — except this. Bring a <b>sniper rifle</b> (or any scoped weapon) to the back of the <b>Cemetery</b>, look out through the fence opening, and shoot the <b>5 Deadshot cans</b> lined up on the fence in quick succession — a timer starts on the first can. Miss the pace and the cans fall; wait a few rounds to retry. Success drinks the perk for free, permanently.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Raining Zombies — free loot shower at the Church</span><span class="cd">At the church, look up at the <b>right metal spike on the tower</b> (closest to the front door) — there's a zombie head impaled on it. Hit it with an <b>explosive</b> (Semtex, launcher, Ray Gun). Zombies rain down in front of the church and burst into loot: Essence vials, Salvage, Aether Tools, even scorestreaks. One of the best free payouts on the map — do it every game.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Dancing Zombies / Zombie Rave — the two telescopes</span><span class="cd">In <b>Riverside</b>, pay 50 Essence at each of the <b>two telescopes</b> by the river fence and look at the zombie dancing on the cliff top through BOTH of them. Disco lights kick on and every zombie on the map climbs onto the white bus and dances — a free breather and an easy photo op. Pure fun, no loot, worth doing once.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Mr. Peeks' Car — Mangler Cannon the right black car</span><span class="cd">Three identical <b>black cars with gold trim</b> sit around town: in front of the Church on Hilltop · Groundskeeper's Yard · outside Olly's Comics. One of them has <b>Mr. Peeks in the back seat</b> and music playing from it. Blast THAT car with a <b>Mangler Cannon</b> (or Mutant Injection, or bait a Mangler's shot) and the trunk pops with free loot — sometimes a Wonder Weapon, and randomly the “We Only Take Cash” document. Peeks moves to another car after ~5 rounds, so you can repeat it.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Grave Digger — get the shovel, dig the Cemetery</span><span class="cd">Craft or loot a <b>Chopper Gunner</b>. From the <b>Washington Ave rooftops</b>, while in the Chopper Gunner, shoot the <b>wooden barrel</b> on top of the stone wall. Afterwards a <b>shovel</b> lies in the grass at the bottom of that wall — there's no pickup prompt, just walk over it and interact. Then dig graves in the <b>Cemetery</b> (stand at a headstone, look down, interact). Graves pay out weapons, Salvage, perks and Essence — or occasionally live zombies, Vermin and grenades. Each grave digs once per game.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Blood Pool — 3 Semtex from the bank roof</span><span class="cd">Take <b>3 Semtex</b> (craft them at the Motor Lodge Alley table if needed) up to the <b>Alamo (bank roof)</b> and throw all three into the <b>pool between the Motor Lodge and Liberty Lanes</b>. A big red orb launches out and lands in front of the bank, spitting loot — plus 3 Vermin that came with it. Kill them, grab everything, and repeat after ~6 rounds.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Church Fire Trap — Napalm Burst the unlit candles</span><span class="cd">Put <b>Napalm Burst</b> on a gun at The Arsenal. Inside the church there are 4 candle stands: two already burn orange, two are unlit. <b>Shoot the two unlit stands</b> — they ignite with purple flame and the whole church floor erupts in fire for about a minute. Devastating during the final encounter. Repeatable all game.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Vending Machine — free loot every round</span><span class="cd">In <b>Motor Lodge Alley</b> (under the 2nd-floor stairs, between motel and lanes), <b>crouch and melee the vending machine once per round</b> for a random drop: Essence, Salvage, equipment, occasionally a perk or even a Ray Gun — sometimes junk. Warning: punching it with <b>Melee Macchiato</b> smashes it open for one big payout of loot, but breaks it for the rest of the game. Only do that late.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Loose Change — 100 free Essence at every perk machine</span><span class="cd">Go <b>prone in front of any perk machine</b> — Quick Revive, Jugger-Nog, Speed Cola, Stamin-Up, PhD Flopper, Melee Macchiato, even the Wunderfizz — for a free <b>100 Essence</b>, once per machine per game (in co-op, first player only). Small, but it's a free door in the early rounds.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Pool Table — 100 free Essence in Liberty Lanes</span><span class="cd">Shoot the racked balls on the <b>pool table</b> inside Fuller's Liberty Lanes — they all sink and you get <b>100 Essence</b>, once per game. While you're in there: the vault note #3 and the Water Pressure Gauge panel are both in this building too.</span></span></button></li>
+  </ul>
+</section>
+
+<section id="powerups">
+  <h2>Free Power-Ups &amp; Every Perk</h2>
+  <p class="lede">Eight power-ups are hidden around town, each in a fixed spot, each claimable <strong>once per game</strong> by shooting the little floating icon. Save them for when they hurt most — don't pop the Max Ammo with full mags. A scoped weapon or C4 makes the awkward angles easy.</p>
+  <div class="progressbar"><strong data-count-for="powerList">0 / 8 done</strong><div class="track"><div class="fill" data-fill-for="powerList"></div></div></div>
+  <ul class="checklist" id="powerList">
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Max Ammo — the bridge at spawn</span><span class="cd">On the spawn rooftop, turn around and look at the <b>bridge behind you</b>: the icon sits low on the right side, where the metal arch meets the ground. Shoot it. Best saved for just before a portal defense or the boss fight.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Bonus Points (500) — behind Olly's Comics</span><span class="cd">At the back of <b>Olly's Comics</b>, look up at the high window with the AC unit — the power-up is a <b>small golden statue/relic sitting on top of the AC unit</b> outside the shop. Shoot it for 500 Bonus Points. Grab it early; it buys a door.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Double Points — the water tower</span><span class="cd">The icon is on the <b>water tower behind the Groundskeeper's toolshed</b>. Easiest sightlines: from the Lily's Flowerpot window on Washington Ave looking up, or from the spawn rooftop. Pop it right before a big kill round or a grave-digging spree.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Insta-Kill — the skull on the church roof</span><span class="cd">From the <b>back of the Cemetery</b>, look at the back of the church roof: a <b>gold skull</b> sits up there. Shoot it. The free Deadshot cans are right next to this spot — do both in one trip.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Nuke — the bank chandelier</span><span class="cd">The icon hangs on the <b>chandelier inside the Savings &amp; Loan Bank</b>. Shoot it through the window from the Alamo roof, or with an explosive from inside the bank. A free round-ender — save it for an emergency or the end of a high round.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Max Armor — the blue house window</span><span class="cd">Near Speed Cola on Washington Ave, look through the window of the <b>white-and-blue house opposite Lily's Flowerpot</b>: the icon lies on a metal cart/trolley inside. Shoot it for full armor plates.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Full Power — behind the bus at Liberty Lanes</span><span class="cd">Behind the <b>white bus outside Fuller's Liberty Lanes</b>, the icon is tucked <b>under the car just past the zombie barrier</b>. Shoot it to instantly refill your Field Upgrade — claim it right after you've spent one.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Fire Sale — the trash can by PhD Flopper</span><span class="cd">The last one only shows up <b>after you've claimed the other seven</b>: it spawns in the <b>trash can near the PhD Flopper machine</b> at Hilltop Stairs. Shoot it for a Fire Sale — then sprint to the Mystery Box while it's cheap.</span></span></button></li>
+  </ul>
+
+  <h3 class="cond" style="font-size:1.4rem;margin:24px 0 6px">Every perk machine on the map</h3>
+  <p class="small">Six machines are placed around town. Every other perk (Deadshot, Elemental Pop, Vulture Aid, Death Perception) only comes from the <strong>Der Wunderfizz</strong> on the bank roof from Round 25 — or free, in Deadshot's case, from the cemetery cans.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Perk</th><th>Location</th><th>What it does</th></tr>
+    <tr><td><strong>Quick Revive</strong></td><td>Inside Olly's Comics, Riverside — left side of the shop</td><td>Faster health regen; revive allies 50% faster (solo: self-revive effect via augments)</td></tr>
+    <tr><td><strong>Jugger-Nog</strong></td><td>Inside Savings &amp; Loan Bank — far-right corridor</td><td>+100 max health (150 → 250). Buy this first, always</td></tr>
+    <tr><td><strong>Speed Cola</strong></td><td>Washington Ave — against the wall by the abandoned bus, opposite the GobbleGum machine</td><td>~30% faster reloads and armor plating</td></tr>
+    <tr><td><strong>Stamin-Up</strong></td><td>East Main Street, down by spawn / Pump &amp; Pay side of town</td><td>Faster sprint and movement — essential for portal defenses</td></tr>
+    <tr><td><strong>PhD Flopper</strong></td><td>Hilltop Stairs — right corner past the Liberty Lanes bus, below the church</td><td>Dolphin-dive explosion; immune to your own explosives and fall damage while diving</td></tr>
+    <tr><td><strong>Melee Macchiato</strong></td><td>Church forecourt / inside the Dark Aether Church area, by the entrance</td><td>Replaces your gun butt with a heavy punch that launches zombies. Also the vending-machine breaker</td></tr>
+    <tr><td><strong>Deadshot Daiquiri</strong></td><td><em>No machine</em> — free from the 5 cemetery cans, or Wunderfizz (R25+)</td><td>Aim assist snaps to heads; bonus crit damage</td></tr>
+  </table></div>
+</section>
+
+<section id="intel">
+  <h2>All 18 Intel — Audio Logs, Documents, Artifacts</h2>
+  <p class="lede">Tracked in the <strong>Zombies Intel</strong> section of the Barracks menu. There's no extra reward for completing the set — it's pure story. Several pieces only exist because you did a side egg, so this list doubles as a final sweep.</p>
+  <div class="progressbar"><strong data-count-for="intelList">0 / 18 done</strong><div class="track"><div class="fill" data-fill-for="intelList"></div></div></div>
+  <ul class="checklist" id="intelList">
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — Quantum Mechanical Failure</span><span class="cd"><b>Olly's Comics</b>, Riverside — the radio in the display window inside the shop.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — Conspiracy Theorist</span><span class="cd"><b>Washington Ave</b> — radio on the table with the ashtray, beside the Speed Cola machine.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — One Lit Match</span><span class="cd"><b>Groundskeeper's Yard</b> — behind the house, next to the woodpile. Only appears <b>after</b> you've started the main quest at the SDG Generator and spoken to Panos.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — The House Josiah Built</span><span class="cd"><b>Cemetery</b> — back-right corner, near the Armor wall-buy.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — The Scientist and The Moonshiner</span><span class="cd"><b>Motor Lodge, Room 202</b> (the Jet Gun room) — radio on the side table, left of the open pizza box, behind the workbench.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — Limited Run</span><span class="cd"><b>Olly's Comics</b> — on a desk by the blue door. Only appears <b>after</b> you've collected all 9 Aetherella figures and transformed.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — Steel Mountain Rescue</span><span class="cd"><b>West Main Street</b> — outside Liberty Lanes, past the broken transit bus, on top of a garbage can by the bench.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — Bear Witness</span><span class="cd"><b>Dark Aether Church</b> — on a bench at the very back, behind/near the Melee Macchiato machine, beside a bouquet of flowers. (This is also headset #3 territory — grab the song while you're here.)</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Audio Log — Money Talks</span><span class="cd">Inside the <b>bank vault</b> — on the floor to the left once you've opened it with the 3-note code.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Document — We Only Take Cash</span><span class="cd">Random drop from the <b>Mr. Peeks car</b> secret: Mangler-Cannon the black-and-gold car with Peeks in the back seat and the document can eject from the trunk. Repeat every ~5 rounds until it drops.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Document — Politics, Politics</span><span class="cd">Random drop from opening <b>safe deposit boxes in the bank vault</b> with Loot Keys. Keep feeding keys until it appears.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Document — Fine Man</span><span class="cd"><b>Riverside, Backstreet Parking</b> — at the back of the VHS store, look through the open window by the crafting table and <b>shoot the 3 VHS tapes/books</b> on the shelf. The document drops.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Document — Final Issue</span><span class="cd"><b>Olly's Comics</b> — top-left corner opposite Quick Revive: interact with the white cardboard boxes full of comics until the document ejects (which box is random).</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Artifact — Limited Transdimensional Gateway Device (LTG)</span><span class="cd">Awarded for <b>crafting the LTG</b> on the Alamo (bank roof) during the main quest.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Artifact — Aetherella Statue</span><span class="cd">Awarded for completing the <b>Aetherella</b> side egg — vacuum all 9 figures with the Jet Gun.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Artifact — Aetheric Bowling Ball</span><span class="cd">Awarded in <b>Mr. Peeks' bowling minigame</b> — pick up and throw the bowling ball after shooting the 5 pairs of shoes.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Artifact — Thrustodyne Model 23</span><span class="cd">Awarded for obtaining the <b>Jet Gun</b> — craft it in Room 202 or pull it from the Mystery Box / vault.</span></span></button></li>
+    <li><button class="check" aria-pressed="false"><span class="box">✓</span><span><span class="ct">Artifact — Mr. Peeks' Misplaced Bowling Shoes</span><span class="cd">Awarded for finding and shooting the <b>5 pairs of bowling shoes</b> that start the bowling minigame.</span></span></button></li>
+  </ul>
+</section>
+
+<section id="one-run">
+  <h2>One-Run Order — Miss Nothing</h2>
+  <p class="lede">A single efficient route that threads everything together, roughly by round. Leave the last zombie of each round alive while you run errands — that's the whole trick to Zombies routing.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>Rounds 1–4 · Spawn &amp; East Side</h3>
+      <ol class="steps">
+        <li>On the roof: shoot the <b>Max Ammo</b> icon on the bridge only if you need it — otherwise save it. Drop down.</li>
+        <li>Shoot <b>bowling shoes #1</b> on the Pump &amp; Pay counter. Melee the <b>vending machine</b> (round 1 of many).</li>
+        <li>Open east to Riverside. In Olly's Comics: grab <b>“Quantum Mechanical Failure,”</b> search the comic boxes for <b>“Final Issue,”</b> note the vault code under the counter, prone at Quick Revive for 100.</li>
+        <li>Shoot <b>shoes #2</b> in Frank's Hardware across the street, and the 3 tapes in the VHS store window for <b>“Fine Man.”</b></li>
+        <li>Shoot the <b>Bonus Points</b> icon on the AC unit behind Olly's. Use both <b>telescopes</b> for the zombie rave while the area is quiet.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Rounds 5–8 · Open the Town, Start the Jet Gun</h3>
+      <ol class="steps">
+        <li>Open Washington Ave: take the <b>Water Valve</b> at Lily's Flowerpot, grab <b>“Conspiracy Theorist”</b> by Speed Cola, shoot the <b>Max Armor</b> icon through the blue-house window and the <b>Double Points</b> icon on the water tower.</li>
+        <li>Open the west route too: Liberty Lanes — install the valve, build pressure, take the <b>Water Pressure Gauge</b>. Shoot the pool balls (+100), melee the snack-bar bucket for vault note #3, shoot the <b>Full Power</b> icon behind the bus outside.</li>
+        <li>Headset #1 in Motor Lodge Alley, headset #2 under the Washington Ave bench. Open <b>Room 202</b> and grab <b>“The Scientist and The Moonshiner.”</b></li>
+        <li>First Mangler: shoot its arm off, take the <b>Mangler Cannon</b> to Radio House for the <b>Electrical Wires</b> — then blow up the <b>Mr. Peeks car</b> if he's spawned (document chance).</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Rounds 9–13 · Church, Jet Gun, Vault</h3>
+      <ol class="steps">
+        <li>Cemetery run: kill the <b>Groundskeeper</b> for the Toolshed Key → <b>Handbrake</b>. Build the <b>Jet Gun</b> in Room 202.</li>
+        <li>Same trip: <b>Deadshot cans</b> + <b>Insta-Kill skull</b> at the back fence, <b>shoes #4</b> on the tree, <b>“The House Josiah Built”</b> by the armor buy, <b>shoes #3</b> in the Hill Street white house on the way down.</li>
+        <li>Church: <b>SDG Generator</b> (quest starts), headset #3, <b>“Bear Witness,”</b> Napalm Burst the <b>unlit candles</b>, explosive the <b>spire head</b> for raining loot. Vacuum the church LTG part.</li>
+        <li>Bank: read vault note #1, enter the code, loot boxes with your Loot Keys (<b>“Money Talks”</b> + <b>“Politics, Politics”</b> chances), shoot the <b>Nuke</b> icon on the chandelier. <b>Shoes #5</b> on the funeral-home coffin across from the lanes — that teleports you into <b>bowling</b>. Go for 300.</li>
+        <li>Vacuum the Olly's Comics + Buzz's Cuts LTG parts, build the <b>LTG</b> on the Alamo, and knock out all <b>9 Aetherella figures</b> while you have the Jet Gun out — then grab <b>“Limited Run”</b> back in Olly's.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Rounds 14+ · Finish the Quest, Sweep the Rest</h3>
+      <ol class="steps">
+        <li>Charge <b>canister #1</b> (portal defense → purple-glowing HVT → trap). Return it, do the <b>3 Strauss projectors</b>, grab <b>“One Lit Match”</b> in Groundskeeper's Yard while you're there.</li>
+        <li>Charge <b>canister #2</b> at the other portal. Somewhere in here: <b>Blood Pool</b> (3 Semtex from the bank roof), <b>Grave Digger</b> (Chopper Gunner the barrel → shovel → dig every grave), vending machine every round, Peeks car every ~5 rounds.</li>
+        <li>Claim the <b>Fire Sale</b> by PhD Flopper once the other 7 power-ups are shot.</li>
+        <li>Gear up fully, then hit the SDG Generator for the <b>final encounter</b>. After the cutscene: keep playing with your bonus perks, or exfil at Pump &amp; Pay.</li>
+        <li>Round 25+: the <b>Wunderfizz</b> appears on the bank roof — fill out any perks you're missing, and replay bowling via the toilet shoes if you still need the 300-point calling card.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="note"><b>Solo survival basics:</b> Jugger-Nog first, then Speed Cola and Stamin-Up. Keep a Decoy or Monkey Bomb for the water-pressure and portal-defense steps. Train zombies in the Cemetery or the church forecourt — the two widest loops on the map. Never fire an Aether trap until the HVT is glowing purple and standing in it.</div>
+</section>
+
+<footer>
+  <p>Liberty Falls is a Zombies map in <em>Call of Duty: Black Ops 6</em> (Treyarch / Activision). This is an unofficial fan guide. Locations and steps cross-checked against community guides at Cod Zombie Guides, DETONATED, VG247, Rock Paper Shotgun, GameRant and CODZombies.app — vault codes, Strauss Counter readings and loot drops are randomized per game, as noted in each step. Progress ticks on this page last for this visit only, so finish the run in one sitting or leave the tab open.</p>
+</footer>
+</div>
+
+<script>
+var PINS = [
+ {n:1, cat:"quest", x:400, y:82, name:"Pack-a-Punch + SDG Generator — Dark Aether Church", d:"Pack-a-Punch sits at the back of the church (5,000 / 15,000 / 30,000 Essence). The SDG Generator beside it starts the main quest, hands out Aether Canisters and the Strauss Counter, and triggers the final encounter. Headset #3 is on the left pews; the 'Bear Witness' audio log is on a back bench; one LTG part floats on the balcony; the fire trap candles are in here too."},
+ {n:2, cat:"secret", x:120, y:82, name:"Cemetery — Deadshot cans, Insta-Kill skull, graves", d:"Back fence: shoot the 5 Deadshot cans with a scoped weapon for a free perk, and the gold skull on the church roof behind you for free Insta-Kill. Bowling shoes #4 hang on a tree outside the fence by the Tier 3 Armor buy. 'The House Josiah Built' radio is in the back-right corner. The Groundskeeper spawns here (Jet Gun key), one Aether storm portal is here, and with the shovel you can dig every grave for loot."},
+ {n:3, cat:"quest", x:120, y:196, name:"Groundskeeper's Yard — Toolshed & projector", d:"Open the shed with the Toolshed Key (dropped by The Groundskeeper in the Cemetery) for the Jet Gun's Handbrake. One Strauss Counter projector stands by the shed. The 'One Lit Match' radio appears behind the house by the woodpile after you start the main quest. One of the three Mr. Peeks cars can spawn here."},
+ {n:4, cat:"secret", x:640, y:82, name:"Hill Street white house — bowling shoes #3", d:"Look through the zombie spawn window next to the AK wall-buy: Mr. Peeks' bowling shoes are under the armchair on the right. Shoot them toward the Disco Bowling minigame."},
+ {n:5, cat:"perk", x:330, y:182, name:"PhD Flopper + Hilltop Stairs", d:"PhD Flopper is in the right corner of Hilltop Stairs, past the Liberty Lanes bus on the way up to the church. The grass patch here holds a Strauss Counter projector and overlooks the lanes. A Dark Aether Field Generator trap sits at the bottom of this hill by the Speed Cola side — it's the trap paired with the Cemetery portal in the main quest. The Fire Sale power-up appears in the trash can near PhD once the other seven are claimed."},
+ {n:6, cat:"perk", x:430, y:282, name:"Speed Cola — Washington Avenue", d:"Speed Cola stands against the wall by the abandoned bus, opposite a GobbleGum machine. The 'Conspiracy Theorist' radio is on the table right beside it. The Washington Ave Aether trap (for the Riverside portal) is on this street."},
+ {n:7, cat:"quest", x:330, y:282, name:"Lily's Flowerpot — Water Valve", d:"Take the Water Valve from the tap outside the flower shop, across from Speed Cola. It goes into the panel in Liberty Lanes to earn the Water Pressure Gauge (Jet Gun part). The Max Armor power-up icon is visible through the blue house window opposite here, and the Double Points icon sits on the water tower beyond."},
+ {n:8, cat:"quest", x:490, y:262, name:"Buzz's Cuts — LTG part in the upstairs window", d:"Stand on the white truck on Washington Ave and use the Jet Gun's suction to pull the LTG component out of the barber shop's second-floor window. One of three LTG parts — the others are in Olly's Comics' ceiling and on the church balcony."},
+ {n:9, cat:"perk", x:380, y:404, name:"Jugger-Nog + Bank Vault + The Alamo", d:"Jugger-Nog is in the bank's far-right corridor. The vault is here too: code note #1 is behind the counter, and the 6-digit code (Bank → Olly's Comics → Liberty Lanes, in that order) opens it for Loot Key boxes, 500 free Essence and the 'Money Talks' log. The Nuke power-up hangs on the chandelier. The roof — The Alamo — holds the LTG workbench, the Der Wunderfizz (Round 25+) and the zipline hub."},
+ {n:10, cat:"secret", x:150, y:404, name:"Benson Funeral Services — bowling shoes #5", d:"On West Main Street, opposite Liberty Lanes: look through the broken door — the last pair of Mr. Peeks bowling shoes rests on the coffin. Shooting the fifth pair teleports the team into the bowling minigame. The 'Steel Mountain Rescue' radio is also on this street, on a garbage can past the broken bus."},
+ {n:11, cat:"secret", x:590, y:170, name:"Riverside telescopes — Dancing Zombies", d:"Pay 50 Essence at each of the two telescopes by the river fence and spot the dancing zombie on the cliff through both. Every zombie on the map then climbs on the white bus and dances under disco lights."},
+ {n:12, cat:"perk", x:700, y:230, name:"Quick Revive — Olly's Comics", d:"Quick Revive is inside Olly's Comics, on the left. This one shop also holds: LTG part in the ceiling hole, vault code note #2 under the central counter, 4 of the 9 Aetherella figures, the Aetherella trap, the 'Quantum Mechanical Failure' radio in the window, the 'Final Issue' document in the comic boxes, and 'Limited Run' after the Aetherella egg. The Bonus Points power-up sits on the AC unit at the back of the building."},
+ {n:13, cat:"quest", x:600, y:280, name:"Radio House Electronics — Electrical Wires", d:"Blast the door open with a Mangler Cannon (shoot a Mangler's arm off, craft one for 1,250 Salvage, or use Mutant Injection), then search the debris piles inside for the Jet Gun's Electrical Wires. Riverside's Aether storm portal is near here, across from Olly's Comics."},
+ {n:14, cat:"secret", x:700, y:290, name:"Frank's Hardware — bowling shoes #2", d:"Across from Olly's Comics, through the open barrier: the second pair of bowling shoes sits on the back-right shelf, easiest to spot when the shop light flickers."},
+ {n:15, cat:"utility", x:590, y:330, name:"Backstreet Parking — 'Fine Man' document", d:"At the back of the VHS store, look through the open window next to the crafting table and shoot the 3 tapes/books on the shelf to drop the 'Fine Man' document."},
+ {n:16, cat:"quest", x:150, y:520, name:"Fuller's Liberty Lanes — gauge panel, vault note, pool table", d:"Inside: install the Water Valve in the wall panel by the lanes and hold interact to build the Water Pressure Gauge (Jet Gun part). Vault code note #3 hides under the bottle bucket on the snack bar counter. Shoot the pool table balls for 100 free Essence. The Full Power icon is behind the bus outside, and the bowling minigame plays out in here."},
+ {n:17, cat:"secret", x:620, y:520, name:"Pump & Pay — bowling shoes #1 (at spawn)", d:"The first pair of bowling shoes is on the gas station counter by the register, directly below your spawn rooftop. This is also where the second Aether Canister appears (by the broken smoking trap) during the main quest, and where Exfil activates from Round 11."},
+ {n:18, cat:"quest", x:390, y:520, name:"Motor Lodge Room 202 — Jet Gun workbench", d:"Up the motel stairs and along the walkway — zombies burst out of Room 202 as you approach. Inside: the workbench where you craft the Thrustodyne M23 Jet Gun from the Handbrake, Water Pressure Gauge and Electrical Wires, plus the 'The Scientist and The Moonshiner' radio by the pizza box."},
+ {n:19, cat:"secret", x:300, y:470, name:"Motor Lodge Alley — vending machine & headset #1", d:"Crouch-melee the vending machine under the stairs once per round for random loot (don't punch it with Melee Macchiato until late — that smashes it for one big payout and ends it). Mr. Peeks headset #1 for the music egg is on the ground at the top of these stairs by the fence. A crafting table is in this alley too — handy for Semtex for the Blood Pool."},
+ {n:20, cat:"secret", x:460, y:60, name:"Church spire — Raining Zombies", d:"Look up at the right metal spike on the church tower, closest to the front door: a zombie head is impaled on it. Hit it with any explosive and zombies rain down in front of the church, bursting into Essence, Salvage, Aether Tools and scorestreaks. One of the best free payouts in the game."},
+ {n:21, cat:"quest", x:470, y:360, name:"The Alamo rooftops — projectors, Blood Pool, LTG bench", d:"From the bank roof: build the LTG at the workbench, break the red-X board (750 Essence) and drop to the Yummy Freeze lower roof for the third Strauss projector, and throw 3 Semtex into the pool below (between Motor Lodge and Liberty Lanes) to trigger the Blood Pool loot orb, which lands in front of the bank."},
+ {n:22, cat:"secret", x:700, y:520, name:"Spawn bridge — Max Ammo + Double Points sightlines", d:"From the spawn rooftop, turn around: the Max Ammo icon sits low on the bridge where the arch meets the ground. You can also line up the Double Points icon on the Groundskeeper's water tower from up here with a scoped weapon."},
+ {n:23, cat:"perk", x:520, y:560, name:"Stamin-Up — East Main Street", d:"Stamin-Up's machine is down on East Main Street on the spawn side of town. Prone in front of it (and every other perk machine) once per game for 100 free Essence."},
+ {n:24, cat:"perk", x:460, y:110, name:"Melee Macchiato — Church forecourt", d:"Melee Macchiato stands by the church entrance/forecourt (the 'Bear Witness' log is on a bench just inside, behind it). Its heavy punch launches zombies — and smashes the Motor Lodge vending machine open if you punch it with this perk active."}
+];
+var pinsG = document.getElementById('pins');
+var detail = document.getElementById('pinDetail');
+var NS = 'http://www.w3.org/2000/svg';
+PINS.forEach(function(p){
+  var g = document.createElementNS(NS,'g');
+  g.setAttribute('class','pin'); g.setAttribute('tabindex','0'); g.setAttribute('role','button');
+  g.setAttribute('aria-label','Pin '+p.n+': '+p.name); g.dataset.cat = p.cat;
+  var c = document.createElementNS(NS,'circle');
+  c.setAttribute('cx',p.x); c.setAttribute('cy',p.y); c.setAttribute('r','13');
+  var t = document.createElementNS(NS,'text');
+  t.setAttribute('x',p.x); t.setAttribute('y',p.y+4); t.textContent = p.n;
+  g.appendChild(c); g.appendChild(t);
+  function show(){
+    document.querySelectorAll('.pin.sel').forEach(function(el){el.classList.remove('sel')});
+    g.classList.add('sel');
+    detail.innerHTML = '<h3>'+p.n+'. '+p.name+'</h3><p>'+p.d+'</p>';
+    detail.scrollIntoView({block:'nearest', behavior:'smooth'});
+  }
+  g.addEventListener('click', show);
+  g.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); show(); } });
+  pinsG.appendChild(g);
+});
+document.getElementById('mapFilters').addEventListener('click', function(e){
+  var b = e.target.closest('button'); if(!b) return;
+  this.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+  b.setAttribute('aria-pressed','true');
+  var f = b.dataset.f;
+  document.querySelectorAll('.pin').forEach(function(g){
+    g.classList.toggle('dim', f!=='all' && g.dataset.cat!==f);
+  });
+});
+function wireList(id){
+  var list = document.getElementById(id); if(!list) return;
+  var items = list.querySelectorAll('.check');
+  var counter = document.querySelector('[data-count-for="'+id+'"]');
+  var fill = document.querySelector('[data-fill-for="'+id+'"]');
+  function update(){
+    var done = list.querySelectorAll('.check[aria-pressed="true"]').length;
+    if(counter) counter.textContent = done+' / '+items.length+' done';
+    if(fill) fill.style.width = (items.length? (done/items.length*100):0)+'%';
+  }
+  items.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.setAttribute('aria-pressed', btn.getAttribute('aria-pressed')==='true' ? 'false':'true');
+      update();
+    });
+  });
+  update();
+}
+['mainQuestList','jetList','sideList','powerList','intelList'].forEach(wireList);
+</script>
+</body>
+</html>

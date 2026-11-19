@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>The Tomb — Map &amp; No-Miss Walkthrough | Black Ops 6 Zombies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f4f1ea; --bg2:#ece7db; --card:#fffdf8; --card2:#f7f3e9;
+    --ink:#211d16; --ink2:#4c463c; --muted:#6f675a;
+    --line:#d8d0bf; --line2:#c6bba2;
+    --gold:#9a7414; --gold-bg:#f3e7c3;
+    --aether:#6d3fc4; --aether-bg:#ece3fb; --aether-ink:#4a2490;
+    --red:#a92c22; --red-bg:#f9e3e0;
+    --green:#2e6b34; --green-bg:#e2efdf;
+    --blue:#1f5f7a; --blue-bg:#ddeef3;
+    --pin:#6d3fc4;
+    --shadow:0 2px 10px rgba(60,48,20,.10);
+    --head-bg:#221c14; --head-ink:#f3ead2; --head-sub:#cfc2a4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#14110d; --bg2:#1a1712; --card:#201c16; --card2:#26221b;
+      --ink:#efe8d8; --ink2:#cfc6b2; --muted:#a79c86;
+      --line:#3a342a; --line2:#4a4234;
+      --gold:#e0b64f; --gold-bg:#3a2f14;
+      --aether:#b79af5; --aether-bg:#2e2150; --aether-ink:#d9c9ff;
+      --red:#f0927f; --red-bg:#47231f;
+      --green:#93cf9a; --green-bg:#1f3524;
+      --blue:#8ec9de; --blue-bg:#1d3540;
+      --pin:#b79af5;
+      --shadow:0 2px 12px rgba(0,0,0,.45);
+      --head-bg:#0d0b08; --head-ink:#f3ead2; --head-sub:#b3a684;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16.5px;line-height:1.55}
+  h1,h2,h3,.cz{font-family:"Cinzel",Georgia,serif;letter-spacing:.02em}
+  button,[role="button"],select,summary{ min-height:2.25rem }
+  a{color:var(--aether)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 16px 64px}
+
+  /* ---------- header ---------- */
+  header{background:var(--head-bg);color:var(--head-ink);border-bottom:4px solid var(--gold)}
+  .head-in{max-width:1060px;margin:0 auto;padding:28px 16px 22px}
+  .kicker{font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+  h1{font-size:clamp(2rem,6vw,3.1rem);line-height:1.05;margin:0 0 10px;font-weight:800}
+  .head-sub{color:var(--head-sub);max-width:62ch;margin:0 0 18px;font-size:1.02rem}
+  .stats{display:flex;flex-wrap:wrap;gap:8px}
+  .stat{background:rgba(255,255,255,.06);border:1px solid rgba(243,234,210,.25);border-radius:10px;padding:8px 12px;min-width:104px}
+  .stat b{display:block;font-size:1.25rem;line-height:1.1;color:#fff;font-family:"Cinzel",serif}
+  .stat span{font-size:.78rem;color:var(--head-sub);text-transform:uppercase;letter-spacing:.08em}
+
+  /* ---------- progress ---------- */
+  .progressbar{position:sticky;top:0;z-index:40;background:var(--card);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  .pb-in{max-width:1060px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .pb-track{flex:1;min-width:140px;height:12px;background:var(--bg2);border:1px solid var(--line);border-radius:99px;overflow:hidden}
+  .pb-fill{height:100%;width:0%;background:var(--gold);transition:width .3s ease}
+  .pb-num{font-weight:700;white-space:nowrap}
+  .pb-reset{border:1px solid var(--line2);background:var(--card2);color:var(--ink);border-radius:8px;padding:6px 12px;font:inherit;font-size:.88rem;cursor:pointer;min-height:36px}
+  .navchips{display:flex;gap:6px;flex-wrap:wrap;width:100%}
+  .navchips a{color:var(--ink2);text-decoration:none;font-size:.86rem;font-weight:600;border:1px solid var(--line);border-radius:99px;padding:7px 12px;background:var(--bg);display:inline-flex;align-items:center;min-height:32px}
+  .navchips a:hover{border-color:var(--gold);color:var(--ink)}
+
+  /* ---------- sections ---------- */
+  section{margin-top:38px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--gold);padding-bottom:8px;margin-bottom:14px}
+  .sec-head h2{font-size:clamp(1.35rem,3.4vw,1.8rem);margin:0}
+  .sec-count{font-size:.85rem;font-weight:700;color:var(--gold);background:var(--gold-bg);border-radius:99px;padding:3px 10px}
+  .sec-intro{color:var(--ink2);max-width:74ch;margin:0 0 16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px}
+  .grid{display:grid;gap:14px}
+  @media(min-width:760px){ .grid.two{grid-template-columns:1fr 1fr} .grid.three{grid-template-columns:1fr 1fr 1fr} }
+
+  /* ---------- map ---------- */
+  .map-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .mf-btn{border:1px solid var(--line2);background:var(--card);color:var(--ink);border-radius:99px;padding:8px 14px;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;min-height:38px}
+  .mf-btn[aria-pressed="true"]{background:var(--aether);border-color:var(--aether);color:#fff}
+  @media (prefers-color-scheme: dark){ .mf-btn[aria-pressed="true"]{color:#17102b} }
+  .map-board{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px}
+  .map-title{font-family:"Cinzel",serif;font-weight:700;font-size:1rem;margin:14px 0 8px}
+  .map-title:first-child{margin-top:0}
+  .zones{display:grid;gap:8px;grid-template-columns:repeat(3,1fr)}
+  .zone{position:relative;border:1.5px dashed var(--line2);border-radius:12px;background:var(--card2);min-height:118px;padding:10px 10px 8px}
+  .zone h4{margin:0 0 2px;font-size:.92rem;font-family:"Cinzel",serif}
+  .zone p{margin:0;font-size:.76rem;color:var(--muted);line-height:1.35}
+  .zone.spawn{border-style:solid;border-color:var(--gold)}
+  .zone.nexus{border-style:solid;border-color:var(--aether);background:var(--aether-bg)}
+  .pins{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+  .pin{border:none;cursor:pointer;border-radius:99px;min-width:36px;min-height:36px;padding:6px 9px;font:inherit;font-size:.78rem;font-weight:700;color:#fff;background:var(--pin);display:inline-flex;align-items:center;gap:4px}
+  .pin.perk{background:#8a5a13}.pin.station{background:var(--blue)}.pin.secret{background:var(--red)}.pin.power{background:var(--green)}
+  @media (prefers-color-scheme: dark){ .pin.perk{background:#a8761f}.pin.station{background:#2c708f}.pin.secret{background:#b0473a}.pin.power{background:#3c7d46} }
+  .pin[aria-pressed="true"]{outline:3px solid var(--gold);outline-offset:1px}
+  .pin.hide{display:none}
+  .portal-note{font-size:.82rem;color:var(--muted);margin-top:10px}
+  .pin-detail{margin-top:12px;border:1px solid var(--gold);background:var(--gold-bg);border-radius:12px;padding:14px 16px}
+  .pin-detail h3{margin:0 0 4px;font-size:1.05rem}
+  .pin-detail p{margin:0;color:var(--ink2)}
+  .pin-detail .tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--card);border:1px solid var(--line2);border-radius:99px;padding:2px 9px;margin-bottom:8px}
+  @media(max-width:560px){ .zones{grid-template-columns:1fr 1fr} .zone{min-height:104px} }
+
+  /* ---------- checklists ---------- */
+  .checklist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .checklist li{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+  .checklist label{display:flex;gap:12px;padding:12px 14px;cursor:pointer;align-items:flex-start;min-height:48px}
+  .checklist input[type="checkbox"]{width:22px;height:22px;flex:0 0 auto;margin-top:2px;accent-color:var(--gold)}
+  .checklist .t{font-weight:700}
+  .checklist .d{color:var(--ink2);font-size:.94rem}
+  .checklist li.done{opacity:.62}
+  .checklist li.done .t{text-decoration:line-through}
+  .stepnum{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--head-bg);color:var(--head-ink);font-family:"Cinzel",serif;font-weight:700;font-size:.85rem;flex:0 0 auto;margin-top:1px}
+  .warn{border:1px solid var(--red);background:var(--red-bg);border-radius:12px;padding:12px 16px;margin:14px 0}
+  .warn b{color:var(--red)}
+  .tip{border:1px solid var(--line2);background:var(--card2);border-radius:12px;padding:12px 16px;margin:14px 0}
+  .route{display:grid;gap:10px}
+  .route-row{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow)}
+  .route-round{flex:0 0 auto;font-family:"Cinzel",serif;font-weight:800;background:var(--gold-bg);color:var(--gold);border-radius:10px;padding:8px 10px;height:fit-content;text-align:center;min-width:74px;font-size:.85rem}
+  .route-row p{margin:0;color:var(--ink2)} .route-row p b{color:var(--ink)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"Cinzel",serif;font-size:.85rem;background:var(--card2)}
+  tr:last-child td{border-bottom:none}
+  td.loc{font-weight:700;white-space:nowrap}
+  .pill{display:inline-block;font-size:.74rem;font-weight:700;border-radius:99px;padding:2px 9px;background:var(--aether-bg);color:var(--aether-ink);white-space:nowrap}
+  .pill.gold{background:var(--gold-bg);color:var(--gold)} .pill.red{background:var(--red-bg);color:var(--red)} .pill.green{background:var(--green-bg);color:var(--green)} .pill.blue{background:var(--blue-bg);color:var(--blue)}
+  footer{margin-top:44px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.88rem}
+  footer a{color:var(--aether)}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .pb-fill{transition:none} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <p class="kicker">Black Ops 6 · Zombies · Season 02 Map</p>
+    <h1>The Tomb</h1>
+    <p class="head-sub">Complete map and no-miss walkthrough for the cursed dig site beneath Avalon. Weaver, Maya, Carver and Grey follow Professor Krafft's trail to the Sentinel Artifact — through Roman catacombs, the Doorway to Nowhere, and the Dark Aether Nexus. Every perk, secret, power-up and Intel piece, in the order to grab them so one clean run misses nothing.</p>
+    <div class="stats">
+      <div class="stat"><b>8</b><span>Zones + Nexus</span></div>
+      <div class="stat"><b>7,500</b><span>Essence to PaP</span></div>
+      <div class="stat"><b>14</b><span>Side Easter Eggs</span></div>
+      <div class="stat"><b>9</b><span>Free Power-Ups</span></div>
+      <div class="stat"><b>22</b><span>Intel Pieces</span></div>
+      <div class="stat"><b>9</b><span>Boss Phases</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="progressbar" role="region" aria-label="Checklist progress">
+  <div class="pb-in">
+    <span class="pb-num" id="pbNum">0 / 0 ticked</span>
+    <div class="pb-track"><div class="pb-fill" id="pbFill"></div></div>
+    <button class="pb-reset" id="pbReset" type="button">Reset ticks</button>
+    <nav class="navchips" aria-label="Sections">
+      <a href="#map">Map</a><a href="#route">No-Miss Route</a><a href="#mainquest">Main Quest</a><a href="#staff">Ice Staff</a><a href="#side">Side Eggs</a><a href="#powerups">Power-Ups</a><a href="#perks">Perks &amp; Machines</a><a href="#intel">Intel</a><a href="#boss">Boss Fight</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- ================= MAP ================= -->
+<section id="map">
+  <div class="sec-head"><h2>Interactive Map</h2><span class="sec-count">Tap a pin for the exact spot</span></div>
+  <p class="sec-intro">The Tomb is two loops that meet at the Subterranean Temple. <strong>North path:</strong> Dig Site → Tombs → Shrine of the Hierophants → Temple. <strong>South path:</strong> Dig Site → Neolithic Catacombs → Ossuary → Temple. Place the amulet in the Temple to open the Doorway to Nowhere — the red portal into the Dark Aether Nexus, where Pack-a-Punch starts. After that, four coloured portals (blue = Dig Site, yellow = Shrine, green = Ossuary, red = Temple) make the Nexus your fast-travel hub. Pack-a-Punch later swaps between the Nexus and the Dig Site, so check the stone maps around the map.</p>
+
+  <div class="map-filters" role="group" aria-label="Filter map pins">
+    <button class="mf-btn" type="button" data-filter="all" aria-pressed="true">All pins</button>
+    <button class="mf-btn" type="button" data-filter="perk" aria-pressed="false">Perks</button>
+    <button class="mf-btn" type="button" data-filter="station" aria-pressed="false">PaP &amp; Stations</button>
+    <button class="mf-btn" type="button" data-filter="secret" aria-pressed="false">Secrets</button>
+    <button class="mf-btn" type="button" data-filter="power" aria-pressed="false">Power-Ups</button>
+  </div>
+
+  <div class="map-board">
+    <p class="map-title">Surface — the catacombs (west → east)</p>
+    <div class="zones">
+      <div class="zone spawn">
+        <h4>Dig Site / Roman Mausoleum</h4><p>Spawn. PhD Flopper, Arsenal, Lv.2 Armor, Marine SP wall buy, GobbleGum.</p>
+        <div class="pins">
+          <button class="pin perk" data-cat="perk" data-title="PhD Flopper — Dig Site" data-body="In the Roman Mausoleum at spawn. Dive-to-prone explosions and no explosive self-damage — very handy for the War Machine and Ray Gun on this tight map.">PhD</button>
+          <button class="pin station" data-cat="station" data-title="Pack-a-Punch (alternate home) — Dig Site" data-body="After you unlock it in the Nexus, PaP swaps between the Nexus and here every few rounds — find it by the blue portal, in front of the two brass bull statues. The stone Tac-Maps around the map show which home it's in.">PaP ⇄</button>
+          <button class="pin secret" data-cat="secret" data-title="Dead Wire generators — Dig Site" data-body="Put Dead Wire on a gun and shoot both sparking generators at spawn (one left of the stairs, one by the armor wall buy). Spawns a Full Power, 1,000 Essence (2,000 on Double Points) and armor plates on the fallen column.">⚡ Gen</button>
+          <button class="pin secret" data-cat="secret" data-title="Vermin statue & Gold Armor statues — Dig Site" data-body="West wall: the Vermin trial statue. The two headless bull-side statues by the temple steps take the statue heads from the Nexus for the Gold Armor blood sacrifices.">Statues</button>
+          <button class="pin power" data-cat="power" data-title="Fire Sale — Dig Site" data-body="On the southwest wall of the Dig Site. It only appears AFTER you've shot the other 7 hidden power-ups — always grab this one last.">Fire Sale</button>
+        </div>
+      </div>
+      <div class="zone">
+        <h4>Tombs</h4><p>North path, upper level. Death Perception, Tanto .22 wall buy, Mystery Box spawn.</p>
+        <div class="pins">
+          <button class="pin perk" data-cat="perk" data-title="Death Perception — Tombs" data-body="In the Tombs, by the broken pillars. See enemies, loot and dig piles through walls — required in spirit for the free Ray Gun egg, since it highlights the dig spots and Ancient Gems.">Death Perc.</button>
+          <button class="pin secret" data-cat="secret" data-title="Bull mural — Taurus puzzle — Tombs" data-body="Left of the door to the Shrine. Move the purple Aetheric Lantern flame here by shooting lanterns, then shoot the 8 Roman-numeral symbols in order (I→VIII) to start the lockdown that drops the Staff piece. The statue beside it also takes the 3 Ancient Gems for the free Ray Gun.">Bull mural</button>
+          <button class="pin secret" data-cat="secret" data-title="Simon Says statues — Tombs" data-body="Shoot the broken statue on the floor; the wall statues light in a random order. Repeat the order by shooting them to earn a free Brain Rot ammo mod plus essence, salvage and loot.">Simon Says</button>
+        </div>
+      </div>
+      <div class="zone">
+        <h4>Shrine of the Hierophants</h4><p>North path end. Stamin-Up, AK-74 wall buy, Crafting Table, Arrow Traps.</p>
+        <div class="pins">
+          <button class="pin perk" data-cat="perk" data-title="Stamin-Up — Shrine of the Hierophants" data-body="Centre of the circular shrine room. The run speed matters here — the statue trials and the orb escort punish slow players.">Stamin-Up</button>
+          <button class="pin secret" data-cat="secret" data-title="Parasite statue — Shrine of the Hierophants" data-body="In front of Stamin-Up. Bring the amulet energy here from the Nexus (yellow portal) to run the Parasite trial: kill glowing Parasites and carry each purple orb back to the statue, one at a time.">Parasite</button>
+          <button class="pin secret" data-cat="secret" data-title="'Dig' headset #1 — Shrine of the Hierophants" data-body="Mr. Peeks headset #1 sits to the right of the statue in the Shrine. One of three for the 'Dig' song easter egg.">🎧 1</button>
+          <button class="pin power" data-cat="power" data-title="Full Power — Shrine of the Hierophants" data-body="Inside the zombie spawn cave to the right of the Stamin-Up machine, on the ground. Shoot it to collect. (Separate from the Dig Site generator Full Power.)">Full Power</button>
+        </div>
+      </div>
+      <div class="zone">
+        <h4>Neolithic Catacombs</h4><p>South path, maze tunnels. Deadshot Daiquiri, Kompakt 92 wall buy, Crafting Table.</p>
+        <div class="pins">
+          <button class="pin perk" data-cat="perk" data-title="Deadshot Daiquiri — Neolithic Catacombs" data-body="In the catacombs room at the south-west. ADS snaps to heads and boosts crit damage — pairs perfectly with the bullet gun you need for the boss.">Deadshot</button>
+          <button class="pin secret" data-cat="secret" data-title="Archer mural — Orion puzzle — Neolithic Catacombs" data-body="Between the Dig Site and the Ossuary. Move the Aetheric Lantern flame in front of the archer wall, then shoot the 10 symbols in order (I→X). Survive the lockdown for the Staff Head Piece.">Archer mural</button>
+          <button class="pin power" data-cat="power" data-title="Nuke — Neolithic Catacombs" data-body="Look through the hole in the wall by the Mystery Box spawn: the Nuke sits on a distant rock ledge/stalagmite tip in the cavern. A scoped weapon makes this far easier. Shoot it to collect.">Nuke</button>
+        </div>
+      </div>
+      <div class="zone">
+        <h4>Ossuary</h4><p>South path end, bone room. Speed Cola, XM4 wall buy, Arrow Traps, GobbleGum.</p>
+        <div class="pins">
+          <button class="pin perk" data-cat="perk" data-title="Speed Cola — Ossuary" data-body="In the Ossuary, south end of the map. Faster reloads and armor plating — grab before the statue trials.">Speed Cola</button>
+          <button class="pin secret" data-cat="secret" data-title="6 fire bowls — free Random Perk — Ossuary" data-body="Light all 6 fire bowls at the Ossuary doorways with Napalm Burst (500 salvage) or Molotovs. A Random Perk power-up spawns mid-room — in co-op, everyone gets one.">6 bowls</button>
+          <button class="pin secret" data-cat="secret" data-title="Doppelghast statue & Brain Rot skulls — Ossuary" data-body="Statue by Speed Cola runs the Doppelghast trial (green portal from the Nexus). The 4 skulls marked with an X around this room are the Brain Rot army egg — order matters, see Side Eggs.">Doppel.</button>
+          <button class="pin secret" data-cat="secret" data-title="'Dig' headset #2 — Ossuary" data-body="Mr. Peeks headset #2 is in the hole in the wall full of skulls and a ribcage, next to the green portal.">🎧 2</button>
+          <button class="pin power" data-cat="power" data-title="Max Armor — Ossuary" data-body="High in the hole in the wall in the corner to the right of / adjacent to the Speed Cola machine. Shoot it to collect.">Max Armor</button>
+        </div>
+      </div>
+      <div class="zone">
+        <h4>Subterranean Temple + Deep Excavation</h4><p>East end, both paths meet. Quick Revive, Arsenal, Lv.3 Armor, GPMG-7 wall buy.</p>
+        <div class="pins">
+          <button class="pin perk" data-cat="perk" data-title="Quick Revive — Deep Excavation" data-body="Down in Deep Excavation, east end. Solo it self-revives you; the Amalgam trial statue stands right in front of this machine.">Quick Revive</button>
+          <button class="pin station" data-cat="station" data-title="Doorway to Nowhere — Subterranean Temple" data-body="Interact with the pedestal at the top of the Temple stairs to place the amulet from Citadelle des Morts. Opens the red portal to the Dark Aether Nexus and unlocks Pack-a-Punch. Costs 2,250 + 2,500 + 2,750 Essence in doors to reach.">Doorway</button>
+          <button class="pin secret" data-cat="secret" data-title="Amalgam statue — Deep Excavation" data-body="In front of Quick Revive. Bring the energy through the red portal for the final trial: an HVT Amalgam spawns shielded by tethered zombies — kill the tethered zombies to drop its shield, then kill it.">Amalgam</button>
+          <button class="pin power" data-cat="power" data-title="Max Ammo — Subterranean Temple" data-body="Top of the northern Temple stairs, in a hole in the wall to the right of the Aetheric Lantern / right of the red portal. Shoot it to collect.">Max Ammo</button>
+          <button class="pin power" data-cat="power" data-title="Insta-Kill — Deep Excavation" data-body="Stand right of the Arsenal in Deep Excavation and look north-east: the skull sits on a ledge behind the stone pillars. Shoot it to collect.">Insta-Kill</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="map-title">Dark Aether Nexus — through the Doorway to Nowhere</p>
+    <div class="zones" style="grid-template-columns:1fr">
+      <div class="zone nexus">
+        <h4>Dark Aether Nexus</h4><p>Central mound &amp; altar where the Staff of Ice is built and upgraded. Four trial statues ring the altar. Portals: 🔵 Dig Site · 🟡 Shrine · 🟢 Ossuary · 🔴 Temple.</p>
+        <div class="pins">
+          <button class="pin station" data-cat="station" data-title="Pack-a-Punch (first home) — Dark Aether Nexus" data-body="Dead ahead when you first step through the Doorway. 5,000 / 15,000 / 30,000 Essence for Tiers 1–3. Later swaps with the Dig Site — check the stone maps.">PaP</button>
+          <button class="pin perk" data-cat="perk" data-title="Jugger-Nog — Dark Aether Nexus" data-body="In the Nexus. Non-negotiable before the statue trials — the Vermin lockdown and Blood Sacrifices will melt you without the extra health.">Jugger-Nog</button>
+          <button class="pin perk" data-cat="perk" data-title="Der Wunderfizz — Dark Aether Nexus" data-body="In the Nexus, by the Crafting Table ruins. One machine for every perk you missed — the efficient way to finish your perk set before the boss.">Wunderfizz</button>
+          <button class="pin secret" data-cat="secret" data-title="Staff altar & 4 trial statues — Nexus centre" data-body="Build and upgrade the Staff of Ice on the central mound. Around it: Vermin (front-right), Parasite (front-left, left of PaP), Doppelghast (back-left), Amalgam (back-right). Shoot each crystal with Sekhmet's Vigor (the staff's revive shot) to start its trial.">Altar</button>
+          <button class="pin secret" data-cat="secret" data-title="Waterfalls, floating rock & statue-head crates — Nexus" data-body="By the green portal: freeze both waterfalls for a free Aether Tool, and melee the wooden crate for a statue head (the second crate is by Jugger-Nog). Overhead: shoot the lightning-struck floating rock, then every spinning rock, for a free Tier 1 PaP crystal + Cryofreeze.">Nexus loot</button>
+          <button class="pin secret" data-cat="secret" data-title="'Dig' headset #3 — Dark Aether Nexus" data-body="Mr. Peeks headset #3 is mid-pathway between the yellow and red portals. Grab it and the 'Dig' song plays (once per game).">🎧 3</button>
+          <button class="pin secret" data-cat="secret" data-title="Boss bridge — Nexus north-east" data-body="After all 4 statue trials, the monolith's beams point north-east. Interact with the pedestal there to raise the bridge to the Sentinel Artifact. Point of no return — prep first (see Boss Fight).">Boss bridge</button>
+          <button class="pin power" data-cat="power" data-title="Double Points — Dark Aether Nexus" data-body="South-west path of the Nexus, up on the rock wall formation. Enter from the Temple gateway and check the south-west corner rocks. Shoot it to collect.">2× Points</button>
+          <button class="pin power" data-cat="power" data-title="Bonus Points — Dark Aether Nexus" data-body="North end of the Nexus: small hole at ground level in the rock wall, just left of the blue portal on the path toward the Dig Site gateway. Shoot it for +500 Essence (1,000 if Double Points is running — grab Double Points first).">Bonus Pts</button>
+        </div>
+      </div>
+    </div>
+    <p class="portal-note">Tip: once the Nexus is open you never need to run the full loop again — portal in from any zone, cross the Nexus, portal out the other side. It's the fastest route to PaP, Jugger-Nog and Wunderfizz from anywhere.</p>
+
+    <div class="pin-detail" id="pinDetail" aria-live="polite">
+      <span class="tag">Pin detail</span>
+      <h3>Tap any pin above</h3>
+      <p>Perks, Pack-a-Punch, every secret trigger and every hidden power-up is pinned. Tap one and the exact location and how-to shows up here.</p>
+    </div>
+  </div>
+</section>
+<!-- ================= ROUTE ================= -->
+<section id="route">
+  <div class="sec-head"><h2>The No-Miss Route</h2><span class="sec-count">One run, everything in order</span></div>
+  <p class="sec-intro">Follow this order and you'll touch every system on the map without backtracking. Pick the <strong>north path</strong> on your first runs — Death Perception early makes the dig-pile egg much easier, and both paths cost exactly the same (2,250 + 2,500 + 2,750).</p>
+  <div class="route">
+    <div class="route-row"><div class="route-round">Rounds<br>1–3</div><p><b>Farm the Dig Site.</b> Knife and headshot for Essence, don't buy the Marine SP yet. Break purple Aether Crystals for salvage. Grab the <b>Infamous Mr. Rhodes</b> and <b>Retirement Plan</b> Intel at spawn (see Intel list) and buy the <b>Level II Armor Vest</b> if you're staying a third round.</p></div>
+    <div class="route-row"><div class="route-round">Round<br>4</div><p><b>Open door 1 (2,250) into the Tombs.</b> Pick up <b>Grave Robbers</b> Intel right inside the door. Note the bull mural and the Death Perception machine — you'll be back here with a lantern flame and 3 gems.</p></div>
+    <div class="route-row"><div class="route-round">Round<br>5</div><p><b>Open door 2 (2,500) into the Shrine of the Hierophants.</b> Grab headset #1 by the statue, the <b>Spring Time</b> and <b>Against a Wall</b> Intel, and shoot the hidden <b>Full Power</b> in the spawn cave right of Stamin-Up. Mind the Arrow Traps on the stairs.</p></div>
+    <div class="route-row"><div class="route-round">Rounds<br>6–8</div><p><b>Open door 3 (2,750) into the Subterranean Temple.</b> Take <b>The Knaves</b> Intel by the altar stairs, place the <b>amulet</b> on the pedestal, and step through the Doorway to Nowhere. In the Nexus: <b>Pack-a-Punch Tier 1</b>, <b>Jugger-Nog</b>, Bernard's skull Intel on the central podium, and the <b>Tortured Artist</b> Intel by the green portal ruins.</p></div>
+    <div class="route-row"><div class="route-round">Round<br>8</div><p><b>Kill the first Shock Mimic — do not let it despawn.</b> It drops <b>Archibald's Monocle</b>, the key that makes the constellation symbols visible. No Monocle, no Staff. Then shoot the Nexus <b>Double Points</b> and <b>Bonus Points</b> (in that order) and headset #3 between the yellow and red portals.</p></div>
+    <div class="route-row"><div class="route-round">Rounds<br>9–12</div><p><b>Build the Staff of Ice</b> (full steps below): lantern flame to the bull mural → Taurus lockdown → Staff piece; lantern flame to the archer mural → Orion lockdown → Head Piece; build and defend it on the Nexus altar. On the way through the south loop, open the Catacombs and Ossuary, grab Speed Cola, headset #2, and light the 6 Ossuary bowls for a <b>free Random Perk</b>.</p></div>
+    <div class="route-row"><div class="route-round">Rounds<br>12–15</div><p><b>Free-loot sweep while the Staff is fresh:</b> Dead Wire the Dig Site generators, freeze the Nexus waterfalls, shoot the floating rocks, dig for the 3 Ancient Gems with Death Perception, and run the Gold Armor blood sacrifices. Then <b>upgrade the Staff to Ull's Arrow</b> — freeze 3 crystals in 10 seconds, floating-rock symbols, orb escort.</p></div>
+    <div class="route-row"><div class="route-round">Rounds<br>15–20</div><p><b>Four statue trials in quest order:</b> Vermin → Parasite → Doppelghast → Amalgam. Carry each amulet energy carefully — getting hit 3 times while carrying it fails the carry and you restart that leg. Refill Sekhmet's Vigor ammo at any Ammo Cache (5,000) if you run dry.</p></div>
+    <div class="route-row"><div class="route-round">Before<br>Boss</div><p><b>Full prep:</b> Tier 3 PaP + Legendary rarity on a <b>bullet</b> gun (ASG-89, GS45 akimbo or a strong AR/LMG build), Tier 3 armor or Gold Armor, 4+ perks incl. Jugger-Nog, Speed Cola, Stamin-Up, Quick Revive, Aether Shroud or Frenzied Guard, Kazimirs/Monkey Bombs, a Self-Revive and your Staff for crowd control only. Then take the north-east bridge in the Nexus.</p></div>
+  </div>
+</section>
+
+<!-- ================= MAIN QUEST ================= -->
+<section id="mainquest">
+  <div class="sec-head"><h2>Main Quest — The Sentinel Artifact</h2><span class="sec-count" data-count-for="mq">0 / 11</span></div>
+  <p class="sec-intro">Rewards: the <strong>X91 Ice-Pike</strong> Staff of Ice skin, "The Tomb Quest Complete" calling card and 5,000 XP (Standard mode before the Directed-mode cutoff also earns the early-completion calling card variant). Tick each step as you clear it.</p>
+  <ul class="checklist" data-group="mq">
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">1</span> Open the Doorway to Nowhere &amp; unlock Pack-a-Punch</span><br><span class="d">Open the three doors (2,250 → 2,500 → 2,750 Essence) down either path to the Subterranean Temple. Interact with the pedestal to place the amulet from Citadelle des Morts. The red portal opens — step through to the Dark Aether Nexus, where Pack-a-Punch waits. It later swaps between the Nexus and the Dig Site every few rounds.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">2</span> Get the Monocle — first Shock Mimic, Round 8</span><br><span class="d">The first Shock Mimic spawns on Round 8 and drops Archibald's Monocle. You MUST have it before the constellation symbols appear. Also counts as an Artifact Intel piece the first time you pick it up.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">3</span> Taurus puzzle — Tombs bull mural → Staff piece</span><br><span class="d">Shoot Aetheric Lanterns one at a time to walk the purple flame around the map until it sits in front of the bull mural in the Tombs. With the Monocle, 8 Roman-numeral symbols appear. Shoot them in order I → VIII. Survive the 5-wave lockdown (purple-eyed zombies, Mimics, Doppelghasts) and take the Staff piece off the mural.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">4</span> Orion puzzle — Neolithic Catacombs archer mural → Head Piece</span><br><span class="d">Same lantern trick, this time park the flame in front of the archer wall in the Neolithic Catacombs. Shoot the 10 symbols in order I → X, survive the 5-wave lockdown, and collect the Head Piece.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">5</span> Build the Staff of Ice — Nexus altar</span><br><span class="d">Interact with the broken monolith on the central mound of the Dark Aether Nexus. Defend the staff during the lockdown — purple zombies beeline for it, and if its health empties you wait a round and retry. Pick up the Staff of Ice when the white flash hits. (Shortcut: a Wonderbar! GobbleGum can pull it from the Box — 50/50 with the Ray Gun — but building it is free and guaranteed.)</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">6</span> Upgrade it — Ull's Arrow</span><br><span class="d">Full detail in the Ice Staff section below: freeze 3 purple crystals in 10 seconds → note the 3 floating-rock symbols in the Nexus → shoot the same symbols in the same order on the wall by the portal that closed → escort the purple orb, feeding it kills, back to the altar → interact to upgrade. The alt-fire is now Sekhmet's Vigor, the green revive shot the trials run on.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">7</span> Vermin trial — Dig Site (blue portal)</span><br><span class="d">In the Nexus, shoot the Vermin statue's crystal (front-right of the altar) with Sekhmet's Vigor and take the amulet energy. Blue portal to the Dig Site, deposit it in the glowing Vermin statue on the west wall, and survive the 60-second Vermin swarm lockdown. Carry the charged energy back to the Nexus statue — its portal seals behind you, so return via a different portal, and don't get hit 3 times while carrying.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">8</span> Parasite trial — Shrine of the Hierophants (yellow portal)</span><br><span class="d">Sekhmet's Vigor on the Parasite statue (front-left of the altar, left of PaP), yellow portal to the Shrine, deposit in the statue in front of Stamin-Up. Kill the glowing Parasites and hand-carry each purple orb they drop back to the statue, one at a time, until it's charged. Return the energy to the Nexus.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">9</span> Doppelghast trial — Ossuary (green portal)</span><br><span class="d">Sekhmet's Vigor on the Doppelghast statue (back-left of the altar), green portal to the Ossuary, deposit in the statue near Speed Cola. Straightforward kill trial: wipe the zombie and Doppelghast waves. Charged Ull's Arrow shots shred this. Return the energy to the Nexus.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">10</span> Amalgam trial — Deep Excavation (red portal)</span><br><span class="d">Sekhmet's Vigor on the Amalgam statue (back-right of the altar), red portal to the Temple, deposit in the statue in front of Quick Revive in Deep Excavation. An HVT Amalgam spawns shielded — kill the zombies tethered to it to drop the shield, then burn it down. Return the final energy; the first completed trial also drops the Monolith Crystal Shard Intel by the Nexus monolith — grab it.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t"><span class="stepnum">11</span> Raise the bridge &amp; take the Sentinel Artifact fight</span><br><span class="d">All four statue beams now converge north-east in the Nexus. Interact with the pedestal the beams point at to raise the bridge, cross, and interact with the Sentinel Artifact. Point of no return — prep checklist and phase guide are in the Boss Fight section below.</span></span></label></li>
+  </ul>
+  <div class="warn"><p style="margin:0"><b>Boss damage rule:</b> the Sentinel Artifact only takes damage from <b>bullet weapons</b>, and only while it glows ghostly purple/blue. Explosives, the Ray Gun and the Staff of Ice itself do <b>not</b> damage it — the Staff is for clearing the horde at your feet, your PaP'd bullet gun is for the boss.</p></div>
+</section>
+
+<!-- ================= STAFF ================= -->
+<section id="staff">
+  <div class="sec-head"><h2>Staff of Ice — Build &amp; Upgrade</h2><span class="sec-count" data-count-for="staff">0 / 9</span></div>
+  <p class="sec-intro">The map's Wonder Weapon, straight out of Origins. Primary fire freezes and shatters; the upgraded <strong>Ull's Arrow</strong> adds a charged ice storm and Sekhmet's Vigor — a green revive shot that also wakes the trial statues. In co-op, once one player upgrades, teammates can take a crystal shard by the monolith to upgrade their own staffs.</p>
+  <div class="grid two">
+    <div class="card">
+      <h3 style="margin-top:0">Build it — 3 parts</h3>
+      <ul class="checklist" data-group="staff">
+        <li><label><input type="checkbox"><span><span class="t">Monocle</span><br><span class="d">Drop from the first Shock Mimic, Round 8. Reveals the constellation symbols.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Staff piece — Tombs</span><br><span class="d">Lantern flame to the bull mural, shoot I→VIII, survive 5 waves.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Head Piece — Neolithic Catacombs</span><br><span class="d">Lantern flame to the archer mural, shoot I→X, survive 5 waves.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Assemble — Nexus altar</span><br><span class="d">Place the parts on the monolith, defend against the purple horde, pick up the Staff of Ice.</span></span></label></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Upgrade it — Ull's Arrow</h3>
+      <ul class="checklist" data-group="staff">
+        <li><label><input type="checkbox"><span><span class="t">Freeze 3 purple crystals in 10 seconds</span><br><span class="d">Find three Dark Aether crystals close together underground and staff-blast all three within 10 seconds. Archibald's voice line confirms it. Failed? Shoot the frozen ones to reset and retry.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Read the floating rocks</span><br><span class="d">In the Nexus, 3 floating rocks now carry symbols. Shoot each with the Staff to lower it and memorise the symbols AND their order — screenshot it, it's random every game.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Reopen the closed portal</span><br><span class="d">One Nexus portal seals. Go to its far side in the normal world and shoot the same 3 symbols, same order, on the wall there with the Staff.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Escort the orb</span><br><span class="d">Step through the reopened portal, interact with the purple orb, and stay with it — EVERY player must follow or it can fail/softlock. Kill zombies next to it to charge it as it travels to the altar.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Claim Ull's Arrow</span><br><span class="d">Interact with the glowing altar to upgrade. Sekhmet's Vigor (alt-fire) is now live — you're trial-ready.</span></span></label></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tip"><p style="margin:0"><b>Ammo note:</b> Sekhmet's Vigor runs dry fast during trials. Refill it at any Ammo Cache for 5,000 Essence while the Staff is equipped — cheaper than losing a trial run.</p></div>
+</section>
+<!-- ================= SIDE EGGS ================= -->
+<section id="side">
+  <div class="sec-head"><h2>Side Easter Eggs</h2><span class="sec-count" data-count-for="side">0 / 14</span></div>
+  <p class="sec-intro">Every side secret on the map — free weapons, free armor, free perks and both songs. None of these are required for the main quest, and most pay out best if you run them before the statue trials.</p>
+  <ul class="checklist" data-group="side">
+    <li><label><input type="checkbox"><span><span class="t">Song: "Dig" — 3 Mr. Peeks headsets</span><br><span class="d">Interact with all three headsets: (1) Shrine of the Hierophants, right of the statue · (2) Ossuary, in the skull-and-ribcage hole in the wall by the green portal · (3) Dark Aether Nexus, mid-pathway between the yellow and red portals. "Dig" by Kevin Sherwood &amp; Matt Heafy plays. Once per game.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Song: "Aether" — the 115 walls</span><br><span class="d">After building the Staff of Ice, go to both constellation walls (bull mural in the Tombs, archer mural in the Catacombs) and shoot the symbols for 1-1-5 on each wall in quick succession. The second hidden song, "Aether," triggers.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Free Full Power + 1,000 Essence — Dead Wire generators</span><br><span class="d">Put Dead Wire on any gun, return to the Dig Site, and shoot both sparking generators (left of the stairs; by the armor wall buy). A Full Power, Essence canisters (1,000 — 2,000 under Double Points, so shoot the Nexus Bonus/Double Points first if you want to double-dip the run) and armor plates spawn on the fallen column.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Free Random Perk — light the 6 Ossuary bowls</span><br><span class="d">Equip Napalm Burst (500 salvage) or carry Molotovs, then light all 6 fire bowls at the Ossuary doorways. A Random Perk power-up spawns in the middle of the room — in co-op the whole squad gets one. Easiest free perk in BO6; do it early.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Free Ray Gun — 3 Ancient Gems</span><br><span class="d">Buy the shovel (one leans by the waterfall near Quick Revive), buy Death Perception so dig piles glow, and dig every pile you pass — piles respawn every few rounds and randomly yield Ancient Gems. With 3 gems, interact with the statue by the bull mural in the Tombs: 2 buffed green-eyed Doppelghasts spawn. Kill them and collect the free Ray Gun, Essence and the Potts and Pains Pt. 5 Intel where the statue stood.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Gold Armor Vest — the two Blood Sacrifices</span><br><span class="d">In the Nexus, melee open 2 wooden crates for statue heads: one by Jugger-Nog, one in a plant by the green portal. Place both heads on the headless statues at the Dig Site. Each statue starts a Blood Sacrifice: you're dropped to 1 HP, killstreaks disabled, red smoke — first spawns 3 HVT Doppelghasts, second 3 HVT Shock Mimics. Clear both and a free Gold Armor Vest wall buy appears by the blue portal temple. It self-regenerates a plate roughly every 10 seconds — but taking it locks you out of normal armor wall buys.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Free Aether Tool — freeze the waterfalls</span><br><span class="d">In the Nexus, shoot both waterfalls near the green portal with Cryofreeze or the Staff of Ice. An Aether Tool spawns on the structure in front of the portal — its rarity scales with the round, so doing this later pays better.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Free Tier 1 PaP Crystal + Cryofreeze — floating rocks</span><br><span class="d">In the Nexus, watch the sky: lightning strikes one floating rock. Shoot that rock, then rapidly shoot every rock that starts spinning around the area before they stop. A Raw Aetherium Crystal (free Pack-a-Punch Tier 1) and a Cryofreeze ammo mod spawn by the mound — one mod per player.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Free Brain Rot + loot — Simon Says statues</span><br><span class="d">In the Tombs, shoot the broken statue on the floor. The wall statues light up in a random sequence — memorise it and shoot them back in the same order. Pays out a free Brain Rot ammo mod plus Essence, salvage and random loot.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Brain Rot Army — the 4 X skulls</span><br><span class="d">With Brain Rot equipped, shoot the 4 skulls with an X carved in the forehead around the Ossuary, in order and fast: (1) by the corridor with the wall traps, (2) in the right trap corridor, (3) next to the inactive fire by the green portal, (4) next to the Doppelghast statue in the Speed Cola room. A friendly Brain Rot zombie squad rises to fight for you, and Potts and Pains Pt. 4 Intel drops the first time.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Free Self-Revive + Light Mend — break 10 vases</span><br><span class="d">Smash 10 of the clay vases scattered across the map (they're everywhere — Dig Site, Tombs and Temple are dense with them). On the tenth, a free Self-Revive and a Light Mend ammo mod drop.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Nexus pods — free loot</span><br><span class="d">Melee the fleshy pods around the Dark Aether Nexus. Parasites burst out — shoot them before they fly off and they drop loot. Rarer (glowing) pods pay out better gear.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">100 Essence per perk machine — go prone</span><br><span class="d">Lie prone directly in front of any perk machine to collect a one-time 100 Essence: Quick Revive, Jugger-Nog, Stamin-Up, PhD Flopper, Speed Cola, Death Perception, Deadshot Daiquiri and Der Wunderfizz. In co-op only the first player to prone at each machine gets it — 800 free Essence across the map if you sweep them all.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">The whispering statues — jumpscare</span><br><span class="d">Aim at one of the watcher statues around the map until it turns, stares back with red eyes and starts whispering. The statue vanishes — and sometime later, as the whispering around you gets louder (or after you pick up enough salvage), the jumpscare lands. Repeatable, unlike most maps. You asked for no secret missed — consider yourself warned.</span></span></label></li>
+  </ul>
+</section>
+
+<!-- ================= POWER-UPS ================= -->
+<section id="powerups">
+  <div class="sec-head"><h2>Hidden &amp; Free Power-Ups</h2><span class="sec-count" data-count-for="pow">0 / 9</span></div>
+  <p class="sec-intro">Eight power-ups are hidden in the scenery from the start of the game — shoot one to teleport it to you — and a ninth free power-up, the Random Perk, is earned from the Ossuary fire-bowl egg (some trackers count 9 free power-ups on this map for exactly that reason; it's also listed in Side Eggs). Of the hidden eight, <strong>Fire Sale only spawns after you've collected the other seven</strong>, so work the hidden list top to bottom. Save Max Ammo and Insta-Kill for when you actually need them; they stay put until shot.</p>
+  <ul class="checklist" data-group="pow">
+    <li><label><input type="checkbox"><span><span class="t">Nuke — Neolithic Catacombs</span><br><span class="d">Through the hole in the wall by the Mystery Box spawn, on a distant rock ledge in the cavern. Bring a scope.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Full Power — Shrine of the Hierophants</span><br><span class="d">On the ground inside the zombie spawn cave to the right of the Stamin-Up machine.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Max Ammo — Subterranean Temple</span><br><span class="d">Top of the northern Temple stairs, in the hole in the wall right of the Aetheric Lantern, near the red portal.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Insta-Kill — Deep Excavation</span><br><span class="d">Stand right of the Arsenal and look north-east — on a ledge behind the stone pillars.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Max Armor — Ossuary</span><br><span class="d">High in the hole in the wall in the corner beside the Speed Cola machine.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Double Points — Dark Aether Nexus</span><br><span class="d">Up on the rock wall along the south-west path of the Nexus. Shoot this BEFORE Bonus Points.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Bonus Points — Dark Aether Nexus</span><br><span class="d">Small hole at ground level in the rock wall just left of the blue portal, north end of the Nexus. +500 Essence — +1,000 if Double Points is active.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Fire Sale — Dig Site (LAST of the hidden eight)</span><br><span class="d">Along the south-west wall of the Dig Site. Only appears once the other 7 hidden power-ups have been collected.</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="t">Random Perk — Ossuary (the 9th free power-up)</span><br><span class="d">Not hidden in the scenery — earned. Light all 6 fire bowls at the Ossuary doorways with Napalm Burst or Molotovs and the Random Perk power-up spawns mid-room. Full steps in Side Eggs.</span></span></label></li>
+  </ul>
+</section>
+
+<!-- ================= PERKS ================= -->
+<section id="perks">
+  <div class="sec-head"><h2>Perks, Wall Buys &amp; Stations</h2></div>
+  <p class="sec-intro">Everything you can spend Essence and salvage on, by zone. Der Wunderfizz in the Nexus sells every perk, so anything you skip on the loop can be finished there before the boss.</p>
+  <div class="grid two">
+    <div>
+      <table aria-label="Perk locations">
+        <tr><th>Perk</th><th>Location</th></tr>
+        <tr><td>PhD Flopper</td><td class="loc">Dig Site / Roman Mausoleum</td></tr>
+        <tr><td>Death Perception</td><td class="loc">Tombs</td></tr>
+        <tr><td>Stamin-Up</td><td class="loc">Shrine of the Hierophants</td></tr>
+        <tr><td>Deadshot Daiquiri</td><td class="loc">Neolithic Catacombs</td></tr>
+        <tr><td>Speed Cola</td><td class="loc">Ossuary</td></tr>
+        <tr><td>Quick Revive</td><td class="loc">Deep Excavation</td></tr>
+        <tr><td>Jugger-Nog</td><td class="loc">Dark Aether Nexus</td></tr>
+        <tr><td>Der Wunderfizz <span class="pill">all perks</span></td><td class="loc">Dark Aether Nexus</td></tr>
+      </table>
+      <div class="tip"><p style="margin:0"><b>Boss perk order:</b> Jugger-Nog → Quick Revive → Speed Cola → Stamin-Up → Deadshot → Death Perception → PhD Flopper. Fill gaps at Wunderfizz.</p></div>
+    </div>
+    <div>
+      <table aria-label="Wall buys and stations">
+        <tr><th>Item</th><th>Location</th></tr>
+        <tr><td>Marine SP wall buy · Lv.2 Armor · Arsenal · GobbleGum</td><td class="loc">Dig Site</td></tr>
+        <tr><td>Tanto .22 wall buy · Mystery Box spawn</td><td class="loc">Tombs</td></tr>
+        <tr><td>AK-74 wall buy · Crafting Table · Arrow Trap</td><td class="loc">Shrine of the Hierophants</td></tr>
+        <tr><td>Kompakt 92 wall buy · Crafting Table</td><td class="loc">Neolithic Catacombs</td></tr>
+        <tr><td>XM4 wall buy · GobbleGum · Arrow Traps</td><td class="loc">Ossuary</td></tr>
+        <tr><td>GPMG-7 wall buy · Lv.3 Armor · Arsenal</td><td class="loc">Deep Excavation</td></tr>
+        <tr><td>Pack-a-Punch <span class="pill gold">moves</span></td><td class="loc">Nexus ⇄ Dig Site</td></tr>
+        <tr><td>Exfil radio</td><td class="loc">Dig Site (from Round 11)</td></tr>
+      </table>
+      <div class="tip"><p style="margin:0"><b>Traps:</b> Arrow Traps guard the Shrine stairs and the Ossuary corridors — cheap horde-thinning during lockdowns. Aetheric Lantern sconces, when lit and shot, drop aetheric flame patches that burn anything standing in them.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTEL ================= -->
+<section id="intel">
+  <div class="sec-head"><h2>Intel — All 22 Pieces</h2><span class="sec-count" data-count-for="intel">0 / 22</span></div>
+  <p class="sec-intro">11 Audio Logs, 5 Documents, 6 Artifacts. Tracked in Barracks → Zombies Intel. Six of them only drop from easter eggs and the main quest, so a full sweep needs the Ray Gun egg, the Brain Rot egg and a finished main quest.</p>
+  <div class="grid two">
+    <div class="card">
+      <h3 style="margin-top:0">Audio Logs (11)</h3>
+      <ul class="checklist" data-group="intel">
+        <li><label><input type="checkbox"><span><span class="t">The Infamous Mr. Rhodes</span><br><span class="d">Dig Site, north-west corner, on a green crate by the GobbleGum machine.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Look at All the Bodies</span><br><span class="d">Dig Site / Roman Mausoleum, on boxes to the right of the blue portal, near the exfil radio.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Retirement Plan</span><br><span class="d">Dig Site, under the wooden platform / on the crates and blue scaffolding right of the Lv.2 Armor wall buy.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Grave Robbers</span><br><span class="d">Tombs — immediately right after the first door from the Dig Site, at the base of the south-west statue.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Spring Time</span><br><span class="d">Shrine of the Hierophants, left of the Stamin-Up machine.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Against a Wall</span><br><span class="d">Shrine of the Hierophants, right of the door that leads to the Subterranean Temple, by the torch wall.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Making a Monocle</span><br><span class="d">Ossuary, by the passage to the green portal room — left of the door, next to the stone jar / on the flammable urn opposite Speed Cola.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">A Fabrication</span><br><span class="d">Neolithic Catacombs, up the stairs left of Deadshot Daiquiri, on the ground by a skeleton opposite the Crafting Table.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">The Knaves</span><br><span class="d">Subterranean Temple, on a slab at the bottom of the northern stairs, east of the amulet altar.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Deep Trouble</span><br><span class="d">Deep Excavation, on the stairs down toward the Amalgam statue, by the north-east ammo crate.</span></span></label></li>
+        <li><label><input type="checkbox"><span><span class="t">Tortured Artist</span><br><span class="d">Dark Aether Nexus, west end — on the ruined stone wall by the Crafting Table / green portal ruins.</span></span></label></li>
+      </ul>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <h3 style="margin-top:0">Documents (5) — shoot the jars</h3>
+        <ul class="checklist" data-group="intel">
+          <li><label><input type="checkbox"><span><span class="t">Potts and Pains Pt. 1</span><br><span class="d">Deep Excavation — shoot the jar atop a stone pillar in the north-east of the area; the page drops to your feet.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Potts and Pains Pt. 2</span><br><span class="d">Subterranean Temple — jar on the arch above and left of the red Dark Aether portal. Shoot it down.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Potts and Pains Pt. 3</span><br><span class="d">Shrine of the Hierophants — jar below the domed roof, east / left of the Stamin-Up machine. Shoot it down.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Potts and Pains Pt. 4</span> <span class="pill red">egg reward</span><br><span class="d">Drops the first time you complete the Brain Rot X-skulls egg in the Ossuary.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Potts and Pains Pt. 5</span> <span class="pill red">egg reward</span><br><span class="d">Drops the first time you complete the free Ray Gun gem egg in the Tombs.</span></span></label></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Artifacts (6) — quest-locked</h3>
+        <ul class="checklist" data-group="intel">
+          <li><label><input type="checkbox"><span><span class="t">Sir Archibald's Monocle</span><br><span class="d">Pick up the Monocle from the Round 8 Shock Mimic.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Aetheric Lantern</span><br><span class="d">Shoot any purple Aetheric Lantern after opening the Dark Aether.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Staff of Ice</span><br><span class="d">Unlocks the first time you obtain the Staff of Ice.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Alas, Poor Bernard</span><br><span class="d">Dark Aether Nexus — pick up Bernard Potts' skull from the skeleton on the ground at the central podium.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Monolith Crystal Shard</span><br><span class="d">Drops from the floating monolith in the Nexus when the statue-trial lasers first hit it — pick it up off the ground.</span></span></label></li>
+          <li><label><input type="checkbox"><span><span class="t">Sentinel Artifact</span><br><span class="d">Complete the main quest and defeat the Sentinel Artifact boss.</span></span></label></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOSS ================= -->
+<section id="boss">
+  <div class="sec-head"><h2>Boss Fight — The Sentinel Artifact</h2></div>
+  <p class="sec-intro">One arena, nine phases, zero cover from the laser except the arena's two levels. The Artifact sweeps a red beam that stuns and nearly kills — when it targets the top floor, drop to the bottom; when it targets the bottom, climb. A Max Ammo spawns under the Artifact at the start of every new phase.</p>
+  <div class="grid two">
+    <div class="card">
+      <h3 style="margin-top:0">Go in with</h3>
+      <ul style="margin:0;padding-left:20px;color:var(--ink2)">
+        <li><b style="color:var(--ink)">Bullet gun, Tier 3 PaP, Legendary rarity</b> — the only thing that hurts the boss. ASG-89, akimbo GS45s, or a high-DPS AR/LMG.</li>
+        <li><b style="color:var(--ink)">Staff of Ice (Ull's Arrow)</b> — crowd control only. Freeze the horde, never waste it on the Artifact.</li>
+        <li><b style="color:var(--ink)">Tier 3 armor or Gold Armor</b>, full plates in reserve.</li>
+        <li><b style="color:var(--ink)">Jugger-Nog, Quick Revive, Speed Cola, Stamin-Up</b> minimum; Deadshot pays off in DPS phases.</li>
+        <li><b style="color:var(--ink)">Aether Shroud</b> for the final DPS check, Kazimirs or Monkey Bombs for breathing room, a Self-Revive each.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">How the phases run</h3>
+      <ul style="margin:0;padding-left:20px;color:var(--ink2)">
+        <li><b style="color:var(--ink)">Phases 1–4 — split:</b> dodge the spinning laser, kill adds. When the Artifact stops, rises and turns ghostly purple, mag-dump it. Each damage chunk costs it a piece of health, drops a Max Ammo, and splits off another Artifact — up to 4 spinning at once.</li>
+        <li><b style="color:var(--ink)">Phases 5–8 — hosts:</b> an Artifact latches onto an elite — a heavy zombie, then Doppelghast, Shock Mimic, and finally an Amalgam. Kill the host while the other Artifacts are still spinning (not purple), then shoot the dropped Artifact until it breaks before it floats back to its pedestal.</li>
+        <li><b style="color:var(--ink)">Phase 9 — the DPS check:</b> the Artifacts form a semi-circle and one mounts the north-east wall. This is a hard damage race: if you don't break it in time, the room wipes the whole squad. Pop Aether Shroud, stand your ground, and burn it down.</li>
+        <li><b style="color:var(--ink)">Finish:</b> interact with the Artifact on the pedestal to end the quest and roll the cutscene.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn"><p style="margin:0"><b>Solo players:</b> this boss is widely rated the hardest of BO6's first four maps to solo, purely because of the phase-9 DPS check. If your gun can't melt an HVT in one magazine by round 25, upgrade rarity and PaP before you raise the bridge — there's no leaving once it starts.</p></div>
+</section>
+
+<footer>
+  <p><strong>Sources &amp; cross-checks:</strong> layout, perk, wall-buy and Directed Mode route from Activision's official guide, <a href="https://www.callofduty.com/guides/blackops6/zombies/call-of-duty-guides-black-ops-6-round-based-zombies-the-tomb" target="_blank" rel="noopener">Call of Duty — The Tomb 10-Round Guide</a>; main quest, Staff and side-egg steps cross-checked against the <a href="https://www.janikrabenstein.de/bo6-zombies/the-tomb/complete-map-breakdown" target="_blank" rel="noopener">complete map breakdown</a> and <a href="https://www.codzombieguides.com/the-tomb" target="_blank" rel="noopener">COD Zombie Guides — The Tomb</a>; all 22 Intel locations from <a href="https://gameranx.com/features/id/526254/article/black-ops-6-zombies-all-the-tomb-intel-locations/" target="_blank" rel="noopener">Gameranx — All The Tomb Intel Locations</a>; hidden power-up spots from <a href="https://gameranx.com/features/id/526358/article/black-ops-6-zombies-how-to-get-all-free-power-ups-on-the-tomb/" target="_blank" rel="noopener">Gameranx — Free Power-Ups on The Tomb</a>.</p>
+  <p>Map above is a schematic drawn for this guide — zone positions follow the in-game Tac-Map, but it's a diagram, not a screenshot. Ticks on this page live only while it's open; close it and they reset, same as a fresh run. The Tomb released with Black Ops 6 Season 02, January 28, 2025.</p>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  // ---- checklist progress (in-memory only) ----
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.checklist input[type="checkbox"]'));
+  var pbNum = document.getElementById('pbNum');
+  var pbFill = document.getElementById('pbFill');
+  function groupCount(name){
+    var sel = document.querySelectorAll('[data-group="'+name+'"] input[type="checkbox"]');
+    var done = 0; sel.forEach(function(b){ if(b.checked) done++; });
+    var el = document.querySelector('[data-count-for="'+name+'"]');
+    if(el) el.textContent = done + ' / ' + sel.length;
+  }
+  function refresh(){
+    var done = 0;
+    boxes.forEach(function(b){
+      if(b.checked) done++;
+      var li = b.closest('li'); if(li) li.classList.toggle('done', b.checked);
+    });
+    pbNum.textContent = done + ' / ' + boxes.length + ' ticked';
+    pbFill.style.width = boxes.length ? (done/boxes.length*100) + '%' : '0%';
+    ['mq','staff','side','pow','intel'].forEach(groupCount);
+  }
+  boxes.forEach(function(b){ b.addEventListener('change', refresh); });
+  document.getElementById('pbReset').addEventListener('click', function(){
+    boxes.forEach(function(b){ b.checked = false; }); refresh();
+  });
+  refresh();
+
+  // ---- map pins ----
+  var detail = document.getElementById('pinDetail');
+  var pins = Array.prototype.slice.call(document.querySelectorAll('.pin'));
+  pins.forEach(function(p){
+    p.addEventListener('click', function(){
+      pins.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      p.setAttribute('aria-pressed','true');
+      detail.innerHTML = '';
+      var tag = document.createElement('span'); tag.className='tag';
+      tag.textContent = p.getAttribute('data-cat') === 'perk' ? 'Perk' :
+                        p.getAttribute('data-cat') === 'station' ? 'Station' :
+                        p.getAttribute('data-cat') === 'secret' ? 'Secret' : 'Hidden power-up';
+      var h = document.createElement('h3'); h.textContent = p.getAttribute('data-title');
+      var body = document.createElement('p'); body.textContent = p.getAttribute('data-body');
+      detail.appendChild(tag); detail.appendChild(h); detail.appendChild(body);
+      if (window.innerWidth < 760) detail.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+  });
+  // ---- map filters ----
+  var fbtns = Array.prototype.slice.call(document.querySelectorAll('.mf-btn'));
+  fbtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      fbtns.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      btn.setAttribute('aria-pressed','true');
+      var f = btn.getAttribute('data-filter');
+      pins.forEach(function(p){
+        p.classList.toggle('hide', f !== 'all' && p.getAttribute('data-cat') !== f);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
