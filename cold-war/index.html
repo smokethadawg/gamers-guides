@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Complete Cold War Zombies Guide — Die Maschine, Firebase Z, Mauer der Toten, Forsaken & Outbreak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2f7; --bg2:#e2e8f0; --card:#ffffff; --card2:#f8fafc;
+  --ink:#0f1a2e; --ink2:#334155; --muted:#64748b;
+  --line:#cbd5e1;
+  --navy:#0a1628; --navy2:#12233f;
+  --ice:#0284c7; --ice-bright:#0ea5e9; --ice-pale:#e0f2fe;
+  --red:#dc2626; --red-dark:#991b1b; --red-pale:#fee2e2;
+  --gold:#d97706; --violet:#7c3aed; --green:#15803d;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#070d1a; --bg2:#0a1628; --card:#0f1e36; --card2:#132742;
+    --ink:#e8eef7; --ink2:#cbd5e1; --muted:#94a3b8;
+    --line:#1e3a5f;
+    --ice:#38bdf8; --ice-bright:#7dd3fc; --ice-pale:#0c2a44;
+    --red:#f87171; --red-pale:#2a1215;
+    --gold:#fbbf24; --violet:#a78bfa; --green:#4ade80;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Barlow",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16.5px}
+h1,h2,h3,.cond{font-family:"Oswald","Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+a{color:var(--ice)}
+img{max-width:100%;display:block}
+
+/* HERO */
+.hero{background:var(--navy);color:#e8eef7;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(115deg,transparent 55%,rgba(220,38,38,.22) 55.2%,rgba(220,38,38,.22) 72%,transparent 72.2%),
+  radial-gradient(700px 340px at 85% -60px,rgba(56,189,248,.35),transparent 65%),
+  radial-gradient(500px 300px at 5% 110%,rgba(124,58,237,.22),transparent 60%)}
+.hero::after{content:"☭  ★  ☭  ★  ☭";position:absolute;right:14px;top:10px;font-size:13px;letter-spacing:8px;color:rgba(255,255,255,.14)}
+.hero-in{position:relative;max-width:1080px;margin:0 auto;padding:34px 20px 28px}
+.kicker{display:inline-flex;gap:8px;align-items:center;background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.45);color:#7dd3fc;padding:6px 12px;border-radius:999px;font-family:"Barlow Condensed";font-weight:700;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
+.kicker b{color:#f87171}
+.hero h1{font-size:clamp(38px,7.5vw,72px);margin:14px 0 6px;font-weight:700}
+.hero h1 span{color:#38bdf8}
+.hero h1 em{font-style:normal;color:#f87171}
+.hero p.lede{font-size:clamp(16px,2.4vw,20px);color:#cbd5e1;max-width:720px;margin:6px 0 18px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:760px}
+.stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-top:3px solid #38bdf8;border-radius:10px;padding:12px 12px 10px}
+.stat:nth-child(2){border-top-color:#f87171}.stat:nth-child(3){border-top-color:#a78bfa}.stat:nth-child(4){border-top-color:#fbbf24}
+.stat strong{font-family:"Oswald";font-size:26px;display:block;line-height:1}
+.stat span{font-size:12.5px;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.hero-note{margin-top:14px;font-size:13.5px;color:#94a3b8}
+.hero-note strong{color:#e2e8f0}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:2px solid var(--ice);box-shadow:0 4px 18px rgba(2,20,40,.10)}
+.nav-in{max-width:1080px;margin:0 auto;padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap}
+.nav a{color:var(--ink);text-decoration:none;font-family:"Barlow Condensed";font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14.5px;padding:9px 12px;border-radius:8px;min-height:38px;display:inline-flex;align-items:center}
+.nav a:hover,.nav a:focus{background:var(--ice-pale);color:var(--ice)}
+
+/* LAYOUT */
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 56px}
+section{padding-top:34px}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:3px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
+.sec-head .no{font-family:"Oswald";font-size:14px;background:var(--red);color:#fff;padding:3px 9px;border-radius:6px;letter-spacing:.1em}
+.sec-head h2{font-size:clamp(26px,4.5vw,38px);margin:0}
+.sec-head p{margin:0;color:var(--muted)}
+.intro{color:var(--ink2);max-width:780px;font-size:17px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.card h3{font-size:19px;margin:0 0 8px}
+.card p{margin:6px 0;color:var(--ink2)}
+.card ul{margin:8px 0 0;padding-left:18px;color:var(--ink2)}
+.card li{margin:4px 0}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-bottom:8px}
+.t-ice{background:var(--ice-pale);color:var(--ice)} .t-red{background:var(--red-pale);color:var(--red)}
+.t-gold{background:#fef3c7;color:#92400e} .t-violet{background:#ede9fe;color:#6d28d9} .t-green{background:#dcfce7;color:#166534}
+@media (prefers-color-scheme: dark){.t-gold{background:#2a1f08;color:var(--gold)}.t-violet{background:#1e1540;color:var(--violet)}.t-green{background:#0a2415;color:var(--green)}}
+.callout{border-radius:12px;padding:16px 18px;margin:14px 0;border:1px solid var(--line);background:var(--card2)}
+.callout.blue{border-left:6px solid var(--ice)} .callout.red{border-left:6px solid var(--red)} .callout.gold{border-left:6px solid var(--gold)}
+.callout strong.cond{font-size:15px;letter-spacing:.08em}
+
+/* TABLES — stacked on mobile */
+.tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
+.tbl th{font-family:"Barlow Condensed";text-transform:uppercase;letter-spacing:.07em;text-align:left;background:var(--navy);color:#e0f2fe;padding:10px 12px;font-size:14px}
+.tbl td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+.tbl td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.tbl tr td .pill{font-size:12px;font-weight:700}
+
+/* MAP CARDS */
+.mapcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.mapcard-top{padding:16px 18px 12px;color:#fff}
+.mc-die{background:linear-gradient(120deg,#12233f,#0e4a6e)} .mc-firebase{background:linear-gradient(120deg,#3b0a0a,#7f1d1d 60%,#9a3412)}
+.mc-mauer{background:linear-gradient(120deg,#1e1b4b,#4c1d95 60%,#0f766e)} .mc-forsaken{background:linear-gradient(120deg,#111827,#7c2d12 55%,#b45309)}
+.mc-outbreak{background:linear-gradient(120deg,#052e16,#166534 55%,#0e7490)}
+.mapcard-top h3{font-size:24px;margin:2px 0 4px;color:#fff}
+.mapcard-top p{margin:0;color:rgba(255,255,255,.82);font-size:14.5px}
+.mapcard-body{padding:14px 18px 18px}
+.mapcard-body p{color:var(--ink2);margin:6px 0}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.meta span{font-size:12.5px;font-weight:600;background:var(--bg2);border:1px solid var(--line);padding:4px 9px;border-radius:999px;color:var(--ink2)}
+
+/* QUEST STEPS */
+.quest{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0}
+.quest-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border-bottom:1px dashed var(--line);padding-bottom:12px;margin-bottom:6px}
+.quest-head h3{font-size:24px;margin:0}
+.diff{font-family:"Barlow Condensed";font-weight:700;letter-spacing:.06em;font-size:13.5px;text-transform:uppercase;padding:6px 11px;border-radius:999px}
+.d-med{background:#fef3c7;color:#92400e}.d-hard{background:var(--red-pale);color:var(--red)}.d-easy{background:#dcfce7;color:#166534}
+@media (prefers-color-scheme: dark){.d-med{background:#2a1f08;color:var(--gold)}.d-easy{background:#0a2415;color:var(--green)}}
+ol.steps{counter-reset:step;list-style:none;padding:0;margin:10px 0 0}
+ol.steps li{counter-increment:step;position:relative;padding:10px 0 10px 52px;border-bottom:1px solid var(--line)}
+ol.steps li:last-child{border-bottom:none}
+ol.steps li::before{content:counter(step);position:absolute;left:0;top:10px;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#7dd3fc;font-family:"Oswald";font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px;border:2px solid var(--ice)}
+ol.steps li strong{color:var(--ink)}
+ol.steps li p{margin:2px 0;color:var(--ink2)}
+.tip{font-size:14.5px;background:var(--ice-pale);border-radius:8px;padding:8px 12px;margin-top:6px;color:var(--ink2)}
+.tip b{color:var(--ice)}
+
+/* BUILDS */
+.build{background:var(--navy);color:#e8eef7;border-radius:16px;padding:20px}
+.build h3{color:#fff;font-size:21px;margin:0 0 4px}
+.build h3 span{color:#38bdf8}
+.build p{color:#cbd5e1;margin:6px 0}
+.build ul{color:#cbd5e1;padding-left:18px;margin:8px 0}
+.build .row{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.build .row span{font-size:13px;font-weight:700;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);padding:5px 10px;border-radius:999px}
+
+footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 8px;color:var(--muted);font-size:14px}
+footer strong{color:var(--ink)}
+.small{font-size:14px;color:var(--muted)}
+.check{list-style:none;padding:0;margin:8px 0}
+.check li{padding:7px 0 7px 30px;position:relative;color:var(--ink2);border-bottom:1px dashed var(--line)}
+.check li:last-child{border-bottom:none}
+.check li::before{content:"▸";position:absolute;left:6px;color:var(--red);font-weight:900}
+@media(max-width:760px){
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl tr{border-top:2px solid var(--line);padding:6px 0}
+  .tbl td{border-top:none;padding:5px 12px}
+  .tbl td:first-child{white-space:normal;font-size:16px}
+  .wrap{padding:0 14px 44px}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <span class="kicker">Gamers Guides <b>•</b> Black Ops Cold War <b>•</b> 2020–2021</span>
+    <h1>Cold War <span>Zombies</span><br>The Complete <em>Guide</em></h1>
+    <p class="lede">Every round-based map, both Outbreak main quests, every Wonder Weapon, perk, Field Upgrade and Pack-a-Punch tier — plus the solo and co-op builds that actually survive past Round 30. This is the game between Black Ops 4 and Black Ops 6. There is no “BO5” — this is it.</p>
+    <div class="hero-stats">
+      <div class="stat"><strong>4</strong><span>Round-Based Maps</span></div>
+      <div class="stat"><strong>8</strong><span>Outbreak Regions</span></div>
+      <div class="stat"><strong>10</strong><span>Perks at Launch-End</span></div>
+      <div class="stat"><strong>6</strong><span>Main Quests</span></div>
+    </div>
+    <p class="hero-note"><strong>How this game is different:</strong> you bring your own loadout weapon in, health and damage work like multiplayer, you earn Salvage to craft with, and you can <strong>Exfil</strong> and leave alive instead of dying. If you learned Zombies on BO1–BO4, read Section 01 first — the rules changed.</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Guide sections">
+  <div class="nav-in">
+    <a href="#systems">Systems</a><a href="#perks">Perks</a><a href="#maps">Maps</a>
+    <a href="#quests">Main Quests</a><a href="#outbreak">Outbreak</a><a href="#wonder">Wonder Weapons</a>
+    <a href="#enemies">Enemies</a><a href="#builds">Builds</a><a href="#exfil">Exfil & Tips</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- 01 SYSTEMS -->
+<section id="systems">
+  <div class="sec-head"><span class="no">01</span><h2>The New Rules</h2></div>
+  <p class="intro">Cold War rebuilt Zombies from the ground up. Wall-buys and the Mystery Box still exist, but almost everything around them is new. Master these six systems and every map gets easier.</p>
+  <div class="grid3">
+    <div class="card"><span class="tag t-ice">Loadouts</span><h3>Bring Your Own Gun</h3><p>You start with a Gunsmith weapon from your own loadout — attachments included. It starts at Common (grey) rarity and you upgrade its damage by raising rarity, not just Pack-a-Punching.</p><ul><li>Start with a strong AR, LMG or shotgun blueprint</li><li>Your knife is a real melee option early</li><li>Field Upgrade + lethal/tactical come with you</li></ul></div>
+    <div class="card"><span class="tag t-red">Health & Armour</span><h3>150 Base Health + Armour</h3><p>Base health is 150. Armour comes in 1, 2 and 3 plates (bought at the Armour Station or crafted) and soaks damage before health does. Juggernog still matters — it raises health to 250.</p><ul><li>Armour breaks plate by plate — re-plate often</li><li>Self-Revive Kits can be crafted or bought</li><li>Health regen kicks in after a few seconds clear</li></ul></div>
+    <div class="card"><span class="tag t-gold">Salvage & Crafting</span><h3>Two Kinds of Salvage</h3><p>Zombies drop <strong>Salvage</strong> (green) and rarer <strong>High-Grade Salvage</strong> (blue). Spend it at the Crafting Table on armour, Self-Revives, equipment, support streaks and ammo mods.</p><ul><li>Don’t hoard it — a Self-Revive beats 500 saved salvage</li><li>Salvage is per-player, not shared</li></ul></div>
+    <div class="card"><span class="tag t-violet">Weapon Rarity</span><h3>Grey → Gold, 5 Steps</h3><p>Common → Uncommon (green) → Rare (blue) → Epic (purple) → Legendary (orange/gold). Each step is a big damage jump. Raise it at the Arsenal with Salvage, or find higher-rarity guns in the Box and as drops.</p><ul><li>Rarity and Pack-a-Punch stack — you need both for high rounds</li></ul></div>
+    <div class="card"><span class="tag t-ice">Pack-a-Punch</span><h3>3 Tiers, Essence Only</h3><p>Tier I: 5,000 • Tier II: 15,000 • Tier III: 30,000 Essence. No parts to build on most maps — turn on power, reach the machine, pay. Tier III roughly triples your damage output with rarity stacked.</p><ul><li>Re-Packing changes your Ammo Mod</li><li>Apply an Ammo Mod separately at the machine</li></ul></div>
+    <div class="card"><span class="tag t-green">Aetherium & Tiers</span><h3>Skills Go to Tier V</h3><p>Every perk, Field Upgrade and Ammo Mod has 5 skill tiers unlocked with Aetherium Crystals earned by playing (and refined/perfected crystals at higher milestones). Tier V perks are game-changers — prioritise Juggernog, your Field Upgrade, and Deadshot first.</p><ul><li>Crystals are account-wide — progress carries across maps</li></ul></div>
+  </div>
+
+  <div class="callout blue"><strong class="cond">Ammo Mods — pick one per gun</strong>
+    <p style="margin:6px 0 0;color:var(--ink2)"><strong>Napalm Burst</strong> (fire DoT, best vs Megatons) • <strong>Dead Wire</strong> (electric stun chains) • <strong>Cryofreeze</strong> (slows everything — safest for high rounds) • <strong>Shatter Blast</strong> (explosive burst, great on armour) • <strong>Brain Rot</strong> (turns a zombie to fight for you — elite turned zombies clear trains). At Tier V most mods also shred special enemies. Cryofreeze + Brain Rot is the classic two-gun combo.</p>
+  </div>
+
+  <h3 style="font-size:21px;margin:22px 0 10px">Field Upgrades — your panic button</h3>
+  <div style="overflow-x:auto">
+  <table class="tbl">
+    <thead><tr><th>Field Upgrade</th><th>What it does</th><th>Best for</th></tr></thead>
+    <tbody>
+      <tr><td>Ring of Fire</td><td>Burning circle that massively boosts damage dealt from inside it for 15s. Tier V keeps it up longer and reloads you.</td><td>Boss fights, holding a corner, high rounds — the meta pick</td></tr>
+      <tr><td>Aether Shroud</td><td>Turns you invisible to zombies for 8s (Tier V: longer + speed boost).</td><td>Solo revives, Easter egg steps, escaping a corner — best solo pick</td></tr>
+      <tr><td>Frenzied Guard</td><td>Full armour repair + all zombies attack only you for 10s; kills repair armour.</td><td>Co-op tanking, objective defence, training for teammates</td></tr>
+      <tr><td>Healing Aura</td><td>Instant heal beam; at Tier V it revives downed teammates remotely.</td><td>Co-op support — the only remote revive in the game</td></tr>
+      <tr><td>Energy Mine</td><td>Deployable mine, big damage. Tier V lets you carry multiple.</td><td>Early game / beginners — outclassed later</td></tr>
+      <tr><td>Toxic Growth</td><td>Thorn barrier that slows zombies 50%+ and damages them.</td><td>Door camping, Outbreak objectives</td></tr>
+      <tr><td>Lightning Strike</td><td>Call down 3 lightning bolts on marked spots (added with Forsaken).</td><td>Outbreak — clearing an area from range</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 02 PERKS -->
+<section id="perks">
+  <div class="sec-head"><span class="no">02</span><h2>Perks — All 10</h2></div>
+  <p class="intro">No perk limit. Seriously — you can buy <strong>every perk on the map</strong>. Prices rise with each one you own: 2,500 / 3,000 / 3,500 / 4,000, then +500 each after. Wunderfizz gives a random unowned perk and appears once you own 4+ (or from Round 10+ on some maps). You only lose perks one at a time when downed, in reverse buy order — and Tombstone can save the lot.</p>
+  <div style="overflow-x:auto">
+  <table class="tbl">
+    <thead><tr><th>Perk</th><th>Effect</th><th>Buy priority</th></tr></thead>
+    <tbody>
+      <tr><td>Juggernog</td><td>Health 150 → 250. Tier V: armour takes less damage, stun resist.</td><td><span class="pill">1st — always</span></td></tr>
+      <tr><td>Quick Revive</td><td>Solo: revives yourself once (then re-buy). Co-op: 50% faster revives. Tier V solo restores it faster.</td><td><span class="pill">1st–2nd solo</span></td></tr>
+      <tr><td>Speed Cola</td><td>Reload 15% faster base, much more at tiers; Tier V swaps weapons faster + reload while sprinting feel.</td><td>3rd–4th</td></tr>
+      <tr><td>Stamin-Up</td><td>Faster move + sprint speed; Tier V = unlimited sprint.</td><td>3rd — training maps</td></tr>
+      <tr><td>Deadshot Daiquiri</td><td>ADS snaps to head, crit damage up; Tier V adds big crit bonuses.</td><td>2nd–3rd — huge DPS</td></tr>
+      <tr><td>Elemental Pop</td><td>Every shot can randomly trigger any Ammo Mod effect.</td><td>Mid game — fun + strong at Tier V</td></tr>
+      <tr><td>Mule Kick</td><td>Carry a 3rd weapon. Lose the perk, lose the 3rd gun. Tier V can return it.</td><td>Mid game</td></tr>
+      <tr><td>Death Perception</td><td>See enemies through walls / minimap cues; Tier V reveals chest & resource locations.</td><td>Outbreak essential, optional round-based</td></tr>
+      <tr><td>Tombstone Soda</td><td>On death (solo) or down, leave a tombstone to reclaim your perks next round.</td><td>Insurance — buy 5th+</td></tr>
+      <tr><td>PHD Slider</td><td>Sliding causes an explosion; immune to your own explosive/splash damage. Added with Mauer der Toten.</td><td>Ray Gun / launcher builds, fun pick</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout gold"><strong class="cond">Standard buy order (solo)</strong><p style="margin:6px 0 0;color:var(--ink2)">Juggernog → Quick Revive → Deadshot → Stamin-Up → Speed Cola → then Wunderfizz the rest. In co-op, drop Quick Revive to 4th and take Deadshot 2nd.</p></div>
+</section>
+
+<!-- 03 MAPS -->
+<section id="maps">
+  <div class="sec-head"><span class="no">03</span><h2>The Maps</h2></div>
+  <p class="intro">Four round-based maps tell one connected Dark Aether story — Requiem vs Omega Group, Samantha Maxis, and the Forsaken himself. Play them in order if you care about the story; jump to Forsaken if you just want the best training map.</p>
+  <div class="grid2">
+    <article class="mapcard">
+      <div class="mapcard-top mc-die"><span class="tag" style="background:rgba(255,255,255,.18);color:#fff">Launch Map • Poland</span><h3>Die Maschine</h3><p>The Nacht der Untoten facility, cracked open into the Dark Aether.</p></div>
+      <div class="mapcard-body"><div class="meta"><span>Wonder Weapon: D.I.E. Shockwave</span><span>Difficulty: Easiest quest</span><span>Best for: Learning</span></div>
+      <p>A two-layer map: the classic Nacht layout on the surface, a Particle Accelerator facility underneath, and a Dark Aether version of the whole map you phase in and out of to build Pack-a-Punch. Wide yard for training, tight facility corners for camping. The friendliest first main quest in the game.</p></div>
+    </article>
+    <article class="mapcard">
+      <div class="mapcard-top mc-firebase"><span class="tag" style="background:rgba(255,255,255,.18);color:#fff">Season 1 • Vietnam</span><h3>Firebase Z</h3><p>Omega’s jungle firebase built around a dimensional portal — and a trapped Samantha.</p></div>
+      <div class="mapcard-body"><div class="meta"><span>Wonder Weapon: RAI K-84</span><span>New enemy: Mimic</span><span>Best for: Camping</span></div>
+      <p>Two zones linked by a teleporter: the spawn Village and the Firebase itself. Turn on three Aether Reactors instead of one power switch. Defence rounds at the reactors teach you to hold ground. The helipad / mission control area is one of the best camp spots in Cold War.</p></div>
+    </article>
+    <article class="mapcard">
+      <div class="mapcard-top mc-mauer"><span class="tag" style="background:rgba(255,255,255,.18);color:#fff">Season 4 • Berlin</span><h3>Mauer der Toten</h3><p>“Wall of the Dead” — rooftops and U-Bahn tunnels in divided Berlin.</p></div>
+      <div class="mapcard-body"><div class="meta"><span>Wonder Weapon: CRBR-S</span><span>Ally: Klaus (buildable robot)</span><span>Best for: Vertical play</span></div>
+      <p>The most vertical map in the game: streets, rooftops with ziplines, a sewer and a subway. You build Klaus, a friendly robot who revives and fights for you, and fight the Panzer Soldat’s successor — plus a train that will happily run you over. Hardest round-based quest of the four.</p></div>
+    </article>
+    <article class="mapcard">
+      <div class="mapcard-top mc-forsaken"><span class="tag" style="background:rgba(255,255,255,.18);color:#fff">Season 6 • Final Map • Ukraine</span><h3>Forsaken</h3><p>An Anytown, USA test site hiding the Forsaken’s containment chamber.</p></div>
+      <div class="mapcard-body"><div class="meta"><span>Wonder Weapon: Chrysalax</span><span>Boss: The Forsaken / Abomination</span><span>Best for: High rounds</span></div>
+      <p>The finale. A fake American main street over a bunker, a proper final boss fight, and the Chrysalax — an axe/gun hybrid forged from Dark Aether crystals. The rooftop and video-store areas are elite training ground. Finish this quest and you’ve finished the Cold War story.</p></div>
+    </article>
+  </div>
+  <div class="callout red"><strong class="cond">Also in the game</strong><p style="margin:6px 0 0;color:var(--ink2)"><strong>Dead Ops Arcade 3</strong> — a full top-down twin-stick arcade mode with its own maps, bosses and 60+ levels. <strong>Onslaught</strong> — fast 2-player survival on multiplayer maps against a moving Orb (launched as a PlayStation exclusive, later opened to all). <strong>Outbreak</strong> gets its own full section below — it’s half the game.</p></div>
+</section>
+
+<!-- 04 QUESTS -->
+<section id="quests">
+  <div class="sec-head"><span class="no">04</span><h2>Main Quest Walkthroughs</h2></div>
+  <p class="intro">Every Cold War main quest follows the same rhythm: power → Pack-a-Punch → Wonder Weapon → collection steps → boss or finale. Steps below are the proven solo-friendly routes. Do quests before Round 15 where you can — scaling makes late steps miserable.</p>
+
+  <div class="quest">
+    <div class="quest-head"><h3>Die Maschine — “Seal the Deal”</h3><span class="diff d-easy">Easiest • 45–60 min</span></div>
+    <ol class="steps">
+      <li><strong>Power & Pack-a-Punch.</strong><p>Open to the Particle Accelerator, turn on power, then enter the Dark Aether portal. In the Aether, go to the Medical Bay / Crash Site spots to pick up the missing machine part, return, and build Pack-a-Punch at the accelerator.</p></li>
+      <li><strong>Get the D.I.E. Shockwave.</strong><p>Kill a Megaton — it splits into two Megaton halves (Bomber + Blaster). Kill both, take the keycard, open the Weapons Lab safe for the D.I.E. Remote, then suck up energy at the glowing fungi / box in the Yard to charge and claim the D.I.E.</p></li>
+      <li><strong>Build all 4 elemental D.I.E. upgrades (quest needs them).</strong><p><em>Electrobolt:</em> in Dark Aether, shoot crystals in Pond / Penthouse areas. <em>Gas / Nova 5:</em> suck the canister under the plane at Crash Site, cleanse it at the box. <em>Cryo / Icewave:</em> shoot the frozen box on the truck at Penthouse. <em>Thermophase:</em> suck up the fuse at Crash Site in the Aether and place it in the Tank room box.</p><div class="tip"><b>Tip:</b> You only strictly need the variants for the containment steps — but having Cryo for the finale defence is worth the detour.</div></li>
+      <li><strong>Talk to the anomaly & collect the photos.</strong><p>Interact with the anomaly in the Medical Bay (Dark Aether), speak to the three spectral figures around the map, and collect the items they point you to.</p></li>
+      <li><strong>Charge the containment unit.</strong><p>Use each D.I.E. variant on the matching canister at the Particle Accelerator to fill the containment unit — defend between charges.</p></li>
+      <li><strong>Finale — protect the unit & the decontamination.</strong><p>Survive the locked-in accelerator defence waves (Megatons + Plaguehounds). Keep Ring of Fire for the Megaton spawns. Survive to the end for the cutscene and Exfil prompt.</p></li>
+    </ol>
+  </div>
+
+  <div class="quest">
+    <div class="quest-head"><h3>Firebase Z — Rescue Samantha</h3><span class="diff d-med">Medium • 60–75 min</span></div>
+    <ol class="steps">
+      <li><strong>Power via 3 Aether Reactors.</strong><p>Teleport from the Village to the Firebase, then activate all three reactors (Military Command, Mission Control, Village side). Each costs Essence and triggers a defence — let zombies come to you, don’t chase.</p></li>
+      <li><strong>Free Samantha — talk & data.</strong><p>Speak to Ravenov in Mission Control and Dr. Peck through the window. Collect the data / serum steps: get the compound from the locker (key from a Mimic kill in the Village area — Mimics hide as loot items, listen for the whisper).</p></li>
+      <li><strong>Build the RAI K-84.</strong><p>Get the blueprint from the Weapons Lab trial / dartboard code (shoot the dartboard numbers in order: the code shows on the board), collect the parts — barrel from the Mangler drop, battery charged at the reactor, and assemble at the Weapons Lab bench. Or pull it from the Box / Trials.</p></li>
+      <li><strong>Uranium & the device.</strong><p>Collect the two uranium rocks (from special enemies at the marked spots), process them at the workbenches, and deliver the device components to Ravenov.</p></li>
+      <li><strong>Charge the Aethermeter & capture essences.</strong><p>Place canisters at the marked Aether spots and trap special zombie essences by killing the right enemy type inside the trap radius.</p></li>
+      <li><strong>Finale — defend the portal & fight Orda.</strong><p>Activate the portal in Mission Control, survive the lockdown, then face <strong>Orda</strong> — a giant Elder God — in the Village. Shoot the glowing weak points, use the RAI K-84’s alternate fire to slow adds, and keep moving: Orda’s slam covers a huge area. Ring of Fire on the weak-point phases ends it fast.</p></li>
+    </ol>
+  </div>
+
+  <div class="quest">
+    <div class="quest-head"><h3>Mauer der Toten — Free Klaus, Stop Valentina</h3><span class="diff d-hard">Hardest • 75–100 min</span></div>
+    <ol class="steps">
+      <li><strong>Power & Pack-a-Punch.</strong><p>Open through the streets to the Power Room in the sewer/subway area, flip the switch, kill the Tempests that spawn, then build Pack-a-Punch with the part in the Dark Aether-adjacent step by the machine.</p></li>
+      <li><strong>Build Klaus.</strong><p>Collect: battery from a Panzer Soldat kill, hands from the Hotel room (safe code from the brick wall combination in the alley), and the microwave dish from the Garment Factory pile. Assemble Klaus at the Safe House. Upgrade him at the upgrade station with zombie kills nearby — you’ll need upgraded Klaus later.</p><div class="tip"><b>Tip:</b> Klaus revives you and holds a train like a champ. Keep him upgraded all game, not just for the quest.</div></li>
+      <li><strong>Get the CRBR-S.</strong><p>From the Box, Trials, or by having Klaus kill zombies near the Safe House safe — open the safe for the base CRBR-S. Its mod kits (Blaze, Diffuser, Swarm) drop from enemies and change its fire mode.</p></li>
+      <li><strong>Activate the three antennas / satellite step.</strong><p>Use the CRBR-S and Klaus to power the marked terminals around the rooftops and streets in order, collecting the essence canisters from special kills at each.</p></li>
+      <li><strong>Uranium enrichment.</strong><p>Collect uranium from the zipline / rooftop spots (use the ziplines with the canister — don’t fall), process it at the Safe House device, and build the warhead components.</p></li>
+      <li><strong>Finale — Valentina boss fight.</strong><p>Enter the portal arena and fight Valentina in phases: shoot her shield down, damage phase, add-clear phase with Disciples and Tormentors. Stay on the move on the rooftops of the arena, save Ring of Fire for damage phases, and finish with the H.A.R.P./warhead sequence for the ending.</p></li>
+    </ol>
+  </div>
+
+  <div class="quest">
+    <div class="quest-head"><h3>Forsaken — Confront The Forsaken</h3><span class="diff d-hard">Hard • Final Boss • 75–90 min</span></div>
+    <ol class="steps">
+      <li><strong>Power, teleporter & Pack-a-Punch.</strong><p>Work through Anytown’s Main Street into the Bunker, activate the teleporter and fuel it (kill the Abomination / collect fuel), then reach the Observation Tower area to unlock Pack-a-Punch.</p></li>
+      <li><strong>Forge the Chrysalax.</strong><p>Collect a Catalyzed Crystal Shard (Abomination kill), a Dark Aether crystal heart, and the other forge parts marked around the map; temper them at the Forge in the Bunker. The Chrysalax swaps between a battle axe (melee, huge damage) and a rapid-fire gun form.</p></li>
+      <li><strong>Build the Aetherium Neutralizer.</strong><p>Gather the housing, fuel tank and monitor parts (arcade / video store / bunker spots — the arcade cabinet step needs a zombie fed to the machine), and assemble the device.</p></li>
+      <li><strong>Escort & charge the Neutralizer.</strong><p>Push the device through the marked zones, defending it while it charges on crystals. Abominations spawn on this step — Chrysalax axe form deletes them.</p></li>
+      <li><strong>Open the containment door.</strong><p>Deliver the Neutralizer, watch the story beat, and prepare fully before triggering the finale: Tier III Pack, Legendary rarity, full perks, Self-Revive, Ring of Fire charged.</p></li>
+      <li><strong>Boss — The Forsaken.</strong><p>A true multi-phase boss: destroy the glowing crystal weak points on his body while Samantha (in the mech / support role) charges her attack. Dodge the Aether orbs, clear Disciple adds between phases, and burn each weak point inside Ring of Fire. Three phases and the Cold War saga ends.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 05 OUTBREAK -->
+<section id="outbreak">
+  <div class="sec-head"><span class="no">05</span><h2>Outbreak — The Big Mode</h2></div>
+  <p class="intro">Outbreak drops you into huge open regions (the Fireteam maps: Alpine, Ruka, Golova, Sanatorium, Duga, Zoo, Collateral, Armada) with one main objective per region, then a warp to the next region at higher difficulty. It’s the best mode for levelling guns, earning crystals, and relaxed co-op — and it has two full main quests of its own.</p>
+  <div class="grid2">
+    <div class="card"><span class="tag t-green">Objectives — know them cold</span><h3>The 6 Objective Types</h3><ul>
+      <li><strong>Defend:</strong> hold the Aetherium canister machine for waves</li>
+      <li><strong>Escort:</strong> protect the rover as it drives to the portal</li>
+      <li><strong>Retrieve:</strong> carry Aetherium canisters to the rockets (slows you down — drop & fight)</li>
+      <li><strong>Eliminate:</strong> kill the marked Elite (HVT) — Mangler, Mimic, Krasny Soldat</li>
+      <li><strong>Holdout:</strong> survive locked inside a building until extraction</li>
+      <li><strong>Secure:</strong> stay in the marked zone and fill the meter</li></ul>
+      <p>Between objectives: loot everything. Golden chests, Trials, world events (Fury Crystal, Dragon / Demented Echo, fishing at ponds) and the Mystery Box all spawn per region. Always leave a region fully looted — you can’t go back.</p></div>
+    <div class="card"><span class="tag t-violet">Side content that pays</span><h3>Don’t Skip These</h3><ul>
+      <li><strong>Trials machine:</strong> spend Essence for challenges → Legendary rewards incl. free perks & Pack levels</li>
+      <li><strong>Red / Gold rifts & orbs:</strong> shoot the floating orb, follow it — free loot & perks</li>
+      <li><strong>World events:</strong> the dragon circle event drops high-rarity weapons early</li>
+      <li><strong>Vehicles:</strong> sedans & trucks run over whole hordes — best “weapon” in Regions 1–2</li>
+      <li><strong>Fishing:</strong> genuinely drops salvage, equipment and occasionally great loot</li></ul>
+      <p><strong>Warp rule:</strong> difficulty, enemy health and Elite counts scale hard from Region 4+. Bank a Tier II Pack and Rare+ weapon before warping past Region 3.</p></div>
+  </div>
+
+  <div class="quest">
+    <div class="quest-head"><h3>Outbreak Main Quest 1 — “Operation Excision” (Legion)</h3><span class="diff d-med">Medium • Do in Regions 1–3</span></div>
+    <ol class="steps">
+      <li><strong>Find the Omega recon & red rift.</strong><p>Progress regions until the quest beacon appears; interact with the Omega documents / radio to start tracking the rift signal.</p></li>
+      <li><strong>Collect the recon intel & beacons.</strong><p>Place and defend the micro-storm beacons at the marked spots in the region; kill the waves that attack each beacon.</p></li>
+      <li><strong>Enter the red rift → Missile Silo.</strong><p>Warp takes you to the Silo (under Sanatorium). Work down the silo levels, activating consoles in order while fighting in tight halls — shotguns shine here.</p></li>
+      <li><strong>Boss — Legion.</strong><p>A giant floating Tempest orb. Shoot the glowing orbs / energy balls it launches to charge your own damage window, then unload on Legion’s core when it opens. Clear Tempest adds first every time they spawn — they’re the real killer in this fight.</p></li>
+    </ol>
+  </div>
+  <div class="quest">
+    <div class="quest-head"><h3>Outbreak Main Quest 2 — Entrapment / The Final Revelation</h3><span class="diff d-hard">Hard • Unlocks after Quest 1</span></div>
+    <ol class="steps">
+      <li><strong>Start in a later region.</strong><p>The quest activates from the Omega helicopter / Ravenov radio step once Excision is done. Follow the signal to the marked region (often Ruka / Sanatorium side areas).</p></li>
+      <li><strong>Collect the Maxis intel & escort steps.</strong><p>Complete the marked defend/escort sequence protecting the device while Samantha’s signal is traced.</p></li>
+      <li><strong>The trap & the reveal.</strong><p>Survive the ambush waves at the extraction site — this is the hardest add-wave in Outbreak. Save support streaks (Chopper Gunner / Death Machine from crafting) for this.</p></li>
+      <li><strong>Exfil under fire.</strong><p>Reach the Exfil chopper with the whole team alive. Completing this sets up the Forsaken finale story — and unlocks the related Dark Ops / calling-card rewards.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 06 WONDER WEAPONS -->
+<section id="wonder">
+  <div class="sec-head"><span class="no">06</span><h2>Wonder Weapons</h2></div>
+  <div style="overflow-x:auto">
+  <table class="tbl">
+    <thead><tr><th>Weapon</th><th>Map</th><th>What makes it special</th></tr></thead>
+    <tbody>
+      <tr><td>D.I.E. Shockwave</td><td>Die Maschine</td><td>Vacuum blast that sucks in and shreds groups. 4 elemental upgrades (Electrobolt, Nova 5 gas, Cryo, Thermophase) — Cryo + Electrobolt are the strongest. Infinite-ish utility, never falls off for crowd control.</td></tr>
+      <tr><td>RAI K-84</td><td>Firebase Z</td><td>Full-auto energy rifle; alt-fire launches a slow orb that damages + slows everything it passes. The orb + Ring of Fire is the Orda killer. Best all-round Wonder Weapon in the game.</td></tr>
+      <tr><td>CRBR-S</td><td>Mauer der Toten</td><td>Energy pistol with swappable mod kits: Blaze (fire), Diffuser (scatter), Swarm (seeking projectiles). Swarm kit turns it into an add-clearing machine.</td></tr>
+      <tr><td>Chrysalax</td><td>Forsaken</td><td>Two weapons in one: Savager axe form (melee one-shots into high rounds) and Storm form (full-auto). The axe is arguably the strongest melee in Zombies history.</td></tr>
+      <tr><td>Ray Gun</td><td>All maps (Box)</td><td>The classic. Strong splash, no Ammo Mod slot issues, PHD Slider makes it safe up close. A great Box pull on any map.</td></tr>
+      <tr><td>Death Machine / War Machine</td><td>Crafted Support</td><td>Not Wonder Weapons, but craftable supports that melt Elites. Always craft one before a boss finale.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout blue"><strong class="cond">Non-Wonder guns that carry high rounds</strong><p style="margin:6px 0 0;color:var(--ink2)"><strong>Hauer 77 & Gallo SA12 shotguns</strong> (best early/mid DPS in the game) • <strong>M60 / Stoner 63 LMGs</strong> (huge mags for training) • <strong>Streetsweeper</strong> • <strong>AK-47 & XM4</strong> (reliable ARs) • <strong>M79 / RPG</strong> with PHD Slider for meme-but-real builds. Shotgun + Ring of Fire will take a new player to Round 30 on any map.</p></div>
+</section>
+
+<!-- 07 ENEMIES -->
+<section id="enemies">
+  <div class="sec-head"><span class="no">07</span><h2>Enemies & How to Kill Them</h2></div>
+  <div style="overflow-x:auto">
+  <table class="tbl">
+    <thead><tr><th>Enemy</th><th>Threat</th><th>Counter</th></tr></thead>
+    <tbody>
+      <tr><td>Megaton</td><td>Splits into Bomber + Blaster halves; radioactive zones</td><td>Kill from range, Napalm Burst, finish both halves fast so they don’t recombine pressure</td></tr>
+      <tr><td>Mangler</td><td>Armoured, cannon arm snipes you</td><td>Shoot the glowing arm cannon to stun; Shatter Blast eats the armour</td></tr>
+      <tr><td>Mimic</td><td>Disguised as loot; grabs and mauls you</td><td>Listen for whispers near loot, shoot suspicious items from range; shotguns delete them</td></tr>
+      <tr><td>Tempest</td><td>Teleports, electric blast disables your perks briefly</td><td>Dead Wire chains; kill on sight — never leave one alive behind you</td></tr>
+      <tr><td>Disciple</td><td>Buffs other zombies, drains you (Mauer+)</td><td>Top priority target — a buffed horde is how runs end</td></tr>
+      <tr><td>Tormentor</td><td>Fast, explodes on you (Mauer+)</td><td>Shoot them at distance; never let one reach melee range in a train</td></tr>
+      <tr><td>Panzer / Krasny Soldat</td><td>Flamethrower mech, huge HP</td><td>Napalm paradoxically works via DoT stacking; keep distance, shoot the fuel tank</td></tr>
+      <tr><td>Abomination</td><td>Three-headed charger (Forsaken / Outbreak)</td><td>Shoot the glowing mouth when it opens; Chrysalax axe or Death Machine melts it</td></tr>
+      <tr><td>Plaguehounds / Hellhounds</td><td>Fast, low, swarm in packs</td><td>Any shotgun; in Dark Aether steps they drop the parts you need — farm them, don’t fear them</td></tr>
+      <tr><td>Orda (Elite)</td><td>Giant hand slam, massive HP (Firebase finale / Outbreak HVT)</td><td>Weak points + RAI K-84 orb + Ring of Fire; keep a vehicle or distance in Outbreak</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 08 BUILDS -->
+<section id="builds">
+  <div class="sec-head"><span class="no">08</span><h2>Loadouts That Work</h2></div>
+  <div class="grid2">
+    <div class="build"><h3>Solo Survival <span>— Any Map</span></h3><p>For quests and Round 30+ solo runs.</p><div class="row"><span>Primary: Gallo SA12 / Hauer 77</span><span>Field: Aether Shroud</span><span>Mod: Cryofreeze</span></div><ul><li>Perks: Jug → Quick Revive → Deadshot → Stamin-Up → Speed Cola</li><li>Craft a Self-Revive before every quest finale</li><li>Train in the biggest open area on the map — never camp solo</li></ul></div>
+    <div class="build"><h3>Co-op Team <span>— 3–4 Players</span></h3><p>Split roles and the quests get twice as fast.</p><div class="row"><span>Support: Healing Aura</span><span>Tank: Frenzied Guard</span><span>DPS: Ring of Fire ×2</span></div><ul><li>One player runs Brain Rot to turn Elites</li><li>Call out Mimic loot before anyone picks it up</li><li>Share Essence calls: whoever’s closest to a perk cost buys first</li></ul></div>
+    <div class="build"><h3>High Round <span>— Round 50+</span></h3><p>Damage stops scaling — control takes over.</p><div class="row"><span>Wonder Weapon + LMG</span><span>Field: Ring of Fire</span><span>Mods: Cryofreeze + Brain Rot</span></div><ul><li>Legendary rarity + Pack III on both guns is mandatory</li><li>Decoy / Monkey Bombs and Kazimir devices buy your reloads</li><li>Exfil at 51 is a legit win — greed ends more runs than zombies do</li></ul></div>
+    <div class="build"><h3>Outbreak Farming <span>— Crystals & Levels</span></h3><p>Fast regions, max loot, clean warps.</p><div class="row"><span>Primary: Stoner 63 / M60</span><span>Field: Toxic Growth / Ring</span><span>Must-have: Death Perception</span></div><ul><li>Do every Trial and world event in Regions 1–2 while they’re easy</li><li>Vehicles first, guns second, until Region 4</li><li>Warp only when the whole team is Pack II+ — one weak player wipes the Holdout</li></ul></div>
+  </div>
+</section>
+
+<!-- 09 EXFIL -->
+<section id="exfil">
+  <div class="sec-head"><span class="no">09</span><h2>Exfil & Progression Tips</h2></div>
+  <div class="grid2">
+    <div class="card"><span class="tag t-ice">New in Cold War</span><h3>How Exfil Works</h3><p>From Round 10 onward, every 5 rounds the Exfil radio (marked on your HUD) offers an escape. Activate it, reach the Exfil site, and clear every zombie in the zone before the timer ends — then the chopper leaves with you on it.</p><ul class="check">
+      <li>Successful Exfil pays bonus Essence, XP and Raw Aetherium Crystals</li>
+      <li>The Exfil wave spawns Elites — save your Field Upgrade and support for it</li>
+      <li>Failing the timer doesn’t end the game — you just keep playing to the next window</li>
+      <li>Solo players: Aether Shroud to reach the site, Ring of Fire to clear it</li></ul></div>
+    <div class="card"><span class="tag t-gold">Get strong faster</span><h3>Progression Priority</h3><ul class="check">
+      <li>Spend your first crystals on: Juggernog tiers → your Field Upgrade → Deadshot → Speed Cola</li>
+      <li>Level guns in Outbreak — big maps, easy kills, weapon XP flows</li>
+      <li>Do the daily & seasonal Zombies challenges — they pay crystals, not just XP</li>
+      <li>Finish each map’s quest once on any difficulty — Dark Ops and rewards are account-wide</li>
+      <li>Play Forsaken last in story order; its boss assumes you know every system above</li></ul></div>
+  </div>
+  <div class="callout red"><strong class="cond">The 5 mistakes that end Cold War runs</strong><p style="margin:6px 0 0;color:var(--ink2)">1) Skipping armour re-plates because “health is full” — armour IS your health. &nbsp;2) Pack-a-Punching before raising rarity (or the reverse) — you need both. &nbsp;3) Opening every door early and shrinking your training space. &nbsp;4) Picking up loot without checking for a Mimic. &nbsp;5) Starting a main-quest finale without a Self-Revive, full perks and a charged Field Upgrade.</p></div>
+</section>
+
+<footer>
+  <p><strong>Gamers Guides — Popnshots4u.</strong> Unofficial fan guide for Call of Duty: Black Ops Cold War Zombies (Treyarch / Activision). Not affiliated with Activision. Quest routes are the standard community-proven steps; minor step order can vary with patches and player count.</p>
+  <p class="small">Guide order in this series: BO1 • BO2 • Cold War (this one) • BO4 • MW3 Zombies • Fortnite • Minecraft — each guide has its own colour scheme so you can tell them apart at a glance. Cold War = ice blue &amp; Soviet red.</p>
+</footer>
+
+</div>
+</body>
+</html>

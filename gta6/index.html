@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Complete GTA 6 Guide — Jason, Lucia & Leonida | Gamers Guides</title>
+<style>
+:root{
+  --bg:#fff7f0; --bg2:#ffeef6; --card:#ffffff; --card2:#fff1e6;
+  --ink:#24102b; --muted:#6b5570; --line:#f3d3e2;
+  --pink:#e91e7a; --pink-d:#c2185b; --orange:#f96d00; --teal:#009688; --teal-b:#00bfa6;
+  --sun1:#ff2e88; --sun2:#ff7a18; --sun3:#ffc21c; --night:#1b0f2e;
+  --chip:#ffe3ef; --good:#0a7a5c; --warn-bg:#fff4d6; --warn:#7a5a00;
+  --shadow:0 10px 30px rgba(233,30,122,.12);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#150a22; --bg2:#1d0f30; --card:#221238; --card2:#2a1844;
+    --ink:#fdf2f8; --muted:#d8b9d6; --line:#3d2358;
+    --pink:#ff4d9d; --pink-d:#ff7ab5; --orange:#ff8c42; --teal:#2dd4bf; --teal-b:#5eead4;
+    --chip:#3a1c52; --warn-bg:#3a2f10; --warn:#ffd97a;
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:var(--pink-d)}
+button,[role="button"],summary{min-height:44px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 64px}
+/* HERO — Vice City sunset, pure CSS/SVG, no photos */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#2b1055 0%,#7b1e5e 28%,#e91e7a 52%,#ff7a18 74%,#ffc21c 100%);color:#fff;padding:34px 16px 0}
+.hero-in{max-width:1080px;margin:0 auto;position:relative;z-index:2}
+.kicker{display:inline-block;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.4);padding:5px 12px;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.hero h1{font-size:clamp(2.1rem,6vw,3.6rem);line-height:1.02;margin:14px 0 8px;font-weight:900;letter-spacing:-.02em;text-shadow:0 3px 18px rgba(0,0,0,.35)}
+.hero h1 .neon{color:#7df9ff;text-shadow:0 0 18px rgba(0,212,197,.9),0 2px 10px rgba(0,0,0,.4)}
+.hero p.lede{font-size:1.08rem;max-width:720px;margin:0 0 16px;color:#fff3e6}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.fact{background:rgba(20,5,35,.55);border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:8px 12px;font-size:.86rem}
+.fact b{color:#ffd166}
+.hero svg.palms{display:block;width:100%;height:90px;margin-top:6px}
+.honest{background:#fff8e1;color:#4a3500;border-left:5px solid #ffc21c;padding:12px 14px;border-radius:0 10px 10px 0;font-size:.92rem;max-width:820px;margin:0 0 20px}
+@media (prefers-color-scheme: dark){.honest{background:#2e2708;color:#ffe9a8}}
+/* NAV */
+nav.toc{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:2px solid var(--pink);padding:8px 0}
+nav.toc .wrap{padding-bottom:0}
+.toc-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+.toc-row::-webkit-scrollbar{display:none}
+.toc-row a{white-space:nowrap;text-decoration:none;background:var(--card);border:1.5px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:999px;font-size:.88rem;font-weight:600;min-height:44px;display:inline-flex;align-items:center}
+.toc-row a:hover{border-color:var(--pink)}
+section{margin-top:36px;scroll-margin-top:76px}
+h2{font-size:1.65rem;line-height:1.15;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+h2 .num{background:linear-gradient(135deg,var(--sun1),var(--sun2));color:#fff;width:36px;height:36px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;flex:none}
+.sub{color:var(--muted);margin:0 0 16px;max-width:760px}
+h3{margin:20px 0 6px;font-size:1.12rem}
+.grid{display:grid;gap:14px}
+@media(min-width:720px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.card h3{margin-top:0}
+.tag{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--chip);color:var(--pink-d);margin-bottom:8px}
+.tag.teal{background:rgba(0,150,136,.14);color:var(--teal)}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:.94rem}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--card2)}
+tr:last-child td{border-bottom:none}
+.tablewrap{overflow-x:auto;border:1.5px solid var(--line);border-radius:12px}
+ul.tight{margin:6px 0;padding-left:20px} ul.tight li{margin:4px 0}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;display:flex;gap:10px;align-items:flex-start}
+.checklist .box{flex:none;width:22px;height:22px;border-radius:6px;border:2px solid var(--pink);margin-top:2px}
+details{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:4px 16px;margin:10px 0}
+summary{cursor:pointer;font-weight:700;padding:10px 0}
+.fb{background:var(--card2);border:1.5px dashed var(--pink);border-radius:12px;padding:14px;margin:12px 0}
+.fb p{white-space:pre-wrap;margin:6px 0 10px;font-size:.94rem}
+.btn{background:linear-gradient(135deg,var(--sun1),var(--sun2));color:#fff;border:none;border-radius:10px;padding:10px 18px;font-weight:800;cursor:pointer;font-size:.92rem;min-height:44px}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:var(--card);color:var(--pink-d);border:1.5px solid var(--pink)}
+.note{font-size:.88rem;color:var(--muted)}
+footer{margin-top:48px;border-top:2px solid var(--line);padding-top:18px;font-size:.88rem;color:var(--muted)}
+.region-head{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.region-head .slogan{font-style:italic;color:var(--orange);font-weight:700;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <span class="kicker">Gamers Guides · Popnshots4u</span>
+    <h1>Grand Theft Auto VI<br><span class="neon">Complete Guide</span></h1>
+    <p class="lede">Jason and Lucia, a score gone wrong, and the whole state of Leonida — Vice City, the Keys, the swamps and everywhere in between. Confirmed facts clearly labelled — anything still being verified is flagged, not guessed.</p>
+    <div class="facts">
+      <span class="fact">📅 Released <b>Thu, Nov 19, 2026</b></span>
+      <span class="fact">🎮 <b>PS5 &amp; Xbox Series X|S</b> only</span>
+      <span class="fact">💲 <b>$79.99</b> Standard · <b>$99.99</b> Ultimate</span>
+      <span class="fact">💻 PC: <b>not announced yet</b></span>
+      <span class="fact">🔞 Rated <b>M (17+)</b></span>
+    </div>
+    <div class="honest"><strong>Straight up:</strong> this is a <strong>research-based launch guide</strong>, built from Rockstar's official site, trailers and launch coverage — not from the author's own playthrough. Anything the community is still verifying is flagged <em>Unconfirmed</em> instead of being stated as fact, and this page will be corrected as details settle.</div>
+  </div>
+  <svg class="palms" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0,90 L0,62 Q120,50 260,60 T560,58 T860,62 T1200,55 L1200,90 Z" fill="#150a22"/><g fill="#150a22"><path d="M90 66 q4-34 -14-48 q16 2 22 14 q2-16 -8-28 q14 6 16 22 q8-12 22-14 q-12 10-14 22 q14-4 24 4 q-14 0-24 8 q-4 10-6 20z"/><rect x="100" y="52" width="7" height="22" rx="3"/><path d="M1080 64 q4-34 -14-48 q16 2 22 14 q2-16 -8-28 q14 6 16 22 q8-12 22-14 q-12 10-14 22 q14-4 24 4 q-14 0-24 8 q-4 10-6 20z"/><rect x="1090" y="50" width="7" height="24" rx="3"/></g><circle cx="600" cy="52" r="26" fill="#fff3b0" opacity=".9"/></svg>
+</header>
+
+<nav class="toc"><div class="wrap"><div class="toc-row">
+  <a href="#start">Start Here</a><a href="#story">Story &amp; Leads</a><a href="#cast">The Cast</a><a href="#map">Leonida Map</a><a href="#firsthours">First Hours</a><a href="#systems">Systems</a><a href="#money">Money</a><a href="#faq">FAQ</a><a href="#posts">Share Posts</a>
+</div></div></nav>
+
+<main class="wrap">
+
+<section id="start">
+  <h2><span class="num">1</span> Start Here — Editions &amp; Setup</h2>
+  <p class="sub">GTA VI launched November 19, 2026 as a console exclusive. There is no PS4 or Xbox One version, and no disc — it's digital download or a download code in a box.</p>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Standard — $79.99</th><th>Ultimate — $99.99</th></tr>
+    <tr><td><strong>Game</strong></td><td>Full GTA VI story</td><td>Full GTA VI story</td></tr>
+    <tr><td><strong>Extras</strong></td><td>Pre-order: Vintage Vice City Pack — two-tone '55 Vapid Stainer + Ocean Beach garage</td><td>Premium vehicles, weapons, apparel and bonuses unlocked across Jason &amp; Lucia's story</td></tr>
+    <tr><td><strong>Best for</strong></td><td>Most players</td><td>Collectors who want the bonus gear from day one</td></tr>
+  </table></div>
+  <ul class="tight">
+    <li><strong>Storage:</strong> launch coverage puts the download at up to ~212 GB depending on console — clear space before you start.</li>
+    <li><strong>Pre-load</strong> opened November 10 for digital pre-orders.</li>
+    <li><strong>GTA Online:</strong> a new Online mode is <em>not</em> available at launch and Rockstar has not dated it. GTA V's Online is the stopgap.</li>
+    <li><strong>PC:</strong> no date announced. Rumours point to 2027 — treat that as <span class="tag warn">Unconfirmed</span> until Rockstar says otherwise.</li>
+  </ul>
+  <p><a class="btn ghost" href="https://smokethadawg.github.io/gamers-guides/" style="display:inline-flex;align-items:center;text-decoration:none">← All Gamers Guides</a></p>
+</section>
+
+<section id="story">
+  <h2><span class="num">2</span> Story &amp; The Two Leads</h2>
+  <p class="sub">A Bonnie-and-Clyde story: two partners who have always known the deck is stacked against them, pulled into a state-wide conspiracy after an easy score goes wrong.</p>
+  <div class="grid g2">
+    <div class="card"><span class="tag">Playable Lead</span><h3>Lucia Caminos</h3>
+      <p>Fresh out of the Leonida Penitentiary at the start of the game. Grew up in Liberty City; her father taught her to fight as a kid, and fighting for her family is what landed her inside. She wants the peaceful life her mother always dreamed of — and sees Jason, and smarter choices, as the way to get it. Lucia is the first playable female lead in a numbered GTA story.</p></div>
+    <div class="card"><span class="tag">Playable Lead</span><h3>Jason Duval</h3>
+      <p>Grew up around grifters and trouble, tried to straighten out with a stint in the Army, then landed in the Leonida Keys working for local drug runners. He runs jobs and shakedowns for veteran smuggler Brian Heder, and lives in one of Brian's properties in exchange for the work. He wants an easier life — the game has other plans.</p></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3>Playing as both</h3>
+    <p>Unlike GTA V's separate solo missions, Jason and Lucia work <strong>as a team</strong> and take on missions together. Launch coverage confirms you can switch between them at any time — even mid-drive. Lean into that: when a job splits the pair, the switch is the mechanic, not a cutscene trick.</p></div>
+</section>
+
+<section id="cast">
+  <h2><span class="num">3</span> The Cast</h2>
+  <p class="sub">Rockstar published eight official character profiles — Jason and Lucia (above) plus these six. Voice cast was only fully credited at launch — don't trust older "leaked cast" lists.</p>
+  <div class="grid g2">
+    <div class="card"><span class="tag teal">Leonida Keys</span><h3>Brian Heder</h3><p>Veteran drug runner from the golden age of Keys smuggling. Runs Brian's Boat Works &amp; Marina, keeps his hands off direct client work, and is Jason's boss and landlord. On his third wife, Lori.</p></div>
+    <div class="card"><span class="tag teal">Leonida Keys</span><h3>Cal Hampton</h3><p>Jason's friend and fellow Brian associate. Paranoid, conspiratorial, happiest at home with a few beers, snooping on Coast Guard comms and watching the birds a little too closely.</p></div>
+    <div class="card"><span class="tag">Vice City</span><h3>Boobie Ike</h3><p>Street hustler turned legitimate empire: real estate, the Jack of Hearts strip club, and a recording studio. All smiles until it's business. His passion project is the Only Raw Records label.</p></div>
+    <div class="card"><span class="tag">Vice City</span><h3>Dre'Quan Priest</h3><p>More hustler than gangster — dealt to survive, but music was always the goal. Boobie's partner at Only Raw Records; he signed Real Dimez and wants out of booking strip-club acts and into the big Vice City scene.</p></div>
+    <div class="card"><span class="tag">Vice City</span><h3>Real Dimez — Bae-Luxe &amp; Roxy</h3><p>Rap duo and school friends with one viral hit behind them, signed to Only Raw Records. The act Dre'Quan is betting the label on.</p></div>
+    <div class="card"><span class="tag warn">Statewide</span><h3>Raul Bautista</h3><p>Seasoned bank robber — confidence, charm and cunning, always scouting fresh talent for bigger scores. Experienced, but reckless enough that it may catch up with him.</p></div>
+  </div>
+</section>
+
+<section id="map">
+  <h2><span class="num">4</span> Leonida — The Map</h2>
+  <p class="sub">Rockstar's take on Florida: one big city, five more regions, five counties. Rockstar has not published an official map size — anyone quoting exact square mileage is guessing.</p>
+  <div class="grid g2">
+    <div class="card"><div class="region-head"><h3>Vice City</h3><span class="slogan">"Everything in Excess"</span></div><span class="tag">Vice-Dale County</span><p>The neon metropolis — Miami-inspired beaches, pastel hotels, Ocean Beach, Washington Beach, Watson Bay, the cruise port and VCIA airport. First full return since Vice City Stories (2006). Boobie and Dre'Quan's turf.</p></div>
+    <div class="card"><div class="region-head"><h3>Leonida Keys</h3><span class="slogan">"Gateway to Paradise"</span></div><span class="tag">Island chain · South</span><p>Tropical islands linked by highway bridges, running from Key Lento down to Mile Zero. Jason's home turf — marinas, boat yards, and Brian's smuggling operation.</p></div>
+    <div class="card"><div class="region-head"><h3>Grassrivers</h3><span class="slogan">"Welcome to the Wetlands"</span></div><span class="tag">Mariana County</span><p>Everglades-style wetlands south-west of Vice City: mangroves, airboats, alligators, and isolated, dangerous backcountry. Pack an off-roader or a boat, not a supercar.</p></div>
+    <div class="card"><div class="region-head"><h3>Port Gellhorn</h3><span class="slogan">"Live Hard"</span></div><span class="tag">Kelly County · West coast</span><p>Leonida's forgotten coast — a faded Gulf resort town of cheap motels, strip clubs and empty strip malls. The seedy opposite of Vice City's shine.</p></div>
+    <div class="card"><div class="region-head"><h3>Ambrosia</h3><span class="slogan">"Keeping Leonida Sweet"</span></div><span class="tag">State centre</span><p>The agricultural and industrial heartland around Lake Leonida, dominated by the big sugar refinery. Working towns, farmland and industry — where Leonida's money is actually made.</p></div>
+    <div class="card"><div class="region-head"><h3>Mount Kalaga National Park</h3><span class="slogan">The wild north</span></div><span class="tag">Lummox County</span><p>Forested hills on the northern border: hunting, fishing, kayaking and off-road trails, with backwoods communities hidden in the trees. The place to disappear.</p></div>
+  </div>
+  <h3>Counties at a glance</h3>
+  <div class="tablewrap"><table>
+    <tr><th>County</th><th>Where</th><th>Known for</th></tr>
+    <tr><td>Vice-Dale</td><td>Southeast</td><td>Vice City, Vice Beach, VCIA airport, Port Vice City</td></tr>
+    <tr><td>Mariana</td><td>South</td><td>Grassrivers, Watson Bay, Cottonmouth Lake</td></tr>
+    <tr><td>Kelly</td><td>West</td><td>Port Gellhorn, Draper Island, Emerald Springs</td></tr>
+    <tr><td>Leonard</td><td>Centre / east</td><td>Lake Leonida, Belville, Waning Sands</td></tr>
+    <tr><td>Lummox</td><td>North</td><td>Mount Kalaga, Bonanza, Grayson, the gold mine</td></tr>
+  </table></div>
+</section>
+
+<section id="firsthours">
+  <h2><span class="num">5</span> Your First Hours — Checklist</h2>
+  <p class="sub">Starter advice for launch week. It teaches the game's systems in order — don't rush past it to free-roam and wonder why nothing's unlocked.</p>
+  <ul class="checklist">
+    <li><span class="box"></span><span><strong>Finish the opening story beats first.</strong> Lucia's release and the reunion with Jason set up the duo-switching, safehouses and your first contacts.</span></li>
+    <li><span class="box"></span><span><strong>Learn the switch.</strong> Practise swapping between Jason and Lucia in low-stakes moments — later jobs assume you can do it under pressure.</span></li>
+    <li><span class="box"></span><span><strong>Bank your cash, don't carry it all.</strong> A series staple habit: dying and arrests hurt less when your money is safe. <span class="tag warn">Verify in-game</span></span></li>
+    <li><span class="box"></span><span><strong>Claim the pre-order Stainer</strong> and the Ocean Beach garage if you pre-ordered — free wheels and storage from hour one.</span></li>
+    <li><span class="box"></span><span><strong>Drive the Keys causeway once, slowly.</strong> Best intro to the map's scale, and it unlocks your mental map of Jason's home region.</span></li>
+    <li><span class="box"></span><span><strong>Don't blow early money on clothes and rims.</strong> Weapons, armour and a reliable getaway car pay off first. Style comes after the first big score.</span></li>
+    <li><span class="box"></span><span><strong>Save before every score.</strong> Heist-style jobs branch — a clean save lets you replay a botched approach instead of living with it.</span></li>
+  </ul>
+</section>
+
+<section id="systems">
+  <h2><span class="num">6</span> Systems — What We Know</h2>
+  <div class="grid g2">
+    <div class="card"><span class="tag teal">Confirmed</span><h3>Duo gameplay</h3><p>Two playable leads who mission together, with free switching at any time, including while driving. Relationship-driven story in the Bonnie-and-Clyde mould.</p></div>
+    <div class="card"><span class="tag teal">Confirmed</span><h3>A living, social world</h3><p>Trailers show a Leonida obsessed with social media — livestreams, viral clips and phones everywhere. Expect the world to react to, and record, what you do.</p></div>
+    <div class="card"><span class="tag teal">Confirmed</span><h3>Water is half the map</h3><p>Keys, Grassrivers, lakes and coast mean boats and airboats are core transport, not novelties. Learn the marinas early.</p></div>
+    <div class="card"><span class="tag warn">Unconfirmed</span><h3>Wanted system, stats &amp; properties</h3><p>Exact wanted-level behaviour, character stats, buyable businesses and property lists are still being documented by players. This section gets rewritten once verified — we won't guess numbers here.</p></div>
+  </div>
+  <h3>Survival habits that always pay in GTA</h3>
+  <ul class="tight">
+    <li>Keep armour topped up before story jobs; buy snacks for quick health.</li>
+    <li>Break line of sight to lose heat — alleys, water and the Grassrivers mangroves beat straight-line speed.</li>
+    <li>Keep one fast, forgettable car for scores. Exotic cars get remembered — and so do you.</li>
+    <li>In the swamps and Kalaga backcountry, watch for wildlife. The gators are not decoration.</li>
+  </ul>
+</section>
+
+<section id="money">
+  <h2><span class="num">7</span> Money — Honest Version</h2>
+  <p class="sub">Launch week is when fake "infinite money" videos flood YouTube. Here's what's actually grounded so far:</p>
+  <div class="grid g2">
+    <div class="card"><h3>Legit earners (story-grounded)</h3><ul class="tight">
+      <li>Story scores with Raul Bautista's crew — the bank-job thread.</li>
+      <li>Work for Brian in the Keys: runs and shakedowns pay early cash.</li>
+      <li>Boobie &amp; Dre'Quan's Vice City business thread — clubs and the label.</li>
+      <li>Side work, races and collectibles as they're verified in-game.</li></ul></div>
+    <div class="card"><h3>Avoid</h3><ul class="tight">
+      <li>Any "glitch" video promising millions in the first week — most are fake, patched, or ban-bait.</li>
+      <li>Sites selling GTA VI money or accounts — scams, every time.</li>
+      <li>Spending real money chasing Ultimate Edition gear twice — check what your edition already includes.</li></ul></div>
+  </div>
+  <p class="note">Full price lists, property costs and a verified money route will be added once they can be checked in-game rather than copied from rumour posts.</p>
+</section>
+
+<section id="faq">
+  <h2><span class="num">8</span> FAQ</h2>
+  <details><summary>Is GTA 6 on PC, PS4 or Xbox One?</summary><p>No. Launch is PS5 and Xbox Series X|S only, and Rockstar has not announced a PC date. Anyone selling a "PC version" right now is scamming.</p></details>
+  <details><summary>Is GTA Online in GTA 6 at launch?</summary><p>No — a new Online mode is not available at launch and has no announced date. GTA V Online is still the online game for now.</p></details>
+  <details><summary>Can I play as just Jason or just Lucia?</summary><p>The story is built around the pair working together, with free switching between them — including mid-drive. It's a duo game by design.</p></details>
+  <details><summary>Is this the same Vice City as the 2002 game?</summary><p>Same city, modern day. This is a present-day reimagining — new story, new cast, vastly bigger state around it — not a remake of the 2002 game.</p></details>
+  <details><summary>How big is the map?</summary><p><span class="tag warn">Unconfirmed</span> Rockstar hasn't published an official size. It's a full state — city, keys, swamps, farmland and a national park — and clearly the largest GTA map to date, but exact figures circulating online are estimates.</p></details>
+  <details><summary>Which edition should I buy?</summary><p>Standard ($79.99) for most players. Ultimate ($99.99) only if you specifically want the premium vehicles, weapons and apparel bonuses.</p></details>
+</section>
+
+<section id="posts">
+  <h2><span class="num">9</span> Copy-Ready Posts</h2>
+  <p class="sub">Plain-text posts for sharing this guide — tap copy, paste anywhere. No images attached, nothing to flag.</p>
+  <div class="fb"><strong>Launch post</strong><p id="p1">GTA 6 IS HERE 🚗🌴 Our complete guide is live: Jason &amp; Lucia's story, the full Leonida map (Vice City, the Keys, Grassrivers, Port Gellhorn, Ambrosia, Mount Kalaga), the whole cast, editions explained and first-hours tips. PS5 &amp; Xbox Series X|S — $79.99. Link in comments 👇</p><button class="btn" data-copy="p1">Copy post</button></div>
+  <div class="fb"><strong>Map post</strong><p id="p2">Leonida is HUGE 🌴 Vice City is just the start — there's the Keys, the Grassrivers swamps, Port Gellhorn, Ambrosia and Mount Kalaga National Park across 5 counties. Full region-by-region breakdown in our GTA 6 guide — link in comments 👇 Where are you heading first?</p><button class="btn" data-copy="p2">Copy post</button></div>
+  <div class="fb"><strong>Characters post</strong><p id="p3">Jason &amp; Lucia — GTA's Bonnie &amp; Clyde 💥 Lucia's fresh out of Leonida Penitentiary, Jason's running jobs in the Keys, and one easy score goes VERY wrong. Meet the full cast in our complete GTA 6 guide — link in comments 👇 Team Jason or Team Lucia?</p><button class="btn" data-copy="p3">Copy post</button></div>
+  <p id="copied" class="note" role="status"></p>
+</section>
+
+<footer>
+  <p><strong>Gamers Guides</strong> by Popnshots4u · More guides: <a href="https://smokethadawg.github.io/gamers-guides/">smokethadawg.github.io/gamers-guides</a></p>
+  <p>Unofficial fan guide. Grand Theft Auto, GTA VI, Vice City and Leonida are trademarks of Rockstar Games / Take-Two Interactive. Facts drawn from Rockstar's official GTA VI site and launch coverage (USA Today, GameDaily, GTA Wiki), checked Nov 20, 2026. Items marked Unconfirmed were not verified at build time and will be updated on correction.</p>
+</footer>
+</main>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click', function(){
+    var el = document.getElementById(b.getAttribute('data-copy'));
+    var t = el ? el.innerText : '';
+    function done(){ document.getElementById('copied').textContent = 'Copied — ready to paste.'; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(done).catch(function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
+      ta.select(); try{ document.execCommand('copy'); done(); }catch(e){}
+      document.body.removeChild(ta);
+    }
+  });
+});
+</script>
+</body>
+</html>

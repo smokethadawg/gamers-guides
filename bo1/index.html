@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Complete BO1 Zombies Guide — Every Map, Easter Egg & Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EDEADF; --bg2:#E3DFCE; --panel:#F7F4EA; --panel2:#FFFFFF;
+    --ink:#23261B; --muted:#5C604F; --line:#CFC9B0;
+    --olive:#556B2F; --olive-d:#3A4A22; --olive-x:#232B16;
+    --gold:#B8890B; --gold-bright:#D4A017; --gold-soft:#F3E3B3;
+    --red:#8B2E2E; --teal:#2F5D5A;
+    --shadow:0 10px 30px rgba(35,43,22,.14);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#171A12; --bg2:#1E2216; --panel:#22261A; --panel2:#262B1C;
+      --ink:#EDEAD8; --muted:#B9BCA6; --line:#3A402C;
+      --olive:#8AA653; --olive-d:#A8C07A; --olive-x:#0F120A;
+      --gold:#D4A017; --gold-bright:#E8B92E; --gold-soft:#3A3418;
+      --red:#D07A7A; --teal:#7AB8B2;
+      --shadow:0 10px 30px rgba(0,0,0,.45);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55;font-size:16px}
+  button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]){min-height:2.25rem}
+  a{color:var(--olive-d)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 18px 56px}
+
+  /* HERO */
+  .hero{background:var(--olive-x);color:#EDEAD8;margin:0 -18px;padding:0;position:relative;overflow:hidden}
+  .hero-inner{max-width:1080px;margin:0 auto;padding:34px 18px 28px;position:relative;z-index:1}
+  .hero::after{content:"115";position:absolute;right:-10px;top:-28px;font-family:"Oswald",sans-serif;font-weight:700;font-size:190px;line-height:1;color:rgba(212,160,23,.13);letter-spacing:-.02em;pointer-events:none}
+  .stamp{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--gold-bright);color:var(--gold-bright);font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.82rem;padding:6px 12px;border-radius:4px}
+  .stamp::before{content:"";width:8px;height:8px;background:var(--gold-bright);border-radius:50%}
+  h1{font-family:"Oswald",sans-serif;font-weight:700;text-transform:uppercase;line-height:.95;letter-spacing:.01em;font-size:clamp(2.4rem,7vw,4.4rem);margin:16px 0 6px;color:#fff}
+  h1 span{color:var(--gold-bright)}
+  .hero-sub{font-family:"Barlow Condensed",sans-serif;font-size:clamp(1.15rem,3vw,1.5rem);letter-spacing:.06em;text-transform:uppercase;color:#CFC9A8;margin:0 0 14px}
+  .hero p.lede{max-width:680px;color:#D8D5C2;font-size:1.02rem;margin:0 0 20px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:680px}
+  .stat{border:1px solid rgba(237,234,216,.22);border-top:3px solid var(--gold-bright);padding:10px 12px;background:rgba(255,255,255,.04)}
+  .stat b{display:block;font-family:"Oswald",sans-serif;font-size:1.55rem;line-height:1;color:#fff}
+  .stat span{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#B9BCA6;font-weight:600}
+  @media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* NAV */
+  .toolbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:2px solid var(--olive);padding:10px 0;margin-bottom:22px}
+  .toolbar-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip{appearance:none;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font-family:"Barlow",sans-serif;font-weight:600;font-size:.9rem;padding:9px 14px;border-radius:999px;cursor:pointer;min-height:40px}
+  .chip[aria-pressed="true"]{background:var(--olive);border-color:var(--olive);color:#fff}
+  .chip:focus-visible,.copy-btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold-bright);outline-offset:2px}
+  .search{flex:1 1 180px;min-width:160px}
+  .search input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--panel2);color:var(--ink);font:inherit;font-size:.95rem;min-height:40px}
+
+  h2{font-family:"Oswald",sans-serif;text-transform:uppercase;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.02em;margin:38px 0 4px;display:flex;align-items:center;gap:12px}
+  h2::before{content:"";width:10px;height:26px;background:var(--gold-bright);flex:none}
+  .section-note{color:var(--muted);margin:0 0 16px;max-width:720px}
+  h3{font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.02em}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 8px;font-size:1.05rem}
+  .card p,.card li{font-size:.96rem}
+  .card ul{margin:8px 0 0;padding-left:19px}
+  .card li{margin:5px 0}
+
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.94rem}
+  th{font-family:"Barlow Condensed",sans-serif;letter-spacing:.07em;text-transform:uppercase;text-align:left;background:var(--olive);color:#fff;padding:10px 12px;font-size:.9rem}
+  td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+  td:first-child{font-weight:700;white-space:nowrap}
+  .table-scroll{overflow-x:auto;border-radius:var(--radius)}
+  @media(max-width:640px){
+    .table-scroll table{min-width:0}
+    .table-scroll thead{display:none}
+    .table-scroll tr{display:block;border-top:1px solid var(--line);padding:8px 0}
+    .table-scroll td{display:block;border-top:none;padding:4px 12px;white-space:normal}
+    .table-scroll td:first-child{font-family:"Oswald",sans-serif;text-transform:uppercase}
+  }
+
+  /* MAP CARDS */
+  .map{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px}
+  .map-head{display:flex;gap:0;flex-wrap:wrap}
+  .map-badge{flex:none;width:108px;min-height:108px;background:var(--olive-d);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 8px}
+  .map-badge .abbr{font-family:"Oswald",sans-serif;font-weight:700;font-size:1.7rem;line-height:1}
+  .map-badge .pack{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft);margin-top:6px;font-weight:700}
+  @media(prefers-color-scheme:dark){.map-badge{background:#2E3A1E}}
+  .map-title{flex:1 1 260px;padding:16px 18px 8px}
+  .map-title h3{margin:0;font-size:1.45rem;line-height:1.1}
+  .map-title .setting{color:var(--muted);font-weight:600;margin:4px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 14px 18px;margin-left:108px}
+  @media(max-width:560px){.tags{margin-left:0}.map-badge{width:84px;min-height:84px}.map-badge .abbr{font-size:1.3rem}}
+  .tag{font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--line);background:var(--bg2);padding:4px 9px;border-radius:999px}
+  .tag.gold{border-color:var(--gold);color:var(--gold);background:var(--gold-soft)}
+  .tag.red{border-color:var(--red);color:var(--red)}
+  .map-body{padding:0 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.map-body{grid-template-columns:1fr}}
+  .block h4{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:.92rem;margin:0 0 6px;color:var(--olive-d);border-bottom:2px solid var(--gold-bright);display:inline-block;padding-bottom:2px}
+  .block p,.block li{font-size:.94rem}
+  .block ul,.block ol{margin:6px 0 0;padding-left:19px}
+  .block li{margin:4px 0}
+  .block.full{grid-column:1/-1}
+  .ee{background:var(--bg2);border-radius:10px;padding:12px 14px}
+  .ee h4{color:var(--ink)}
+  .tip{border-left:4px solid var(--gold-bright);background:var(--gold-soft);padding:10px 14px;border-radius:0 10px 10px 0;font-size:.94rem}
+  .tip b{text-transform:uppercase;letter-spacing:.05em;font-size:.8rem}
+
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:4px 16px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:700;padding:10px 0;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:1.02rem}
+  details p,details li{font-size:.95rem}
+  details ul{padding-left:19px}
+
+  .post{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px}
+  .post h3{margin:0 0 6px;font-size:1rem}
+  .post p{white-space:pre-line;font-size:.94rem;color:var(--muted);margin:0 0 12px}
+  .copy-btn{appearance:none;border:none;background:var(--olive);color:#fff;font-weight:700;font-family:"Barlow",sans-serif;padding:10px 18px;border-radius:8px;cursor:pointer;min-height:42px;font-size:.92rem}
+  .copy-btn.done{background:var(--gold);color:#1A1A10}
+  .hidden{display:none !important}
+  .empty{padding:22px;text-align:center;color:var(--muted);font-weight:600;border:1.5px dashed var(--line);border-radius:var(--radius)}
+  footer{margin-top:44px;border-top:2px solid var(--olive);padding-top:16px;color:var(--muted);font-size:.88rem}
+  .kbd{font-weight:700;background:var(--bg2);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font-size:.88em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="stamp">Popnshots4u · Gamers Guides</span>
+      <h1>Black Ops 1<br><span>Zombies</span> — Complete Guide</h1>
+      <p class="hero-sub">Guide 1 of 7 · The 2010 original · Treyarch</p>
+      <p class="lede">Every map from the launch theater to the Moon: power and Pack-a-Punch locations, wonder weapons, full main Easter egg steps, boss fights, and the training routes that actually hold up on high rounds. This is the original Black Ops 1 (2010) — set during the Cold War, but a different game from Black Ops Cold War (2020), which gets its own separate guide later in this series. BO1 runs olive and gold, so it never gets mixed up with the other games.</p>
+      <div class="stats">
+        <div class="stat"><b>11</b><span>Maps covered</span></div>
+        <div class="stat"><b>4</b><span>DLC packs</span></div>
+        <div class="stat"><b>4</b><span>Main quest Easter eggs</span></div>
+        <div class="stat"><b>8</b><span>Perk-a-Colas</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toolbar" aria-label="Filter maps">
+    <div class="toolbar-row">
+      <button class="chip" data-filter="all" aria-pressed="true">All maps</button>
+      <button class="chip" data-filter="launch" aria-pressed="false">Launch</button>
+      <button class="chip" data-filter="dlc" aria-pressed="false">DLC</button>
+      <button class="chip" data-filter="classic" aria-pressed="false">WaW Classics</button>
+      <button class="chip" data-filter="ee" aria-pressed="false">Has main Easter egg</button>
+      <div class="search"><input id="q" type="search" placeholder="Search a map, weapon, or perk…" aria-label="Search the guide"></div>
+    </div>
+  </nav>
+
+  <h2>Start Here — The BO1 Basics</h2>
+  <p class="section-note">BO1 runs on the classic points economy. Everything below applies to every map in this guide unless a map card says otherwise.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Points &amp; the early rounds</h3>
+      <ul>
+        <li><b>Round 1–3:</b> Shoot a zombie 5–6 times in the chest, then knife it. That is worth far more than headshots early and funds your first doors.</li>
+        <li><b>Repair windows</b> between rounds — 10 points per board, free points while zombies are held off by the boards.</li>
+        <li><b>Don't open everything.</b> Open one route to power, buy Juggernog, then open the rest. Every open door is another spawn window to watch.</li>
+        <li><b>Save a crawler</b> at the end of a round whenever you need to hit the box, link teleporters, or do Easter egg steps.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Mystery Box &amp; Pack-a-Punch</h3>
+      <ul>
+        <li><b>Box:</b> 950 points per spin. The teddy bear moves the box to a new location — follow the light beam in the sky.</li>
+        <li><b>Pack-a-Punch:</b> 5,000 points. Full ammo refill on the upgraded gun, more damage, bigger mag, and a new name and camo. Keep one wall gun you can re-buy ammo for instead of depending on the box twice.</li>
+        <li><b>Max Ammo</b> drops refill both weapons — call it out and reload <em>before</em> anyone picks it up.</li>
+        <li><b>Fire Sale</b> (on maps that have it) drops every box location to 10 points — spin fast, it only lasts 30 seconds.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top:30px">The 8 Perks</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Perk</th><th>Cost</th><th>What it does</th><th>Priority</th></tr></thead>
+    <tbody>
+      <tr><td>Juggernog</td><td>2,500</td><td>Roughly doubles your health — survive 4–5 hits instead of 2–3.</td><td>First buy, every map</td></tr>
+      <tr><td>Speed Cola</td><td>3,000</td><td>Reload about twice as fast.</td><td>Second on most guns</td></tr>
+      <tr><td>Quick Revive</td><td>500 solo / 1,500 co-op</td><td>Solo: revives you once per purchase (up to 3). Co-op: revives teammates much faster.</td><td>Essential solo</td></tr>
+      <tr><td>Double Tap Root Beer</td><td>2,000</td><td>BO1 version increases fire rate only (no double-bullet effect — that came in BO2).</td><td>Situational</td></tr>
+      <tr><td>Stamin-Up</td><td>2,000</td><td>Move and sprint faster, sprint longer. First appears on Ascension.</td><td>Great for big maps</td></tr>
+      <tr><td>PHD Flopper</td><td>2,000</td><td>No explosive or fall damage, and diving to prone creates an explosion. First appears on Ascension.</td><td>Fun + Ray Gun safety</td></tr>
+      <tr><td>Deadshot Daiquiri</td><td>1,500</td><td>Aim assist snaps to the head, tighter hip-fire. First appears on Call of the Dead.</td><td>Console players</td></tr>
+      <tr><td>Mule Kick</td><td>4,000</td><td>Carry a third weapon. Added to all maps late in BO1's life. Lose the third gun if you go down.</td><td>Late-game luxury</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="section-note" style="margin-top:10px">You can hold 4 perks at a time in standard BO1 play. Losing all perks on a down is normal — re-buy Juggernog first when you get back up.</p>
+
+  <h2>The Maps</h2>
+  <p class="section-note">In release order. Use the filters above to jump to launch maps, DLC, or the World at War classics bundled in Rezurrection.</p>
+
+  <div id="maps">
+
+  <!-- KINO -->
+  <article class="map" data-cat="launch ee" data-search="kino der toten theater berlin thundergun zeus cannon teleporter nova crawlers samantha">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">KINO</span><span class="pack">Launch</span></div>
+      <div class="map-title"><h3>Kino der Toten</h3><p class="setting">Abandoned Nazi theater, Berlin · The starter map</p></div>
+    </div>
+    <div class="tags"><span class="tag gold">Wonder Weapon: Thundergun</span><span class="tag">Special: Nova Crawlers</span><span class="tag">Difficulty: Easy–Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power &amp; Pack-a-Punch</h4><p>Power switch is on the stage — take either route from the lobby (upstairs through the dressing room or downstairs through the kitchen side). Once power is on, stand on the teleporter pad in the lobby and <b>link it to the mainframe</b> at the Pack-a-Punch projector room. Each teleport sends you to the projector room for a short window to use Pack-a-Punch before you are dropped back — and a random Samantha room or perk room can appear on the way.</p></div>
+      <div class="block"><h4>Best strategy</h4><ul><li>Train on the <b>stage</b> once power is on — the widest open loop on the map, with the trap and curtain spawns easy to read.</li><li>Alley is a strong early holdout until about round 12.</li><li>Thundergun + a light machine gun or upgraded MP40 off the wall covers almost everything.</li><li>Watch the Nova Crawlers after teleporting — they explode into gas; shoot them, don't knife them.</li></ul></div>
+      <div class="block full ee"><h4>Musical Easter egg — “115” by Elena Siegman</h4><ol><li>Find and activate <b>three meteor fragments</b> (hold the interact button until you hear the cue): one in the lobby corner by the stairs, one in the dressing room on a shelf/pedestal, and one in the room past the stage near the window.</li><li>Activate all three and the song plays. There is no full quest Easter egg on Kino — the meteor pieces and the film reels that appear in the projector-room trips are the story layer here.</li></ol></div>
+    </div>
+  </article>
+
+  <!-- FIVE -->
+  <article class="map" data-cat="launch ee" data-search="five pentagon winters howl defcon thief pentagon thief jfk castro nixon mcnamara">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">FIVE</span><span class="pack">Launch</span></div>
+      <div class="map-title"><h3>“Five”</h3><p class="setting">The Pentagon · JFK, Nixon, Castro &amp; McNamara</p></div>
+    </div>
+    <div class="tags"><span class="tag gold">Wonder Weapon: Winter's Howl</span><span class="tag red">Boss: Pentagon Thief</span><span class="tag">Difficulty: Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power &amp; Pack-a-Punch</h4><p>Power is in the basement labs — ride the elevator down from the War Room side. Pack-a-Punch is in the War Room but locked behind <b>DEFCON 5</b>: flip all five DEFCON switches around the War Room to lower DEFCON, then step through the portal. The DEFCON level counts back up over time, so move as a team.</p></div>
+      <div class="block"><h4>The Pentagon Thief</h4><ul><li>Appears every few rounds after power, only one player can see him at first — he steals the weapon of whoever he touches.</li><li>Kill him before he escapes and you get your gun back plus a <b>Bonfire Sale</b> drop (Pack-a-Punch drops to 1,000 points) or a Max Ammo.</li><li>Winter's Howl freezes groups solid — one of the few guns that makes the tight War Room survivable late.</li></ul></div>
+      <div class="block full ee"><h4>Musical Easter egg — “Won't Back Down” by Eminem</h4><ol><li>Activate <b>three red telephones</b>: one in the starting office area, one in the War Room, and one in the Pack-a-Punch room area.</li><li>All three phones ring the song in. Five has no multi-step quest egg — the Thief, DEFCON system, and the televisions showing the outbreak are its signature systems.</li></ol></div>
+    </div>
+  </article>
+
+  <!-- ASCENSION -->
+  <article class="map" data-cat="dlc ee" data-search="ascension cosmodrome kazakhstan thundergun gersh device black hole matryoshka dolls space monkeys lunar landers perk steal">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">ASC</span><span class="pack">DLC 1 · First Strike</span></div>
+      <div class="map-title"><h3>Ascension</h3><p class="setting">Soviet cosmodrome, Kazakhstan · First big quest map</p></div>
+    </div>
+    <div class="tags"><span class="tag gold">Wonder Weapons: Thundergun + Gersh Device</span><span class="tag red">Special: Space Monkeys</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power &amp; Pack-a-Punch</h4><p>Power is at the top of the facility past the centrifuge room. Pack-a-Punch unlocks by <b>riding all three Lunar Landers</b> — ride each lander back to the launch platform (each ride costs 250), and once all three have been used, the rocket launch button by the power area opens the Pack-a-Punch room under the rocket. Launch the rocket for a Double Points drop.</p></div>
+      <div class="block"><h4>Space Monkeys — read this</h4><ul><li>On perk-machine rounds, monkeys drop in and <b>attack your perk machines</b>. If they damage one enough, you lose that perk.</li><li>Defend the machines — don't open areas whose perks you can't defend. Killing every monkey without a machine taking damage earns a <b>random free perk</b> (the only way to hold more than 4).</li><li>New perks Stamin-Up and PHD Flopper debut here.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Casimir Mechanism (co-op recommended)</h4><ol><li>Use the four <b>Gersh Device / Matryoshka</b> steps in order: free the mechanism by throwing a Gersh Device at the sparking generator outside the map near the PHD Flopper area.</li><li>Press the four glowing buttons that appear around the map within the time limit (all players at once in co-op).</li><li>Stand in the centrifuge / complete the pressure and letter steps: ride the landers to spell and hold the nodes as prompted by the voices.</li><li>Throw a Gersh Device at the final orb and empty upgraded weapons into it to free Gersh — the reward is a <b>Death Machine for 90 seconds</b> for the whole team. Note: unlike later maps, Ascension's egg gives no permanent perks.</li></ol><p style="margin-top:8px"><b>Song:</b> “Abracadavre” by Elena Siegman — activate the three teddy bears holding sickles around the map.</p></div>
+    </div>
+  </article>
+
+  <!-- CALL OF THE DEAD -->
+  <article class="map" data-cat="dlc ee" data-search="call of the dead siberia ship lighthouse george romero scavenger vr-11 wunderwaffe trejo englund rooker gellar">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">COTD</span><span class="pack">DLC 2 · Escalation</span></div>
+      <div class="map-title"><h3>Call of the Dead</h3><p class="setting">Frozen Siberian shipwreck &amp; lighthouse · George Romero boss</p></div>
+    </div>
+    <div class="tags"><span class="tag gold">Wonder Weapons: V-R11 + Scavenger</span><span class="tag red">Boss: George A. Romero</span><span class="tag">Difficulty: Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power &amp; Pack-a-Punch</h4><p>Power is on the <b>ship's upper deck</b> — clear the wreck debris from spawn and work up the ship. Pack-a-Punch appears at the <b>top of the lighthouse</b> on a rotating/random cycle with the lighthouse beam — watch where the light points; it also periodically moves. Ziplines and the Flinger get you around fast, but the ice water slows you and spawns crawlers — stay out of it on high rounds.</p></div>
+      <div class="block"><h4>George Romero</h4><ul><li>George is always on the map, slowly following you with a stage light. Shooting or exploding him enrages him — he sprints and swings.</li><li>Calm him by leading him into <b>deep water</b>.</li><li>Killing him (it takes a huge amount of damage, Scavenger and V-R11 combos work best) drops a <b>Death Machine and a free random perk</b>, and he returns a few rounds later.</li><li>The V-R11 turns zombies back into humans who sprint away distracting the horde — and shooting a teammate with the upgraded V-R11 gives them a brief invulnerability aura.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Ensemble Cast / Stand-In</h4><ol><li>Free the original crew trapped behind the vault door in the lighthouse's lower level — get the <b>fuse</b> from the rooms above (kill a zombie near the door area drops it / it spawns in the nearby cabins) and install it in the panel by the door.</li><li>Destroy the four vodka bottles the crew asks for by knifing/shooting them around the map.</li><li>Complete the lighthouse dials puzzle: set the four colored dials in the lighthouse stairwell to the correct combination (the crew calls out the order).</li><li>Use the ship's wheel and controls as directed, then recover the <b>Golden Rod</b> with a V-R11-charged zombie in the final step — deliver it to the door. Reward: the <b>Wunderwaffe DG-2</b> for the player who completes it (and Lightning Bolt drops).</li></ol><p style="margin-top:8px"><b>Song:</b> “Not Ready to Die” by Avenged Sevenfold — activate the three meteor fragments.</p></div>
+    </div>
+  </article>
+
+  <!-- SHANGRI-LA -->
+  <article class="map" data-cat="dlc ee" data-search="shangri-la jungle temple baby gun 31-79 jgb215 shrink gun napalm shrieker monkeys eclipse time travel focusing stone">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">SHANG</span><span class="pack">DLC 3 · Annihilation</span></div>
+      <div class="map-title"><h3>Shangri-La</h3><p class="setting">Lost jungle temple · The hardest BO1 egg</p></div>
+    </div>
+    <div class="tags"><span class="tag gold">Wonder Weapon: 31-79 JGb215 (Baby Gun)</span><span class="tag red">Specials: Napalm + Shrieker</span><span class="tag">Difficulty: Very Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power &amp; Pack-a-Punch</h4><p>Two power switches — one on each side of the temple (the mud-room side and the mine side); <b>both must be flipped</b>. Pack-a-Punch is earned: stand on the pressure plates at spawn as a full team (solo players get a timed window), which raises the stairs to the altar at the top of the temple. Miss the window and the stairs drop — do your upgrading in one trip.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li>The map is tight — train in the open spawn area or the AK-74u room, never in the tunnels.</li><li><b>Napalm zombie</b> explodes when close — kill it at range. <b>Shrieker</b> sprints and blurs your screen — kill it first.</li><li>Monkeys steal drops and cycle them — shoot the monkey to lock in the drop you want.</li><li>The Baby Gun shrinks zombies so you can run through and kick them — upgraded, it's one of the strongest panic buttons in BO1.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Time Travel Will Tell (4 players required)</h4><ol><li>Activate <b>Eclipse mode</b> using the eclipse buttons at spawn (all four players press simultaneously).</li><li>Work through the eclipse steps in order: charge the plates, use the spikemores and the Baby Gun on the shrunken targets, complete the water-slide and mud-pressure steps, and place the <b>Focusing Stone</b> components as Richtofen directs.</li><li>Repeat the sequence across past/present eclipse trips — twelve main steps in total, several are timed and several need specific box weapons (dynamite, the shrink gun, and a sniper for the final shots).</li><li>Final reward: <b>all seven perks permanently</b> for Richtofen's player (the Focusing Stone) — the strongest single reward in BO1. This egg cannot be finished solo or with fewer than four players.</li></ol><p style="margin-top:8px"><b>Song:</b> “Pareidolia” by Elena Siegman — activate the three meteor fragments.</p></div>
+    </div>
+  </article>
+
+  <!-- MOON -->
+  <article class="map" data-cat="dlc ee" data-search="moon griffin station no mans land area 51 hacker pes qed wave gun zap gun astronaut samantha big bang theory richtofens grand scheme">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">MOON</span><span class="pack">DLC 4 · Rezurrection</span></div>
+      <div class="map-title"><h3>Moon</h3><p class="setting">Griffin Station, the Moon + Area 51 · The BO1 finale</p></div>
+    </div>
+    <div class="tags"><span class="tag gold">Wonder Weapons: Wave Gun + QED</span><span class="tag red">Special: Astronaut (steals a perk)</span><span class="tag">Difficulty: Very Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Start, power &amp; Pack-a-Punch</h4><p>You start in <b>No Man's Land (Area 51)</b> — survive the sprint for points, grab Juggernog or Speed Cola if they are up, then take the teleporter before you are overrun. On the Moon: you need the <b>P.E.S. suit</b> to breathe outside. Power is in the labs area. Pack-a-Punch stays in Area 51 — teleport back during a calm round, upgrade fast, and return; No Man's Land gets harder every visit. The <b>Hacker</b> device (found in the labs, replaces your P.E.S. slot choice) hacks perks, doors, the box, and downed teammates cheaper or faster — and hacks Pack-a-Punch for a chance at better outcomes.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li>The <b>Astronaut zombie</b> is slow and tanky — if he grabs you he teleports you and <b>steals a random perk</b>. Kill him at range; he explodes, so keep distance.</li><li>Excavators can breach the biodome and tunnels and cut off oxygen — use the hacker on the excavator controls in Receiving Bay to stop them.</li><li>Train in the <b>Biodome</b> — low gravity jumps make it the best loop in BO1. Bounce pads save ammo and lives.</li><li>The Wave Gun splits into dual Zap Guns; the combined Wave Gun microwave blast clears a whole train.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Richtofen's Grand Scheme / Big Bang Theory</h4><ol><li>Power the pyramid: fill the four soul tubes by killing zombies near the M.P.D. pyramid in Receiving Bay until each tube is full.</li><li>Use the Hacker and the QED through the mid steps: hack the four control panels in the labs within the time window, and throw a QED at the excavator / plates as directed to move the plates into place.</li><li>Collect the <b>Golden Rod / Vril Generator</b> from the earlier maps' storyline items, place it, and complete Samantha's games: play the <b>“Samantha Says”</b> computer sequence in the labs correctly.</li><li>Charge the final orbs with the Wave Gun and Gersh Devices, swap souls at the pyramid (in co-op, the Richtofen player completes the swap), then throw a QED at the final device — the cutscene plays and the Earth is hit by three rockets.</li><li>Reward: <b>all eight perks permanently</b> (Big Bang Theory achievement version) — you keep them even after going down, for the rest of the match.</li></ol><p style="margin-top:8px"><b>Songs:</b> “Coming Home” by Elena Siegman (three teddy bears) and the hidden “Nightmare” by Avenged Sevenfold after completing the egg.</p></div>
+    </div>
+  </article>
+
+  <!-- NACHT -->
+  <article class="map" data-cat="classic" data-search="nacht der untoten world at war remaster bunker nacht no perks no pack a punch original">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">NACHT</span><span class="pack">Rezurrection Classic</span></div>
+      <div class="map-title"><h3>Nacht der Untoten</h3><p class="setting">Ruined bunker · Where Zombies began (WaW remaster)</p></div>
+    </div>
+    <div class="tags"><span class="tag">No Perks · No Pack-a-Punch</span><span class="tag">Difficulty: Hard (by design)</span></div>
+    <div class="map-body">
+      <div class="block"><h4>How it plays</h4><p>The original three-room map, exactly as it was: a starting room, the Help room with the Mystery Box, and the upstairs with the sniper cabinet. There is <b>no power, no perks, and no Pack-a-Punch</b> in the BO1 version — just wall guns, the box, grenades, and your aim.</p></div>
+      <div class="block"><h4>Best strategy</h4><ul><li>Hold the starting room until you can afford the Help door, then camp the corner by the box with a wall LMG or the Thompson upstairs.</li><li>Upstairs grenade spam off the balcony is the classic high-round play — buy grenades every round.</li><li>Radio in the starting room plays messages when shot/knifed — pure story flavor.</li></ul></div>
+      <div class="block full"><div class="tip"><b>Why play it:</b> &nbsp;Nacht is the purest form of the mode. If you can hit round 20 here with no perks, every other map in this guide feels generous.</div></div>
+    </div>
+  </article>
+
+  <!-- VERRUCKT -->
+  <article class="map" data-cat="classic ee" data-search="verruckt asylum wittenau berlin world at war remaster power doors split start">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">VERR</span><span class="pack">Rezurrection Classic</span></div>
+      <div class="map-title"><h3>Verrückt</h3><p class="setting">Wittenau asylum, Berlin · Split-start co-op (WaW remaster)</p></div>
+    </div>
+    <div class="tags"><span class="tag">First map with perks &amp; power</span><span class="tag">Difficulty: Medium–Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power &amp; layout</h4><p>The team starts <b>split in two halves</b> of the asylum. Power — in the generator room between the two sides — reunites the team and turns on the perk machines and the electro-shock defenses. No Pack-a-Punch on this classic version. The corridors are narrow: this map teaches spawn control better than any other.</p></div>
+      <div class="block"><h4>Best strategy</h4><ul><li>Open toward power first, not toward more rooms.</li><li>The balcony by Speed Cola is the classic camp spot — one player watches the stairs, one the window.</li><li>Song: “Lullaby for a Dead Man” — the series' first musical egg originated here.</li></ul></div>
+    </div>
+  </article>
+
+  <!-- SHI NO NUMA -->
+  <article class="map" data-cat="classic ee" data-search="shi no numa swamp jungle world at war remaster hellhounds wunderwaffe dg-2 zipline flogger perk huts">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">SHI</span><span class="pack">Rezurrection Classic</span></div>
+      <div class="map-title"><h3>Shi No Numa</h3><p class="setting">Tunguska swamp · Hellhounds' debut (WaW remaster)</p></div>
+    </div>
+    <div class="tags"><span class="tag gold">Wonder Weapon: Wunderwaffe DG-2</span><span class="tag red">Special: Hellhounds</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Layout &amp; perks</h4><p>No power switch — instead, four outer huts each hold <b>one random perk machine</b>, so perk locations change every game. Open the hut doors to activate them. The Flogger trap and the zipline from the Doctor's Quarters are your crowd control. Pack-a-Punch is not on this classic version.</p></div>
+      <div class="block"><h4>Best strategy</h4><ul><li>Hellhound rounds start around round 5–7 — finish the last hound and a Max Ammo drops. Save it until you've reloaded.</li><li>The Wunderwaffe chains lightning through a whole train — don't waste it on single zombies.</li><li>Train around the main hut's center loop; the swamp water slows you, so stay on the paths and bridges.</li></ul></div>
+    </div>
+  </article>
+
+  <!-- DER RIESE -->
+  <article class="map" data-cat="classic ee" data-search="der riese the giant factory world at war remaster pack a punch teleporters wunderwaffe fly trap hellhounds samantha hide and seek">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">RIESE</span><span class="pack">Rezurrection Classic</span></div>
+      <div class="map-title"><h3>Der Riese</h3><p class="setting">Group 935 factory, Germany · The Pack-a-Punch debut (WaW remaster)</p></div>
+    </div>
+    <div class="tags"><span class="tag gold">Wonder Weapon: Wunderwaffe DG-2</span><span class="tag">First Pack-a-Punch map</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power &amp; Pack-a-Punch</h4><p>Power is at the back of the factory past the courtyard. Pack-a-Punch works the way Kino copied: <b>link all three teleporters</b> (A, B, and C) to the mainframe pad at spawn — each link costs a short trip and the pad charges between uses. Once all three are linked, the Pack-a-Punch vault at spawn opens permanently.</p></div>
+      <div class="block"><h4>Best strategy &amp; secrets</h4><ul><li>The <b>catwalk</b> above the furnace room is the most famous camp spot in Zombies history — hold the stairs, watch the window.</li><li><b>The Fly Trap:</b> shoot the hidden panel outside the map with an upgraded weapon to start Samantha's hide-and-seek — find the hidden teddy bears and monkey for the “Acep in the Hole” reward and story audio.</li><li>Hellhounds appear here too — the upgraded Wunderwaffe and the catwalk make Der Riese the best high-round teacher in the classics set.</li></ul></div>
+    </div>
+  </article>
+
+  <!-- DEAD OPS -->
+  <article class="map" data-cat="launch" data-search="dead ops arcade top down twin stick hidden mini game doa gems chicken fate">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">DOA</span><span class="pack">Launch · Hidden Mode</span></div>
+      <div class="map-title"><h3>Dead Ops Arcade</h3><p class="setting">Top-down twin-stick arena · The hidden arcade mode</p></div>
+    </div>
+    <div class="tags"><span class="tag">Unlock: computer terminal code</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>How to unlock it</h4><p>At the main menu, break out of the chair (look down and mash the triggers), walk to the computer terminal behind you, and type <span class="kbd">DOA</span> — or type <span class="kbd">3ARC UNLOCK</span> to unlock Dead Ops and “Five” together.</p></div>
+      <div class="block"><h4>How it plays</h4><ul><li>40 rounds of arena survival across themed islands, ending with the Cosmic Silverback boss.</li><li>Grab gems and treasure for extra lives; the <b>Fate</b> system after the first boss fight grants a permanent bonus (like the chicken companion or extra speed).</li><li>Golden items stack — prioritize the boots, the chicken, and weapon-duration pickups.</li></ul></div>
+    </div>
+  </article>
+
+  </div>
+  <div id="empty" class="empty hidden">No map matches that search — try a map name, a wonder weapon, or a perk.</div>
+
+  <h2>High-Round Rules That Work on Every Map</h2>
+  <div class="grid2">
+    <div class="card"><h3>Training, not camping</h3><p>Past round 25, camping fails everywhere except a few classic spots. Run a loop with at least two exits, let the whole wave spawn in, then turn and clear the train with your strongest gun. A tight train is one Thundergun shell, one Wave Gun shot, or one Wunderwaffe bolt — that ammo math is how high rounds are won.</p></div>
+    <div class="card"><h3>Downs &amp; recovery</h3><ul><li>Keep a crawler before doing anything risky.</li><li>After a revive: Juggernog first, then your main gun's ammo, then the rest of your perks.</li><li>Call out drops before touching them — a wasted Max Ammo or an Insta-Kill grabbed at the wrong second loses more rounds than any zombie.</li><li>Monkey Bombs (from the box) buy 8–10 seconds of total safety — save them for revives and Pack-a-Punch trips, not for fun.</li></ul></div>
+  </div>
+
+  <h2>Facebook Posts — Ready to Copy</h2>
+  <p class="section-note">One post per walkthrough, written for the Popnshots4u page. Tap Copy and paste straight into Facebook — plain text only, nothing extra attached.</p>
+  <div id="posts">
+    <div class="post"><h3>Series announcement</h3><p>NEW SERIES STARTING 🎮🧟
+We're running the COMPLETE Black Ops 1 Zombies guide — every map, every Easter egg, every wonder weapon, in release order.
+Kino → Five → Ascension → Call of the Dead → Shangri-La → Moon, plus the classic WaW maps.
+Full guide is live on the site — link in the comments. Which map do you want first?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Kino der Toten</h3><p>BO1 ZOMBIES — KINO DER TOTEN 🧟🎭
+The theater where BO1 started. Power's on the stage, link the teleporter, and the Thundergun does the rest.
+Best train spot, Nova Crawler tips, and the “115” song egg — full walkthrough on the site now.
+What round have you hit on Kino?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>“Five”</h3><p>BO1 ZOMBIES — “FIVE” 🏛️🧟
+JFK vs the undead in the Pentagon. DEFCON 5 opens Pack-a-Punch — and watch out for the Thief, he WILL take your gun.
+Full walkthrough live now. Ever killed the Thief before he got away?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Ascension</h3><p>BO1 ZOMBIES — ASCENSION 🚀🧟
+Ride all three Lunar Landers, launch the rocket, and defend your perks — the Space Monkeys are coming for them.
+Casimir Mechanism egg steps + monkey defense guide on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Call of the Dead</h3><p>BO1 ZOMBIES — CALL OF THE DEAD 🥶🧟
+A frozen ship, a lighthouse, and George Romero himself chasing you with a stage light.
+V-R11 + Scavenger guide and the full Ensemble Cast egg — live on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Shangri-La</h3><p>BO1 ZOMBIES — SHANGRI-LA 🌴🧟
+The hardest Easter egg in BO1. Four players, eclipse mode, and the Focusing Stone at the end.
+Baby Gun guide + full Time Travel Will Tell steps on the site now. Who's actually finished this one?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Moon</h3><p>BO1 ZOMBIES — MOON 🌕🧟
+The BO1 finale. Area 51, low gravity, the Hacker, the Wave Gun — and the egg that ends the world.
+Richtofen's Grand Scheme, step by step, live on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Nacht der Untoten</h3><p>BO1 ZOMBIES — NACHT DER UNTOTEN 🧟🏚️
+Where it all started. Three rooms, no perks, no Pack-a-Punch — just you, the box, and the Thompson.
+Full Nacht strategy in the guide on the site now. What's your best no-perk round?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Verrückt</h3><p>BO1 ZOMBIES — VERRÜCKT 🧟🏥
+The asylum splits your team in half until someone hits the power. Tightest corridors in the series.
+Full walkthrough live on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Shi No Numa</h3><p>BO1 ZOMBIES — SHI NO NUMA 🧟🐕
+The swamp, the Wunderwaffe, and the first Hellhounds. Perks hide in a different hut every game.
+Full walkthrough live on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Der Riese</h3><p>BO1 ZOMBIES — DER RIESE 🧟🏭
+Link all three teleporters, open Pack-a-Punch for the first time in Zombies history, and hold the catwalk.
+Fly Trap secret + full walkthrough on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Dead Ops Arcade</h3><p>BO1 ZOMBIES — DEAD OPS ARCADE 🕹️🧟
+BO1's hidden top-down arcade mode — 40 rounds, treasure, and the Cosmic Silverback at the end.
+How to unlock it (type DOA at the terminal) + full guide on the site now.</p><button class="copy-btn">Copy post</button></div>
+  </div>
+
+  <h2>Quick Answers</h2>
+  <details><summary>Which BO1 map should a beginner start on?</summary><p>Kino der Toten. It teaches power, teleporters, Pack-a-Punch, and training on the stage without any punishing extra systems. Move to Ascension next, then Der Riese from the classics.</p></details>
+  <details><summary>Which Easter eggs can be done solo?</summary><p>Call of the Dead's egg has a dedicated solo version (Stand-In). Moon's egg can be completed solo in the BO1 version, though the final steps are far easier with help. Shangri-La's Time Travel Will Tell strictly requires four players. Ascension's egg is possible solo but the button step is extremely tight alone.</p></details>
+  <details><summary>What is the best wonder weapon in BO1?</summary><p>For raw train-clearing, the Thundergun (Kino/Ascension) and the Wave Gun (Moon) are the top tier. The Wunderwaffe DG-2 on Shi No Numa and Der Riese chains through ten zombies per shot and never really falls off. The Baby Gun on Shangri-La is the best panic button because shrunk zombies can simply be run over.</p></details>
+  <details><summary>How do I unlock “Five” and Dead Ops Arcade without playing the campaign?</summary><p>Break out of the menu chair, use the computer terminal, and type <b>3ARC UNLOCK</b>. That unlocks “Five”, Dead Ops Arcade, and the campaign missions. Typing <b>DOA</b> alone unlocks just Dead Ops Arcade.</p></details>
+
+  <footer>
+    <p><b>Popnshots4u · Gamers Guides — Guide 1 of 7.</b> This page is BO1 only, in olive &amp; gold. The rest of the set each get their own page in their own colors: BO2 in burnt orange, Black Ops Cold War (the separate 2020 game — not this one) in its own scheme, BO4 in blood red, MW3 Zombies in military green &amp; tan, plus Fortnite and Minecraft — so the seven guides never get mixed up.</p>
+    <p>Guide covers the original Black Ops (2010) Zombies mode including First Strike, Escalation, Annihilation, and Rezurrection DLC. Steps summarized from in-game play; Easter egg routes for Shangri-La and Moon reward a full team that communicates.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var maps = Array.prototype.slice.call(document.querySelectorAll('.map'));
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var active = 'all';
+  function apply(){
+    var term = (q.value || '').toLowerCase().trim();
+    var shown = 0;
+    maps.forEach(function(m){
+      var catOk = active === 'all' || m.getAttribute('data-cat').split(' ').indexOf(active) !== -1;
+      var text = (m.textContent + ' ' + (m.getAttribute('data-search') || '')).toLowerCase();
+      var qOk = !term || text.indexOf(term) !== -1;
+      var show = catOk && qOk;
+      m.classList.toggle('hidden', !show);
+      if (show) shown++;
+    });
+    empty.classList.toggle('hidden', shown !== 0);
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      chips.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      c.setAttribute('aria-pressed','true');
+      active = c.getAttribute('data-filter');
+      apply();
+    });
+  });
+  q.addEventListener('input', apply);
+
+  document.querySelectorAll('.post').forEach(function(post){
+    var btn = post.querySelector('.copy-btn');
+    var text = post.querySelector('p').textContent;
+    btn.addEventListener('click', function(){
+      function done(){
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('done');
+        setTimeout(function(){ btn.textContent = 'Copy post'; btn.classList.remove('done'); }, 2200);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch(e) { btn.textContent = 'Select the text above to copy'; }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
