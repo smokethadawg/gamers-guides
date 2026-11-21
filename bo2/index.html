@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Complete BO2 Zombies Guide — Every Map, Easter Egg & Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6EFE6; --bg2:#EEE0CE; --panel:#FCF7EF; --panel2:#FFFFFF;
+    --ink:#241304; --muted:#6E5138; --line:#DEC49E;
+    --brand:#C2510A; --brand-d:#96400A; --brand-x:#140A03;
+    --acc:#E8620C; --acc-bright:#FF7A1A; --acc-soft:#FBE3C8;
+    --red:#9C2B1B; --steel:#4A5560;
+    --shadow:0 10px 30px rgba(60,30,5,.16);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0E0906; --bg2:#17100A; --panel:#1D1409; --panel2:#251A0E;
+      --ink:#F4E9D9; --muted:#C8AE8F; --line:#3E2C16;
+      --brand:#FF8A3D; --brand-d:#FFA25E; --brand-x:#070302;
+      --acc:#FF7A1A; --acc-bright:#FF9A3D; --acc-soft:#3A2410;
+      --red:#E07A63; --steel:#9FB2BF;
+      --shadow:0 10px 30px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55;font-size:16px}
+  button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]){min-height:2.25rem}
+  a{color:var(--brand-d)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 18px 56px}
+
+  /* HERO */
+  .hero{background:var(--brand-x);color:#F4E9D9;margin:0 -18px;padding:0;position:relative;overflow:hidden}
+  .hero-inner{max-width:1080px;margin:0 auto;padding:34px 18px 28px;position:relative;z-index:1}
+  .hero::after{content:"II";position:absolute;right:6px;top:-30px;font-family:"Oswald",sans-serif;font-weight:700;font-size:210px;line-height:1;color:rgba(255,122,26,.14);letter-spacing:-.02em;pointer-events:none}
+  .stamp{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--acc-bright);color:var(--acc-bright);font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.82rem;padding:6px 12px;border-radius:4px}
+  .stamp::before{content:"";width:8px;height:8px;background:var(--acc-bright);border-radius:50%}
+  h1{font-family:"Oswald",sans-serif;font-weight:700;text-transform:uppercase;line-height:.95;letter-spacing:.01em;font-size:clamp(2.4rem,7vw,4.4rem);margin:16px 0 6px;color:#fff}
+  h1 span{color:var(--acc-bright)}
+  .hero-sub{font-family:"Barlow Condensed",sans-serif;font-size:clamp(1.15rem,3vw,1.5rem);letter-spacing:.06em;text-transform:uppercase;color:#D8B98F;margin:0 0 14px}
+  .hero p.lede{max-width:680px;color:#E4D6C2;font-size:1.02rem;margin:0 0 20px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:680px}
+  .stat{border:1px solid rgba(244,233,217,.22);border-top:3px solid var(--acc-bright);padding:10px 12px;background:rgba(255,255,255,.04)}
+  .stat b{display:block;font-family:"Oswald",sans-serif;font-size:1.55rem;line-height:1;color:#fff}
+  .stat span{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#C8AE8F;font-weight:600}
+  @media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* NAV */
+  .toolbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:2px solid var(--brand);padding:10px 0;margin-bottom:22px}
+  .toolbar-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip{appearance:none;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font-family:"Barlow",sans-serif;font-weight:600;font-size:.9rem;padding:9px 14px;border-radius:999px;cursor:pointer;min-height:40px}
+  .chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+  .chip:focus-visible,.copy-btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--acc-bright);outline-offset:2px}
+  .search{flex:1 1 180px;min-width:160px}
+  .search input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--panel2);color:var(--ink);font:inherit;font-size:.95rem;min-height:40px}
+
+  h2{font-family:"Oswald",sans-serif;text-transform:uppercase;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.02em;margin:38px 0 4px;display:flex;align-items:center;gap:12px}
+  h2::before{content:"";width:10px;height:26px;background:var(--acc-bright);flex:none}
+  .section-note{color:var(--muted);margin:0 0 16px;max-width:720px}
+  h3{font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.02em}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 8px;font-size:1.05rem}
+  .card p,.card li{font-size:.96rem}
+  .card ul{margin:8px 0 0;padding-left:19px}
+  .card li{margin:5px 0}
+
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.94rem}
+  th{font-family:"Barlow Condensed",sans-serif;letter-spacing:.07em;text-transform:uppercase;text-align:left;background:var(--brand);color:#fff;padding:10px 12px;font-size:.9rem}
+  td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+  td:first-child{font-weight:700;white-space:nowrap}
+  .table-scroll{overflow-x:auto;border-radius:var(--radius)}
+  @media(max-width:640px){
+    .table-scroll table{min-width:0}
+    .table-scroll thead{display:none}
+    .table-scroll tr{display:block;border-top:1px solid var(--line);padding:8px 0}
+    .table-scroll td{display:block;border-top:none;padding:4px 12px;white-space:normal}
+    .table-scroll td:first-child{font-family:"Oswald",sans-serif;text-transform:uppercase}
+  }
+
+  /* MAP CARDS */
+  .map{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px}
+  .map-head{display:flex;gap:0;flex-wrap:wrap}
+  .map-badge{flex:none;width:108px;min-height:108px;background:var(--brand-d);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 8px}
+  .map-badge .abbr{font-family:"Oswald",sans-serif;font-weight:700;font-size:1.7rem;line-height:1}
+  .map-badge .pack{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc-soft);margin-top:6px;font-weight:700}
+  @media(prefers-color-scheme:dark){.map-badge{background:#7A3405}}
+  .map-title{flex:1 1 260px;padding:16px 18px 8px}
+  .map-title h3{margin:0;font-size:1.45rem;line-height:1.1}
+  .map-title .setting{color:var(--muted);font-weight:600;margin:4px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 14px 18px;margin-left:108px}
+  @media(max-width:560px){.tags{margin-left:0}.map-badge{width:84px;min-height:84px}.map-badge .abbr{font-size:1.3rem}}
+  .tag{font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--line);background:var(--bg2);padding:4px 9px;border-radius:999px}
+  .tag.hot{border-color:var(--brand);color:var(--brand);background:var(--acc-soft)}
+  .tag.red{border-color:var(--red);color:var(--red)}
+  .map-body{padding:0 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.map-body{grid-template-columns:1fr}}
+  .block h4{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:.92rem;margin:0 0 6px;color:var(--brand-d);border-bottom:2px solid var(--acc-bright);display:inline-block;padding-bottom:2px}
+  .block p,.block li{font-size:.94rem}
+  .block ul,.block ol{margin:6px 0 0;padding-left:19px}
+  .block li{margin:4px 0}
+  .block.full{grid-column:1/-1}
+  .ee{background:var(--bg2);border-radius:10px;padding:12px 14px}
+  .ee h4{color:var(--ink)}
+  .tip{border-left:4px solid var(--acc-bright);background:var(--acc-soft);padding:10px 14px;border-radius:0 10px 10px 0;font-size:.94rem}
+  .tip b{text-transform:uppercase;letter-spacing:.05em;font-size:.8rem}
+
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:4px 16px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:700;padding:10px 0;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:1.02rem}
+  details p,details li{font-size:.95rem}
+  details ul{padding-left:19px}
+
+  .post{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px}
+  .post h3{margin:0 0 6px;font-size:1rem}
+  .post p{white-space:pre-line;font-size:.94rem;color:var(--muted);margin:0 0 12px}
+  .copy-btn{appearance:none;border:none;background:var(--brand);color:#fff;font-weight:700;font-family:"Barlow",sans-serif;padding:10px 18px;border-radius:8px;cursor:pointer;min-height:42px;font-size:.92rem}
+  .copy-btn.done{background:var(--acc-bright);color:#1A0D02}
+  .hidden{display:none !important}
+  .empty{padding:22px;text-align:center;color:var(--muted);font-weight:600;border:1.5px dashed var(--line);border-radius:var(--radius)}
+  footer{margin-top:44px;border-top:2px solid var(--brand);padding-top:16px;color:var(--muted);font-size:.88rem}
+  .kbd{font-weight:700;background:var(--bg2);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font-size:.88em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="stamp">Popnshots4u · Gamers Guides</span>
+      <h1>Black Ops 2<br><span>Zombies</span> — Complete Guide</h1>
+      <p class="hero-sub">Guide 2 of 7 · The 2012 sequel · Treyarch</p>
+      <p class="lede">Every map from the TranZit bus ride to the trenches of Origins: buildables and workbench locations, wonder weapons, full main-quest Easter egg steps for all five story maps, boss fights, and the training routes that hold up on high rounds. BO2 is where Zombies grew up — buildable gear, a shared bank, Double Tap that finally doubles your bullets, and the Victis and Primis storylines colliding. This guide runs burnt orange and black, BO2's own colors, so it never gets mixed up with the other six.</p>
+      <div class="stats">
+        <div class="stat"><b>9</b><span>Maps covered</span></div>
+        <div class="stat"><b>4</b><span>DLC packs</span></div>
+        <div class="stat"><b>5</b><span>Main quest Easter eggs</span></div>
+        <div class="stat"><b>12</b><span>Perk-a-Colas</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toolbar" aria-label="Filter maps">
+    <div class="toolbar-row">
+      <button class="chip" data-filter="all" aria-pressed="true">All maps</button>
+      <button class="chip" data-filter="launch" aria-pressed="false">Launch</button>
+      <button class="chip" data-filter="dlc" aria-pressed="false">DLC</button>
+      <button class="chip" data-filter="survival" aria-pressed="false">Survival</button>
+      <button class="chip" data-filter="ee" aria-pressed="false">Has main Easter egg</button>
+      <div class="search"><input id="q" type="search" placeholder="Search a map, weapon, or perk…" aria-label="Search the guide"></div>
+    </div>
+  </nav>
+
+  <h2>Start Here — What's New in BO2</h2>
+  <p class="section-note">BO2 keeps the classic points economy from BO1 and layers four big systems on top. Everything below applies unless a map card says otherwise.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Buildables &amp; workbenches</h3>
+      <ul>
+        <li><b>Parts are carried one at a time.</b> Pick up a part, take it to a workbench, and build — shields, turrets, traps, and wonder weapons all work this way.</li>
+        <li><b>The Zombie Shield</b> (buildable on most maps) blocks hits from behind and can be re-bought off the bench when it breaks. Build it early, every game.</li>
+        <li><b>Buildables break and wear out.</b> Turbines die, Trample Steams get stomped, the Jet Gun overheats. Plan around replacing them.</li>
+        <li><b>Nav Cards &amp; buildable tables:</b> each story map hides a Nav Card from the previous map — carry them forward to unlock the shared Easter egg steps.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Bank, locker &amp; Double Tap II</h3>
+      <ul>
+        <li><b>The Bank</b> (TranZit, Die Rise &amp; Buried — all three share one account): deposit points in one game, withdraw them in the next — 1,000 points at a time, with a small fee on withdrawal. Banked points are how you fund fast starts.</li>
+        <li><b>The weapon locker / fridge</b> (same three maps, also shared): store a gun at the end of a game and pull it out on any of the three maps next game. Store something Pack-a-Punched.</li>
+        <li><b>Double Tap II</b> replaces the old Double Tap: every trigger pull now fires <b>two bullets for the price of one</b>, plus the fire-rate boost. It is a top-three perk in BO2, not a situational one.</li>
+        <li><b>Persistent upgrades</b> (TranZit / Green Run): hidden stat boosts earned by play — headshot damage, faster revives, stronger boards — shown by a green flash when earned. They can be lost if you play badly.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top:30px">The 12 Perks</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Perk</th><th>Cost</th><th>What it does</th><th>Where it shows up</th></tr></thead>
+    <tbody>
+      <tr><td>Juggernog</td><td>2,500</td><td>Roughly doubles your health — survive 4–5 hits instead of 2–3.</td><td>Every map — first buy</td></tr>
+      <tr><td>Speed Cola</td><td>3,000</td><td>Reload about twice as fast.</td><td>Every map</td></tr>
+      <tr><td>Quick Revive</td><td>500 solo / 1,500 co-op</td><td>Solo: revives you once per purchase (up to 3). Co-op: revives teammates much faster.</td><td>Every map</td></tr>
+      <tr><td>Double Tap II</td><td>2,000</td><td>Fires two bullets per shot plus faster fire rate. The BO2 upgrade over BO1's version.</td><td>Every map</td></tr>
+      <tr><td>Stamin-Up</td><td>2,000</td><td>Move and sprint faster, sprint longer.</td><td>Most maps</td></tr>
+      <tr><td>Mule Kick</td><td>4,000</td><td>Carry a third weapon. Lose the third gun if you go down.</td><td>Most maps</td></tr>
+      <tr><td>Deadshot Daiquiri</td><td>1,500</td><td>Aim assist snaps to the head, tighter hip-fire, no scope sway.</td><td>Most maps</td></tr>
+      <tr><td>Tombstone Soda</td><td>2,000</td><td>On death, choose to respawn next round keeping your perks and guns (or drop a tombstone to recover them). Debuts here.</td><td>TranZit, Nuketown</td></tr>
+      <tr><td>Who's Who</td><td>2,000</td><td>When downed, you spawn as a ghostly double who can revive your own body. Debuts here.</td><td>Die Rise</td></tr>
+      <tr><td>Electric Cherry</td><td>2,000</td><td>Reloading sends out an electric shock that stuns zombies around you — stronger on an empty mag. Debuts here.</td><td>Mob of the Dead</td></tr>
+      <tr><td>Vulture Aid</td><td>3,000</td><td>Zombies drop small point, ammo, and stink-gas pickups; gas clouds hide you, and icons show perks, the box, and wall guns through walls. Debuts here.</td><td>Buried</td></tr>
+      <tr><td>PHD Flopper</td><td>2,000</td><td>No explosive or fall damage; diving to prone makes an explosion.</td><td>Origins (via Der Wunderfizz)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="section-note" style="margin-top:10px">Standard perk limit is 4. Origins' Der Wunderfizz machine sells a random perk for 1,500 and is the only way to push past the normal machine hunt — and finishing Mob of the Dead's or Buried's Easter eggs can award every perk on the map.</p>
+
+  <h2>The Maps</h2>
+  <p class="section-note">In release order — the five story maps first, then the survival maps. Use the filters above to jump around.</p>
+
+  <div id="maps">
+
+  <!-- TRANZIT -->
+  <article class="map" data-cat="launch ee" data-search="tranzit green run bus t.e.d.d. tedd turbine jet gun thrustodyne avogadro denizen nav card tower of babble maxis richtofen cornfield diner power station victis marlton misty russman stuhlinger">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">TRZ</span><span class="pack">Launch</span></div>
+      <div class="map-title"><h3>TranZit</h3><p class="setting">Green Run, Washington · The bus ride across the fog</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapon: Jet Gun</span><span class="tag red">Boss: The Avogadro</span><span class="tag">Difficulty: Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power, the bus &amp; Pack-a-Punch</h4><p>The bus (driven by T.E.D.D.) loops between Bus Depot, Diner, Farm, Power Station, and Town — ride it or run the fog at your own risk. Power is at the <b>Power Station</b>: build the switch at the workbench (circuit board, lever, and a zombie arm from the shed area), then flip it. Pack-a-Punch is in the <b>bank vault in Town</b> — blow the vault doors open with explosives (grenades work) after power is on. That same vault holds the <b>Bank</b> (deposit/withdrawal keys on the wall), and the <b>weapon locker</b> is the fridge inside the Farm house — both systems debut on this map and are shared with Die Rise and Buried. Build the <b>Turbine</b> at the Bus Depot bench (mannequin, fan blade, tail fin) — it powers doors, traps, and perk machines without the main power, and it is the most useful buildable in BO2.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li><b>Denizens</b> leap on your head in the fog — knife them off (5 knives) or stay on the bus and on lit roads.</li><li>Turning the power on wakes the <b>Avogadro</b>, an electric man who spawns in the cornfield and zaps you at range. Knife him to drive him off — shooting barely slows him. Many players simply never turn the power on and run Turbines instead.</li><li>The <b>Jet Gun (Thrustodyne AER4)</b> is built from parts in the tunnel, the diner area, the power station, and the cornfield cabin (Nacht der Untoten easter egg building). It sucks in whole trains and explodes them — but it overheats and breaks, so fire in bursts.</li><li>Train at the <b>Diner</b> parking lot or the Town street loop. The Farm barn is a solid early holdout.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Tower of Babble (pick a side: Maxis or Richtofen)</h4><ol><li>Build the Turbine, turn the power ON at the Power Station, and build the <b>Nav Card table</b> under the transmission tower in the cornfield.</li><li><b>Maxis path:</b> turn the power back OFF. Build the Jet Gun and use it under the tower in the cornfield until it overheats and Maxis confirms the charge. Then place two Turbines at two street-lamp posts and throw an <b>EMP grenade</b> at a lit lamp post to complete the circuit.</li><li><b>Richtofen path:</b> leave the power ON. Trap the Avogadro under the tower (lure him there on a power-surge round), place Turbines under the tower and at lamp posts, and kill zombies beneath the tower to feed it souls while the Avogadro is held there.</li><li>Either path ends with the tower lit in your side's color — blue for Maxis, orange for Richtofen. Your choice carries into Die Rise and Buried, so a regular crew should agree on one side and stick with it across all three maps.</li></ol><p style="margin-top:8px"><b>Song:</b> “Carrion” by Kevin Sherwood — activate the three teddy bears (Bus Depot, Farm house, Town bar area).</p></div>
+    </div>
+  </article>
+
+  <!-- DIE RISE -->
+  <article class="map" data-cat="dlc ee" data-search="die rise great leap forward shanghai skyscraper sliquifier trample steam who's who phd flopper elevators mahjong high maintenance galvaknuckles minion jumping jacks">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">DIE</span><span class="pack">DLC 1 · Revolution</span></div>
+      <div class="map-title"><h3>Die Rise</h3><p class="setting">Crumbling Shanghai skyscrapers · Watch your step</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapon: Sliquifier</span><span class="tag red">Special: Minions (Jumping Jacks)</span><span class="tag">Difficulty: Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power, elevators &amp; Pack-a-Punch</h4><p>You start on a rooftop and drop into the building — power is reached by riding the <b>elevator shafts</b> down through the ruined tower (the key spawns in the shaft areas; elevators move on their own, so time your rides). Perks ride elevators too: machines sit in shafts and arrive on different floors each visit. Pack-a-Punch is on the <b>roof of the second building</b>, reached across the Trample Steam gap. The <b>Bank</b> here is a pair of shower stalls just outside the power room, and the <b>weapon locker</b> is the blue fridge next to them — both are the same shared systems from TranZit, and they carry into Buried too.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li><b>Falling is the real boss.</b> The map is holes, shafts, and ledges. Learn the safe drops; Who's Who exists on this map for a reason.</li><li>The <b>Sliquifier</b> is built at the bench in the sweatshop area (parts around the starting building and the power floor). It coats the floor in slippery goo and melts groups — upgraded, it carries high rounds almost alone.</li><li>The <b>Trample Steam</b> (buildable) flings zombies — and you. Set one facing the roof gap to cross safely, and on ledges as a trap.</li><li>Minion rounds (leaping crawlers) every few rounds — the last one drops a Max Ammo or a free perk. Train on the <b>Buddha room</b> floor once you reach it: the widest flat loop on the map.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — High Maintenance (continues your TranZit side)</h4><ol><li>Turn on power and get all four players standing on the <b>four golden symbols</b> in the elevator shafts at the same time until they lock in.</li><li>Build the Sliquifier and coat the <b>floor symbols</b> in the starting building; then place Trample Steams on the dragon symbols so flung zombies land on the marked pads and charge them.</li><li>Shoot the orbs free from the two rooftop <b>dragons' mouths</b>, then use the Galvaknuckles to punch the four <b>tower pillars</b> in the order shown by the Mahjong tiles hidden around the map (the correct order matches the tile set you found).</li><li>Finish the final charge in the Buddha room area as your side's voice directs. Reward: a <b>free perk slot reward / all-perks drop</b> depending on path, plus the story beat that sets up Buried. As with TranZit, Maxis and Richtofen paths have different steps mid-way — follow the voice you chose.</li></ol><p style="margin-top:8px"><b>Song:</b> “We All Fall Down” by Kevin Sherwood — activate the three teddy bears.</p></div>
+    </div>
+  </article>
+
+  <!-- MOB OF THE DEAD -->
+  <article class="map" data-cat="dlc ee" data-search="mob of the dead alcatraz prison blundergat acid gat hell's retriever redeemer brutus warden afterlife electric cherry golden spork pop goes the weasel plane golden gate weasel sal finn billy arlington">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">MOB</span><span class="pack">DLC 2 · Uprising</span></div>
+      <div class="map-title"><h3>Mob of the Dead</h3><p class="setting">Alcatraz Island prison, 1930s · The fan-favorite</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapons: Blundergat + Hell's Retriever</span><span class="tag red">Boss: Brutus the Warden</span><span class="tag">Difficulty: Medium–Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Afterlife, power &amp; Pack-a-Punch</h4><p>There is no power switch. Instead, dying (or using a life token) sends you into <b>Afterlife mode</b>: as a ghost you shock generators to power doors, perk machines, and the plane parts. You get one Afterlife per round plus earned extras — spend them wisely. Pack-a-Punch is on the <b>Golden Gate Bridge</b>, reached by building the plane on the roof (five parts, each collected in Afterlife: fuel, rigging, engine, uniforms, controls) and flying it across. The plane needs refueling for later trips.</p></div>
+      <div class="block"><h4>Brutus &amp; the gear</h4><ul><li><b>Brutus</b> storms in every few rounds, locks down perk machines and the box, and smashes buildables. Headshots stagger him; killing him drops a power-up. Don't let him lock Juggernog mid-fight.</li><li>Feed zombies to the three glowing <b>Cerberus heads</b> (infirmary, cafeteria, docks) to unlock the <b>Hell's Retriever</b> tomahawk in the lava pit — it one-kills into the mid-teens and picks up drops from range.</li><li>The <b>Blundergat</b> is earned by finding five skulls with the Retriever (on posts and rooftops around the prison), then collecting it from the Warden's office. Build the <b>Acid Gat kit</b> at a bench to convert it into an acid-spewing monster; the upgraded Magma Gat is one of BO2's best guns.</li><li>The <b>Golden Spork</b> — the strongest melee in the game — is hidden behind a poster in the cafeteria area and a spoon-retrieval sequence in the infirmary. Worth it: it one-hit kills to round 30+.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Pop Goes the Weasel</h4><ol><li>Collect all five plane parts using Afterlife shocks, build the plane, and fly to the Golden Gate Bridge. Use the electric chairs to return.</li><li>Refuel and fly <b>three times total</b>, completing the Retriever and Blundergat side quests between trips.</li><li>Enter Afterlife on the bridge and read the <b>prisoner numbers</b> shown at the cell block number pad (by the docks) — enter the three codes into the keypad in the cell block while a teammate guards you.</li><li>Final step: on the bridge, the team fights a wave of Brutus spawns. The player playing <b>Weasel (Arlington)</b> must stay in Afterlife at the end to <b>break the cycle</b> — or revive and let the cycle continue. Breaking the cycle is the true ending; continuing it lets the game play on.</li></ol><p style="margin-top:8px"><b>Song:</b> “Where Are We Going” by Kevin Sherwood (feat. Malukah) — activate the three teddy bears / the 935 bottles. Johnny Cash's “Rusty Cage” plays in the opening area radio.</p></div>
+    </div>
+  </article>
+
+  <!-- BURIED -->
+  <article class="map" data-cat="dlc ee" data-search="buried resolution 1295 underground western town paralyzer time bomb leroy giant subsonic resonator turbine vulture aid bank chalk mined games haunted mansion maze wisp">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">BUR</span><span class="pack">DLC 3 · Vengeance</span></div>
+      <div class="map-title"><h3>Buried</h3><p class="setting">Buried Old West town, Resolution 1295 · Leroy carries</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapons: Paralyzer + Time Bomb</span><span class="tag red">Helper: Leroy (the Giant)</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power, Leroy &amp; Pack-a-Punch</h4><p>You drop through the processing tunnels into the town. There is no power switch for the map itself — machines run on their own — but everything important runs through <b>Leroy</b>, the giant locked in the jail. Free him with the key, then manage him: give him <b>booze</b> (from the saloon) and he'll smash the debris blocking buildings; give him <b>candy</b> (from the candy store) and he'll attack zombies, carry buildables to benches, or hold a crawler for you. Pack-a-Punch sits in the <b>haunted mansion's</b> maze-side area — Leroy smashing the fountain debris opens the fast route. The Bank and weapon locker return here (the locker is in the General Store), shared with TranZit and Die Rise.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li>The <b>Paralyzer</b> (box wonder weapon) slows zombies to a crawl in a beam and never runs out of ammo — it overheats instead. It is the best crowd-control gun in BO2 and lets you fly briefly by aiming down.</li><li>The <b>Time Bomb</b> (buildable) records the round state — detonate it to rewind everyone to that moment, guns, points, and all. Set one before every risky step.</li><li><b>Chalk outlines:</b> grab chalk pieces around town and draw wall-buy outlines where you want them — you choose your own wall weapons, and drawing all of them pays a points bonus.</li><li>The <b>Subsurface Resonator + Turbine</b> combo at the town entrance mulches whole trains hands-free — the classic Buried high-round setup. Train in the saloon street or by the church.</li><li>The mansion ghosts drain 100 points per touch — sprint through, don't fight them.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Mined Games (the Victis finale)</h4><ol><li>Free Leroy, build the Nav Card table in the courthouse, and build the Time Bomb. Have Leroy smash the fountain and the mansion-route debris.</li><li>Follow the <b>wisp</b>: charge it at the electric switch in the tunnels, then use Vulture Aid's glow to track it through the hedge maze to the next switch — repeat as it relocates.</li><li>Place the Time Bomb by the fountain, go back, and shoot the four glowing <b>orbs</b> (mansion, jail, church, and saloon areas) with the Paralyzer in the past state — then return and hit the switch in the courthouse.</li><li>Final step: all four players take the shooting-gallery challenge at the saloon targets — every target must be hit in the sequence. Reward: <b>all perks on the map, permanently for the game</b>, and the Victis story ends on your chosen side (Maxis or Richtofen, decided by your TranZit/Die Rise choices).</li></ol><p style="margin-top:8px"><b>Song:</b> “Always Running” by Kevin Sherwood (feat. Malukah) — activate the three teddy bears.</p></div>
+    </div>
+  </article>
+
+  <!-- ORIGINS -->
+  <article class="map" data-cat="dlc ee" data-search="origins excavation site france 1918 staffs fire ice lightning wind panzer soldat giant robots der wunderfizz maxis drone g-strike little lost girl primis richtofen dempsey nikolai takeo crazy place">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">ORI</span><span class="pack">DLC 4 · Apocalypse</span></div>
+      <div class="map-title"><h3>Origins</h3><p class="setting">WWI France, 1918 · Giant robots &amp; the four staffs</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapons: The 4 Elemental Staffs</span><span class="tag red">Boss: Panzer Soldat</span><span class="tag">Difficulty: Very Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Generators, robots &amp; Pack-a-Punch</h4><p>No single power switch: six <b>generators</b> power their local areas, and zombies will attack active generators to shut them down — defend them or re-capture them. Capture all six to unlock the Pack-a-Punch area under the <b>Excavation Site</b>. Three <b>giant robots</b> (Odin, Thor, Freya) stomp across the map on a cycle — their feet kill you, but stepping in the glowing foot at the right moment rides you inside to a staff part room. <b>Der Wunderfizz</b> sells a random perk for 1,500 — the only place PHD Flopper appears in BO2. Dig spots with the shovel (golden shovel after enough digs) for parts, guns, and the occasional zombie ambush.</p></div>
+      <div class="block"><h4>Panzer Soldat &amp; the staffs</h4><ul><li>The <b>Panzer Soldat</b> drops in from round 8 onward — a flamethrower armored boss whose claw drags you in. Aim for the glowing fuel tank and head; killing him drops staff parts and power-ups. He returns every few rounds, sometimes two at once.</li><li>Each <b>staff</b> is built from three parts plus an elemental crystal fetched from the Crazy Place (opened by powering the four ritual pedestals): Fire (red), Ice (blue), Lightning (purple), Wind (yellow).</li><li>Every staff <b>upgrades</b> through its own puzzle — solving a code in the Crazy Place, a challenge around the map (fill soul chests, shoot floating orbs, align the rings), then charging it on its Crazy Place pedestal. Upgraded staffs are the strongest weapons in all of BO2.</li><li>Build the <b>Maxis Drone</b> (parts around the site) — it revives teammates, kills zombies, and is required for the Easter egg. The <b>G-Strike</b> beacon calls in an airstrike that clears any train, anywhere.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Little Lost Girl</h4><ol><li>Open the Crazy Place and build all four staffs. Upgrade <b>all four</b> — each has a Crazy Place puzzle, an open-world challenge, and a soul-charge on its pedestal.</li><li>Place the upgraded staffs in their stands: three go inside the giant robots' feet (match staff to robot as the voices describe) and one in the Crazy Place.</li><li>Throw a <b>G-Strike</b> at the glowing seal on the ground by the Excavation Site to crack it open, then melee the zombies pouring out with the <b>elemental fists</b> until the portal charge completes.</li><li>Release the <b>Maxis Drone</b> into the open portal. Reward: the <b>ending cutscene</b> — Samantha is freed, and the Primis crew's story rolls straight into Black Ops 3.</li></ol><p style="margin-top:8px"><b>Songs:</b> “Archangel” by Elena Siegman, Kevin Sherwood &amp; Malukah (three teddy bears) and Avenged Sevenfold's “Shepherd of Fire” as the intro theme.</p></div>
+    </div>
+  </article>
+
+  <!-- NUKETOWN -->
+  <article class="map" data-cat="dlc survival" data-search="nuketown zombies mannequin population counter perks fall from sky pack a punch drop bonus map nuketown 2025">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">NUKE</span><span class="pack">Bonus Map</span></div>
+      <div class="map-title"><h3>Nuketown Zombies</h3><p class="setting">Nuketown 2025, Nevada · The perks fall from the sky</p></div>
+    </div>
+    <div class="tags"><span class="tag">Survival · No main quest</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>How it plays</h4><p>The multiplayer classic, overrun. There are no perk machines on the ground at the start — as the <b>population counter</b> on the Nuketown sign ticks down with your kills, perk machines and eventually the <b>Pack-a-Punch machine drop from the sky</b> into random yards. Which perks you get, and when, is luck — a game might give you Juggernog at round 6 or round 16. The Mystery Box sits in one of the back yards; the houses' back gardens are your training loops.</p></div>
+      <div class="block"><h4>Best strategy</h4><ul><li>Train in the <b>cul-de-sac and back yards</b> — the map is small, so keep the loop wide and never get pinned in a house.</li><li>Shoot the heads off the mannequins for the map's hidden musical easter egg flavor, and check the sign counter to know how close the next drop is.</li><li>When a machine drops, buy Juggernog first no matter the round — drops are not guaranteed to come back.</li><li>At round 25 the counter hits zero and the drops speed up — the late game is a perk-rich sprint.</li></ul></div>
+    </div>
+  </article>
+
+  <!-- BUS DEPOT -->
+  <article class="map" data-cat="launch survival" data-search="bus depot green run survival no perks no pack a punch turbine workbench lava">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">DEPOT</span><span class="pack">Launch · Green Run</span></div>
+      <div class="map-title"><h3>Bus Depot — Survival</h3><p class="setting">Green Run bus station · The stripped-down challenge</p></div>
+    </div>
+    <div class="tags"><span class="tag">No Perks · No Pack-a-Punch</span><span class="tag">Difficulty: Hard (by design)</span></div>
+    <div class="map-body">
+      <div class="block"><h4>How it plays</h4><p>Just the TranZit starting area as a standalone survival map: the depot interior, the lava-cracked parking lot, the box, and wall guns. There are <b>no perk machines and no Pack-a-Punch</b> here — the BO2 answer to Nacht der Untoten. The Turbine workbench is here, so you can still build and carry a Turbine out the door.</p></div>
+      <div class="block"><h4>Best strategy</h4><ul><li>Hold the depot's back room early, then move outside and train wide around the bus before the lava lanes funnel you.</li><li>The MP5 and Olympia off the wall, plus box luck, are your whole arsenal — conserve ammo, knife the first rounds clean.</li><li>Round 15+ with no Juggernog is the real test — one mistake ends it, so keep a crawler before every box spin.</li></ul></div>
+    </div>
+  </article>
+
+  <!-- FARM -->
+  <article class="map" data-cat="launch survival" data-search="farm green run survival grief barn house juggernog mystery box claymores">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">FARM</span><span class="pack">Launch · Green Run</span></div>
+      <div class="map-title"><h3>Farm — Survival &amp; Grief</h3><p class="setting">Green Run farmstead · Barn, house, and open ground</p></div>
+    </div>
+    <div class="tags"><span class="tag">Perks + Box · No Pack-a-Punch</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>How it plays</h4><p>The TranZit farm stop as its own map: barn, farmhouse, and the fields between. Perk machines and the Mystery Box are here, but <b>no Pack-a-Punch</b> — your guns stay stock, so ammo discipline and traps do the heavy lifting. Farm also hosts <b>Grief mode</b>: two teams of four share the map, can't shoot each other, and win by being the last team standing — grief the other team's revives and box spins at your own risk.</p></div>
+      <div class="block"><h4>Best strategy</h4><ul><li>The barn loft is the classic holdout — one player on the stairs, the rest covering the windows and the drop-down.</li><li>Open ground between the house and barn is your training loop once the barn gets hot.</li><li>In Grief, a downed enemy you <em>don't</em> revive is worth more than any kill — body-block their teammates' revive attempts.</li></ul></div>
+    </div>
+  </article>
+
+  <!-- TOWN -->
+  <article class="map" data-cat="launch survival" data-search="town green run survival grief pack a punch bank vault juggernog bar lava semtex stamin-up">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">TOWN</span><span class="pack">Launch · Green Run</span></div>
+      <div class="map-title"><h3>Town — Survival &amp; Grief</h3><p class="setting">Green Run town center · Lava streets, full perk set</p></div>
+    </div>
+    <div class="tags"><span class="tag">Perks + Pack-a-Punch</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>How it plays</h4><p>The biggest of the Green Run survival maps and the most complete: the full perk set, the Mystery Box, and Pack-a-Punch inside the <b>bank vault</b> (blow the doors with explosives, same as TranZit). Lava cracks split the streets, so routes matter. Town also runs <b>Grief mode</b> for two teams of four.</p></div>
+      <div class="block"><h4>Best strategy</h4><ul><li>Train the big loop around the bar and the bank — wide streets, two exits everywhere, and the lava lanes funnel zombies into lines.</li><li>Juggernog is in the bar area; Stamin-Up makes the lava jumps painless and is a legit second buy here.</li><li>The vault is a deathtrap as a camp spot — upgrade and get out.</li></ul></div>
+      <div class="block full"><div class="tip"><b>Best of the three:</b> &nbsp;If you only play one Green Run survival map, make it Town — it's the only one with perks <em>and</em> Pack-a-Punch, and it's where most BO2 high-round survival records were set.</div></div>
+    </div>
+  </article>
+
+  </div>
+  <div id="empty" class="empty hidden">No map matches that search — try a map name, a wonder weapon, or a perk.</div>
+
+  <h2>High-Round Rules That Work on Every Map</h2>
+  <div class="grid2">
+    <div class="card"><h3>Build first, train second</h3><p>BO2 high rounds are won at the workbench. Get the Zombie Shield built, your map's crowd-control buildable running (Trample Steam, Resonator, Turbine traps), and your wonder weapon upgraded before you settle into a training loop. Past round 30, run a loop with two exits, let the whole wave spawn in, then turn and clear the train with your strongest gun — upgraded staffs, the Sliquifier, and the Acid Gat exist precisely for that turn-and-clear moment.</p></div>
+    <div class="card"><h3>Downs, bosses &amp; recovery</h3><ul><li>Brutus and the Panzer Soldat get <em>more</em> frequent, not less — keep a dedicated boss plan (Electric Cherry reloads, a stored G-Strike, a Time Bomb snapshot) instead of improvising.</li><li>After a revive: Juggernog first, then shield, then perks. On TranZit, Die Rise, and Buried, your <b>banked points</b> make recovery cheap — bank when you're rich, not when you're desperate.</li><li>Call out drops before touching them. A Max Ammo grabbed before reloads, or a Carpenter during a boss wave, loses more rounds than any zombie.</li><li>Save a crawler before Easter egg steps, plane trips, and robot-foot rides — every BO2 quest step assumes you have time.</li></ul></div>
+  </div>
+
+  <h2>Facebook Posts — Ready to Copy</h2>
+  <p class="section-note">One post per walkthrough, written for the Popnshots4u page. Tap Copy and paste straight into Facebook — plain text only, nothing extra attached.</p>
+  <div id="posts">
+    <div class="post"><h3>Series announcement</h3><p>GUIDE 2 OF 7 IS LIVE 🧟🔥
+The COMPLETE Black Ops 2 Zombies guide — every map, every Easter egg, every wonder weapon, in release order.
+TranZit → Die Rise → Mob of the Dead → Buried → Origins, plus Nuketown and the Green Run survival maps.
+Full guide is live on the site — link in the comments. Which BO2 map is your all-time favorite?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>TranZit</h3><p>BO2 ZOMBIES — TRANZIT 🚌🧟
+All aboard. Ride T.E.D.D.'s bus through the fog, build the Turbine, and decide: Maxis or Richtofen?
+Tower of Babble, both paths, step by step — plus the Jet Gun build and how to handle the Avogadro. Full walkthrough on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Die Rise</h3><p>BO2 ZOMBIES — DIE RISE 🏙️🧟
+Skyscrapers, elevator shafts, and the Sliquifier. Mind the drops — falling kills more players than zombies do on this one.
+High Maintenance egg steps + Buddha room training guide, live on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Mob of the Dead</h3><p>BO2 ZOMBIES — MOB OF THE DEAD 🔒🧟
+Alcatraz. Afterlife mode, the Blundergat, Hell's Retriever, and Brutus himself.
+Full Pop Goes the Weasel walkthrough + Golden Spork guide on the site now. Best BO2 map ever — yes or no?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Buried</h3><p>BO2 ZOMBIES — BURIED 🤠🧟
+An Old West town, a haunted mansion, and Leroy — the giant who smashes, carries, and holds your crawler if you feed him candy.
+Paralyzer + Time Bomb guide and the full Mined Games egg, live on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Origins</h3><p>BO2 ZOMBIES — ORIGINS ⚔️🧟
+Giant robots, the Panzer Soldat, and the four elemental staffs. The hardest, biggest, best finale BO2 could ask for.
+Little Lost Girl, step by step, plus every staff build and upgrade — on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Nuketown Zombies</h3><p>BO2 ZOMBIES — NUKETOWN ☢️🧟
+The perks literally fall from the sky. Watch the population counter, pray for an early Juggernog, and train the cul-de-sac.
+Full Nuketown survival guide on the site now. What's the latest round you've survived here?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Green Run Survival — Bus Depot, Farm &amp; Town</h3><p>BO2 ZOMBIES — GREEN RUN SURVIVAL MAPS 🧟🔥
+Bus Depot (no perks, no Pack-a-Punch — pure pain), Farm, and Town with the full setup and Grief mode.
+All three broken down in the guide on the site now. Which one's your high-round pick?</p><button class="copy-btn">Copy post</button></div>
+  </div>
+
+  <h2>Quick Answers</h2>
+  <details><summary>Which BO2 map should a beginner start on?</summary><p>Mob of the Dead. It teaches Afterlife, buildables, and wonder-weapon side quests on a fair map with a forgiving training loop by the docks and cafeteria. Then Buried — Leroy and the Paralyzer make it the friendliest of the big quest maps. Save Origins for last.</p></details>
+  <details><summary>Maxis or Richtofen — which side should I pick?</summary><p>Whichever your regular crew picks — the choice carries across TranZit, Die Rise, and Buried, and mixing sides mid-story blocks steps. Mechanically the endings differ in Buried (Mined Games resolves differently per side), but neither side is harder overall. First-time crews usually run Maxis: the TranZit Maxis path is the simpler of the two.</p></details>
+  <details><summary>What is the best wonder weapon in BO2?</summary><p>The upgraded <b>Ice Staff</b> and <b>Fire Staff</b> on Origins are the strongest weapons in the game, full stop. Outside Origins: the Acid Gat / Magma Gat on Mob of the Dead and the Sliquifier on Die Rise carry high rounds, and the Paralyzer on Buried is the best pure crowd-control tool — it never needs ammo.</p></details>
+  <details><summary>How do the bank and weapon locker work?</summary><p>On TranZit, Die Rise, and Buried, the bank lets you deposit points (in 1,000-point chunks) that persist between games on those maps — withdraw them in a later game for a fast start, minus a small fee; all three maps share the one account. The weapon locker/fridge stores one gun when you interact with it, and you can pull that same gun out in a future game on any of the three maps. Store something Pack-a-Punched.</p></details>
+
+  <footer>
+    <p><b>Popnshots4u · Gamers Guides — Guide 2 of 7.</b> This page is BO2 only, in burnt orange &amp; black. The rest of the set each get their own page in their own colors: BO1 in olive &amp; gold, Black Ops Cold War in ice blue &amp; Soviet red, BO4 in blood red, MW3 Zombies in military green &amp; tan, plus Fortnite and Minecraft — so the seven guides never get mixed up.</p>
+    <p>Guide covers Black Ops II (2012) Zombies including Revolution, Uprising, Vengeance, and Apocalypse DLC, Nuketown Zombies, and the Green Run survival maps. Easter egg steps are condensed routes — the Maxis/Richtofen split means mid-quest steps differ by the side your crew chose in TranZit.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var maps = Array.prototype.slice.call(document.querySelectorAll('.map'));
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var active = 'all';
+  function apply(){
+    var term = (q.value || '').toLowerCase().trim();
+    var shown = 0;
+    maps.forEach(function(m){
+      var catOk = active === 'all' || m.getAttribute('data-cat').split(' ').indexOf(active) !== -1;
+      var text = (m.textContent + ' ' + (m.getAttribute('data-search') || '')).toLowerCase();
+      var qOk = !term || text.indexOf(term) !== -1;
+      var show = catOk && qOk;
+      m.classList.toggle('hidden', !show);
+      if (show) shown++;
+    });
+    empty.classList.toggle('hidden', shown !== 0);
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      chips.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      c.setAttribute('aria-pressed','true');
+      active = c.getAttribute('data-filter');
+      apply();
+    });
+  });
+  q.addEventListener('input', apply);
+
+  document.querySelectorAll('.post').forEach(function(post){
+    var btn = post.querySelector('.copy-btn');
+    var text = post.querySelector('p').textContent;
+    btn.addEventListener('click', function(){
+      function done(){
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('done');
+        setTimeout(function(){ btn.textContent = 'Copy post'; btn.classList.remove('done'); }, 2200);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch(e) { btn.textContent = 'Select the text above to copy'; }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
