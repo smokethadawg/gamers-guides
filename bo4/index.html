@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Complete BO4 Zombies Guide — Every Map, Easter Egg & Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F1EFEF; --bg2:#E7E0E1; --panel:#FBF8F8; --panel2:#FFFFFF;
+    --ink:#1D1416; --muted:#6E585D; --line:#D9CACE;
+    --brand:#A31621; --brand-d:#7E0F18; --brand-x:#130A0C;
+    --acc:#C8102E; --acc-bright:#D92336; --acc-soft:#F8DEE1;
+    --red:#8C1D2F; --steel:#4A4448;
+    --shadow:0 10px 30px rgba(50,5,10,.16);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0D0A0B; --bg2:#171114; --panel:#1C1518; --panel2:#251B1F;
+      --ink:#F4E9EA; --muted:#C6A9AD; --line:#3D282D;
+      --brand:#E5323E; --brand-d:#FF707A; --brand-x:#070304;
+      --acc:#FF3B47; --acc-bright:#FF5560; --acc-soft:#3B1B20;
+      --red:#E07A85; --steel:#A8A3A6;
+      --shadow:0 10px 30px rgba(0,0,0,.55);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55;font-size:16px}
+  button,[role="button"],select,summary,input:not([type="checkbox"],[type="radio"]){min-height:2.25rem}
+  a{color:var(--brand-d)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 18px 56px}
+
+  /* HERO */
+  .hero{background:var(--brand-x);color:#F4E9EA;margin:0 -18px;padding:0;position:relative;overflow:hidden}
+  .hero-inner{max-width:1080px;margin:0 auto;padding:34px 18px 28px;position:relative;z-index:1}
+  .hero::after{content:"IV";position:absolute;right:6px;top:-30px;font-family:"Oswald",sans-serif;font-weight:700;font-size:210px;line-height:1;color:rgba(217,35,54,.16);letter-spacing:-.02em;pointer-events:none}
+  .stamp{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--acc-bright);color:#FF707A;font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.82rem;padding:6px 12px;border-radius:4px}
+  .stamp::before{content:"";width:8px;height:8px;background:var(--acc-bright);border-radius:50%}
+  h1{font-family:"Oswald",sans-serif;font-weight:700;text-transform:uppercase;line-height:.95;letter-spacing:.01em;font-size:clamp(2.4rem,7vw,4.4rem);margin:16px 0 6px;color:#fff}
+  h1 span{color:#FF3B47}
+  .hero-sub{font-family:"Barlow Condensed",sans-serif;font-size:clamp(1.15rem,3vw,1.5rem);letter-spacing:.06em;text-transform:uppercase;color:#D8B4B8;margin:0 0 14px}
+  .hero p.lede{max-width:680px;color:#E8D8DA;font-size:1.02rem;margin:0 0 20px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:680px}
+  .stat{border:1px solid rgba(244,233,234,.22);border-top:3px solid #FF3B47;padding:10px 12px;background:rgba(255,255,255,.04)}
+  .stat b{display:block;font-family:"Oswald",sans-serif;font-size:1.55rem;line-height:1;color:#fff}
+  .stat span{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#C6A9AD;font-weight:600}
+  @media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* NAV */
+  .toolbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:2px solid var(--brand);padding:10px 0;margin-bottom:22px}
+  .toolbar-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip{appearance:none;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font-family:"Barlow",sans-serif;font-weight:600;font-size:.9rem;padding:9px 14px;border-radius:999px;cursor:pointer;min-height:40px}
+  .chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+  .chip:focus-visible,.copy-btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--acc-bright);outline-offset:2px}
+  .search{flex:1 1 180px;min-width:160px}
+  .search input{width:100%;padding:10px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--panel2);color:var(--ink);font:inherit;font-size:.95rem;min-height:40px}
+
+  h2{font-family:"Oswald",sans-serif;text-transform:uppercase;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.02em;margin:38px 0 4px;display:flex;align-items:center;gap:12px}
+  h2::before{content:"";width:10px;height:26px;background:var(--acc-bright);flex:none}
+  .section-note{color:var(--muted);margin:0 0 16px;max-width:720px}
+  h3{font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.02em}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 8px;font-size:1.05rem}
+  .card p,.card li{font-size:.96rem}
+  .card ul{margin:8px 0 0;padding-left:19px}
+  .card li{margin:5px 0}
+
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.94rem}
+  th{font-family:"Barlow Condensed",sans-serif;letter-spacing:.07em;text-transform:uppercase;text-align:left;background:var(--brand);color:#fff;padding:10px 12px;font-size:.9rem}
+  td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+  td:first-child{font-weight:700;white-space:nowrap}
+  .table-scroll{overflow-x:auto;border-radius:var(--radius)}
+  @media(max-width:640px){
+    .table-scroll table{min-width:0}
+    .table-scroll thead{display:none}
+    .table-scroll tr{display:block;border-top:1px solid var(--line);padding:8px 0}
+    .table-scroll td{display:block;border-top:none;padding:4px 12px;white-space:normal}
+    .table-scroll td:first-child{font-family:"Oswald",sans-serif;text-transform:uppercase}
+  }
+
+  /* MAP CARDS */
+  .map{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px}
+  .map-head{display:flex;gap:0;flex-wrap:wrap}
+  .map-badge{flex:none;width:108px;min-height:108px;background:var(--brand-d);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 8px}
+  .map-badge .abbr{font-family:"Oswald",sans-serif;font-weight:700;font-size:1.7rem;line-height:1}
+  .map-badge .pack{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acc-soft);margin-top:6px;font-weight:700}
+  @media(prefers-color-scheme:dark){.map-badge{background:#5E0A11}}
+  .map-title{flex:1 1 260px;padding:16px 18px 8px}
+  .map-title h3{margin:0;font-size:1.45rem;line-height:1.1}
+  .map-title .setting{color:var(--muted);font-weight:600;margin:4px 0 0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 14px 18px;margin-left:108px}
+  @media(max-width:560px){.tags{margin-left:0}.map-badge{width:84px;min-height:84px}.map-badge .abbr{font-size:1.3rem}}
+  .tag{font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--line);background:var(--bg2);padding:4px 9px;border-radius:999px}
+  .tag.hot{border-color:var(--brand);color:var(--brand);background:var(--acc-soft)}
+  .tag.red{border-color:var(--red);color:var(--red)}
+  .map-body{padding:0 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.map-body{grid-template-columns:1fr}}
+  .block h4{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.08em;font-size:.92rem;margin:0 0 6px;color:var(--brand-d);border-bottom:2px solid var(--acc-bright);display:inline-block;padding-bottom:2px}
+  .block p,.block li{font-size:.94rem}
+  .block ul,.block ol{margin:6px 0 0;padding-left:19px}
+  .block li{margin:4px 0}
+  .block.full{grid-column:1/-1}
+  .ee{background:var(--bg2);border-radius:10px;padding:12px 14px}
+  .ee h4{color:var(--ink)}
+  .tip{border-left:4px solid var(--acc-bright);background:var(--acc-soft);padding:10px 14px;border-radius:0 10px 10px 0;font-size:.94rem}
+  .tip b{text-transform:uppercase;letter-spacing:.05em;font-size:.8rem}
+
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:4px 16px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:700;padding:10px 0;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:1.02rem}
+  details p,details li{font-size:.95rem}
+  details ul{padding-left:19px}
+
+  .post{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px}
+  .post h3{margin:0 0 6px;font-size:1rem}
+  .post p{white-space:pre-line;font-size:.94rem;color:var(--muted);margin:0 0 12px}
+  .copy-btn{appearance:none;border:none;background:var(--brand);color:#fff;font-weight:700;font-family:"Barlow",sans-serif;padding:10px 18px;border-radius:8px;cursor:pointer;min-height:42px;font-size:.92rem}
+  .copy-btn.done{background:var(--acc-bright);color:#1A0508}
+  .hidden{display:none !important}
+  .empty{padding:22px;text-align:center;color:var(--muted);font-weight:600;border:1.5px dashed var(--line);border-radius:var(--radius)}
+  footer{margin-top:44px;border-top:2px solid var(--brand);padding-top:16px;color:var(--muted);font-size:.88rem}
+  .kbd{font-weight:700;background:var(--bg2);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font-size:.88em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="stamp">Popnshots4u · Gamers Guides</span>
+      <h1>Black Ops 4<br><span>Zombies</span> — Complete Guide</h1>
+      <p class="hero-sub">Guide 4 of 7 · The 2018 double-story season · Treyarch</p>
+      <p class="lede">Every map from the gladiator pit of IX to the frozen lighthouse of Tag der Toten: wonder weapons, bosses, and full main-quest Easter egg steps for all eight maps. BO4 is the experimental one — no Juggernog, perks you pick yourself before the match, elixirs instead of GobbleGums, and two full storylines running side by side: the brand-new Chaos crew hunting the Prima Materia, and the Aether story that started in 2008 finally reaching its end. This guide runs blood red and charcoal, BO4's own colors, so it never gets mixed up with the other six.</p>
+      <div class="stats">
+        <div class="stat"><b>8</b><span>Maps covered</span></div>
+        <div class="stat"><b>2</b><span>Storylines — Chaos &amp; Aether</span></div>
+        <div class="stat"><b>8</b><span>Main quest Easter eggs</span></div>
+        <div class="stat"><b>18</b><span>Perk-a-Colas</span></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toolbar" aria-label="Filter maps">
+    <div class="toolbar-row">
+      <button class="chip" data-filter="all" aria-pressed="true">All maps</button>
+      <button class="chip" data-filter="launch" aria-pressed="false">Launch</button>
+      <button class="chip" data-filter="dlc" aria-pressed="false">DLC</button>
+      <button class="chip" data-filter="chaos" aria-pressed="false">Chaos story</button>
+      <button class="chip" data-filter="aether" aria-pressed="false">Aether story</button>
+      <button class="chip" data-filter="ee" aria-pressed="false">Has main Easter egg</button>
+      <div class="search"><input id="q" type="search" placeholder="Search a map, weapon, or perk…" aria-label="Search the guide"></div>
+    </div>
+  </nav>
+
+  <h2>Start Here — What's New in BO4</h2>
+  <p class="section-note">BO4 rebuilds the Zombies formula more than any other game in the set. Four systems change everything — learn these first, because every map card below assumes them.</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Create-a-Class &amp; special weapons</h3>
+      <ul>
+        <li><b>You build your loadout before the match:</b> starting weapon, four perks, four elixirs, one talisman, and one <b>special weapon</b> — a powered signature weapon (katana, gravity spikes, healing staff and more) that charges up as you score kills and is your panic button when a train gets too close.</li>
+        <li><b>There is no Juggernog.</b> Base health was raised to compensate (200 after the big tuning update) and it regenerates — survival now comes from your shield, your special weapon, and perks like Dying Wish and Winter's Wail instead of a health perk.</li>
+        <li><b>Points pay per kill, not per hit.</b> Headshot and knife kills pay a bonus. The old "shoot legs for points" economy is gone — kill fast, knife early rounds clean.</li>
+        <li><b>Pack-a-Punch stacks.</b> Re-Pack a gun to raise its damage tier (up to five tiers), and buy ammo for a Pack-a-Punched gun straight from the machine. High rounds are built on re-Packing, not box luck.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Elixirs, talismans &amp; the extra modes</h3>
+      <ul>
+        <li><b>Elixirs replace GobbleGums.</b> Equip four before the match. <b>Classic</b> elixirs are unlimited with a cooldown; Rare, Epic and Legendary elixirs are consumables you brew in the Laboratory with Nebulium Plasma earned in-game. Perkaholic, Cache Back and Temporal Gift are the chase legendaries.</li>
+        <li><b>Talismans</b> are one-use, one-per-match starting bonuses — extra starting points, a discounted first box spin, your special weapon pre-charged, and similar head starts. Equip one, it burns when the match starts.</li>
+        <li><b>Difficulty tiers:</b> Casual, Normal, Hardcore and Realistic change zombie health and speed. Easter eggs require <b>Normal or higher</b>. Solo players can also add AI teammates in custom games.</li>
+        <li><b>Gauntlets</b> are 30-round challenge runs on every map — survive scripted rule changes round after round, and three strikes ends the run. <b>Rush</b> is a competitive points race on the same maps. Both are separate from the main quests below.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top:30px">The 18 Perks — You Pick Your Four</h2>
+  <p class="section-note">BO4's biggest change: the game doesn't choose your perks, you do. Before the match you assign four perks to the four slots — <b>Brew</b> (near spawn), <b>Cola</b>, <b>Soda</b> and <b>Tonic</b>. On Aether maps those slots are machines; on Chaos maps they're god statues. Prices climb per purchase — 1,500 / 3,000 / 4,500 / 6,000 — no matter which perk sits in the slot. The perk you place in the <b>fourth slot</b> is your modifier perk: once you own all four perks, its bonus modifier switches on.</p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Perk</th><th>What it does</th><th>Availability</th></tr></thead>
+    <tbody>
+      <tr><td>Dying Wish</td><td>Instead of going down, you go Berserk — invulnerable with huge melee damage for 9 seconds, then drop to 1 HP. Long cooldown that grows per use. The closest thing BO4 has to a second life.</td><td>Launch — top pick</td></tr>
+      <tr><td>Quick Revive</td><td>Revive teammates much faster, and your own health starts regenerating sooner and refills faster.</td><td>Launch</td></tr>
+      <tr><td>Winter's Wail</td><td>When a zombie hits you, a frost explosion freezes or slows everything around you. Stores two charges. The defensive buy that replaces Juggernog's job.</td><td>Launch — top pick</td></tr>
+      <tr><td>Victorious Tortoise</td><td>Your shield blocks damage from <em>all</em> directions while held, and explodes when it breaks. In the modifier slot it can knock down even boss zombies.</td><td>Launch</td></tr>
+      <tr><td>Stamin-Up</td><td>Faster movement and sprint speed, stamina refills faster. Essential on the big maps — Voyage and Tag der Toten are hikes.</td><td>Launch</td></tr>
+      <tr><td>Deadshot Dealer</td><td>Aiming snaps to the head, with reduced recoil, scope sway and hip-fire spread.</td><td>Launch</td></tr>
+      <tr><td>Electric Burst</td><td>Reloading discharges an electric shock that damages and stuns nearby zombies — the emptier the mag, the bigger the burst. BO4's Electric Cherry.</td><td>Launch</td></tr>
+      <tr><td>Death Perception</td><td>See zombies through walls when they're close, plus screen-edge indicators for enemies approaching off-camera. A training safety net.</td><td>Launch</td></tr>
+      <tr><td>Timeslip</td><td>Equipment cooldowns shrink, traps and fast travel reset faster, and box / Pack-a-Punch weapons appear faster.</td><td>Launch</td></tr>
+      <tr><td>Stone Cold Stronghold</td><td>Standing your ground builds a defensive circle around you that stacks armor and damage the longer you hold it. A camper's perk — built for lockdown steps.</td><td>Launch</td></tr>
+      <tr><td>Bandolier Bandit</td><td>Carry far more reserve ammo for every gun. Quietly one of the best high-round perks in the game.</td><td>Launch</td></tr>
+      <tr><td>Mule Kick</td><td>Carry a third primary weapon. Lose it if you go down, same as always.</td><td>Launch</td></tr>
+      <tr><td>PHD Slider</td><td>Slide to build a charge, then slide into a zombie to detonate it. Grants explosive-damage resistance. BO4's answer to PHD Flopper.</td><td>Launch</td></tr>
+      <tr><td>Secret Sauce</td><td>Grants a random perk that isn't one of your four slotted perks. A gamble slot — sometimes it's the best buy on the map.</td><td>Launch</td></tr>
+      <tr><td>Blood Wolf Bite</td><td>A spectral wolf, Luna, fights beside you — her kills pay you points, and in the modifier slot her kills can drop bonus power-ups.</td><td>Added post-launch</td></tr>
+      <tr><td>Ethereal Razor</td><td>Massively increased melee damage, and melee kills can restore health. Makes the Bowie Knife a real high-round weapon.</td><td>Added post-launch</td></tr>
+      <tr><td>Zombshell</td><td>Damaged zombies can drop into a slowed shell state that also slows the zombies around them — free crowd control on every gun.</td><td>Added post-launch</td></tr>
+      <tr><td>Blaze Phase</td><td>Bursts you forward in a rush of flame that burns zombies in your path — an escape button on a cooldown, and the last perk ever added to BO4.</td><td>Added with Tag der Toten</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="section-note" style="margin-top:10px">A proven default four for most maps: <b>Dying Wish, Winter's Wail, Stamin-Up, and Victorious Tortoise or Bandolier Bandit</b> — put Dying Wish or Victorious Tortoise in the fourth (modifier) slot. On shield-heavy maps the Tortoise modifier is the difference between a boss knocking you down and you knocking the boss down.</p>
+
+  <h2>The 7 Special Weapons</h2>
+  <p class="section-note">One per player, chosen in Create-a-Class, charged by kills. Think of it as a fifth weapon that lives on a cooldown — spend it on boss waves, lockdown steps and rescues, not on round-12 trash.</p>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Special Weapon</th><th>What it does</th><th>Best for</th></tr></thead>
+    <tbody>
+      <tr><td>Path of Sorrows</td><td>A katana — fast, lethal slashes with a dashing lunge. One-hit kills deep into high rounds.</td><td>Aggressive trainers</td></tr>
+      <tr><td>Ragnarok DG-5</td><td>Gravity spikes: slam them down for a shockwave, then plant them as electric traps. Returns from BO3.</td><td>Holding a doorway or lockdown</td></tr>
+      <tr><td>Scepter of Ra</td><td>A staff that fires a damaging beam and heals/revives teammates you aim it at. The support pick.</td><td>Co-op crews and Easter egg runs</td></tr>
+      <tr><td>Hammer of Valhalla</td><td>A war hammer with a shield — area-effect slams and real defense while it's out.</td><td>Front-line reviver</td></tr>
+      <tr><td>Chakrams of Vengeance</td><td>Thrown bladed rings that bounce between zombies and return to your hand.</td><td>Mid-range train clearing</td></tr>
+      <tr><td>Death of Orion</td><td>The IX scorpion gun doubles as a special weapon option: charged shots chain lightning through a whole train.</td><td>Crowd wipes on any map</td></tr>
+      <tr><td>Viper and Dragon</td><td>Dual pistols — one spits venom, the other fire — with a combined burst attack.</td><td>Players who live in the box anyway</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>The Maps</h2>
+  <p class="section-note">In release order. Three launch maps, then the five Black Ops Pass maps. Chaos maps star Scarlett, Bruno, Diego and Shaw; Aether maps close out the Primis, Ultimis and Victis storylines.</p>
+
+  <div id="maps">
+
+  <!-- IX -->
+  <article class="map" data-cat="launch chaos ee" data-search="ix nine roman egypt gladiator arena danu ra zeus odin death of orion serket's kiss brazen bull shield fury wrath elephants blightfather tigers crowd affinity challenge banners venerated warrior chaos scarlett bruno diego shaw">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">IX</span><span class="pack">Launch · Chaos</span></div>
+      <div class="map-title"><h3>IX</h3><p class="setting">Roman-Egyptian gladiator arena · The Chaos crew's debut</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapon: Death of Orion</span><span class="tag red">Bosses: Fury &amp; Wrath, the war elephants</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Pack-a-Punch, the crowd &amp; challenges</h4><p>Four god towers — <b>Ra, Danu, Zeus, Odin</b> — ring the arena, and your four perk statues stand in their temples. To raise Pack-a-Punch: ring the <b>gong</b> at the top of each tower to summon that god's Champion, kill all four, carry their heads to the Temple, and set them on the spikes. The arena crowd has an <b>affinity</b> meter — flashy kills and completed challenges please them and earn gifts (points, power-ups, a free perk for a full set of challenge banners); sloppy play angers them, and an angry crowd is still useful: it's how you get them to throw the dung the Easter egg needs. Cut down the <b>challenge banners</b> in the arena to start personal challenges — finishing them pays out weapons and perks all game long.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li>The <b>Death of Orion</b> is the box's scorpion gun — charged shots chain lightning through a train, and Pack-a-Punched it becomes <b>Serket's Kiss</b>. The guaranteed route: tip the fire bowl at the Danu-Ra temple entrance, then let the poison work on the Mystery Box.</li><li>Build the <b>Brazen Bull</b> shield in the Pit (three parts around the underground) — it shoots fire, blocks your back, and upgrades to the Iron Bull. On a map with tigers and axe-throwing gladiators, it's not optional.</li><li><b>Blightfathers</b> debut here — hulking brutes whose weak point is the glowing growth; don't let one corner you in a tower stairwell. <b>Tigers</b> are fast and low: listen for them.</li><li>Train in the arena itself — it's the widest loop in BO4 — and keep the crowd happy while you do it.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Venerated Warrior</h4><ol><li>Unlock Pack-a-Punch (four gongs, four Champions, four heads in the Temple) and get the <b>Death of Orion</b>.</li><li><b>Make the fertilizer:</b> grind the marked blue skull into bone meal in the Flooded Crypt, char a piece of pyre wood in the Odin cauldron using a gladiator's thrown axe, and collect dung from an angry crowd. Mix all three in the Zeus bath house bowl, plant the fertilizer in the Danu Arboretum, burn off the green-smoke lockdown, and destroy the three corrupted pods on the tree.</li><li>Build the <b>Brazen Bull</b>, shoot the four bull plates with it to summon and kill four gladiators, then complete the <b>Ra obelisk challenge</b> — kill the enemy types shown on the obelisk, in the order shown, twice.</li><li>Raise the four poles around the map and charge the arena circles with electric kills, shoot the three matched symbols with a charged Death of Orion shot, then survive the lockdown in <b>the Pit</b> and take the key that drops.</li><li><b>Boss fight:</b> step through the arena portal. Survive waves of tigers and gladiators, then face the war elephants <b>Fury</b> and <b>Wrath</b> one at a time — strip the side armor, knock off the rider, and pour fire into the exposed head.</li></ol><p style="margin-top:8px"><b>Song:</b> “Mad Hatter” by Avenged Sevenfold — the map's hidden musical Easter egg.</p></div>
+    </div>
+  </article>
+
+  <!-- VOYAGE OF DESPAIR -->
+  <article class="map" data-cat="launch chaos ee" data-search="voyage of despair titanic rms ship kraken elemental stoker catalyst blightfather sentinel artifact abandon ship eye of odin poop deck boiler room clocks dials chaos scarlett">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">VOY</span><span class="pack">Launch · Chaos</span></div>
+      <div class="map-title"><h3>Voyage of Despair</h3><p class="setting">RMS Titanic, 1912 · A heist gone wrong on a sinking ship</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapon: The Kraken</span><span class="tag red">Boss: The Eye of Odin</span><span class="tag">Difficulty: Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>The Sentinel Artifact &amp; Pack-a-Punch</h4><p>The Chaos maps run on <b>Sentinel Artifacts</b> instead of a power switch. Voyage's artifact sits in the State Rooms near spawn — pick it up, carry it to the Poop Deck, and activate it to wake the ship: doors unlock, and the artifact scatters four glowing orbs to pedestals across the ship (Forecastle, Grand Staircase, Boat Deck, Poop Deck areas). Activate all four pedestals and Pack-a-Punch is live — but it <b>teleports between the pedestal locations every few rounds</b>, so check an empty pedestal to learn where it moved. Fast-travel portals (500 points a ride) stitch the ship's two ends together.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li>The <b>Kraken</b> has a free quest route: from about round 12, kill a <b>Stoker</b> (the coal-shoveling mini-boss — shoot the glowing weak spot under its shoulder or head plating) to drop a key, open the chest it unlocks, and fill that chest with zombie souls. Fill it three times as it relocates, and a tentacle delivers the Kraken. Kill elemental <b>Catalysts</b> near it to swap its ammo between fire, ice, acid and decay variants.</li><li>Catalysts are elemental zombies that explode on death — shoot them at range or use their deaths to clear a doorway, never hug them.</li><li>The ship is a maze of tight decks. Train on the <b>Poop Deck</b> and the Forecastle, and learn the portal routes early — getting lost mid-round kills more Voyage runs than zombies do.</li><li>Build the <b>Svalinn Guard</b> shield below decks; the corridors are too narrow to fight without something on your back.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Abandon Ship</h4><ol><li>Activate the Sentinel Artifact, unlock Pack-a-Punch, and Pack-a-Punch a weapon once. Four of the ship's <b>clocks</b> change — note each changed clock's time and symbol, then set the dials on the Bridge to match.</li><li><b>Charge the outlets:</b> four elemental outlets start sparking around the ship. Lead a Catalyst of the matching element to each outlet and kill it there to reveal a ritual symbol. Stand on the symbols and clear all four trials — acid, water, electric, fire — to claim the <b>true Sentinel Artifact</b>.</li><li>Take the <b>Acid Kraken</b> to the Boiler Room and shoot out all nine leaking pipes to flood it and douse the fires, then place the true artifact into the Pack-a-Punch machine.</li><li>In the Cargo Hold, solve the <b>solar system</b> step — work the planet models in the order the artifact reveals — to open the way to the ship's heart.</li><li><b>Boss fight — the Eye of Odin:</b> on deck, against the giant Eye and waves of Blightfathers and Catalysts. Shoot the Eye when its weak point opens between add phases, and keep a special weapon saved for the Blightfather surges. Three players is the sweet spot — a full four makes the boss spawns brutal.</li></ol><p style="margin-top:8px"><b>Song:</b> “Drowning” by Kevin Sherwood (feat. Elena Siegman) — the map's hidden musical Easter egg.</p></div>
+    </div>
+  </article>
+
+  <!-- BLOOD OF THE DEAD -->
+  <article class="map" data-cat="launch aether ee" data-search="blood of the dead alcatraz mob primis brutus warden spectral shield hell's retriever blundergat magmagat golden spork bird most wanted richtofen power house warden's key">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">BLOOD</span><span class="pack">Launch · Aether</span></div>
+      <div class="map-title"><h3>Blood of the Dead</h3><p class="setting">Alcatraz Island, again · Mob of the Dead, reimagined and expanded</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapons: Blundergat + Hell's Retriever</span><span class="tag red">Boss: Brutus, the Warden</span><span class="tag">Difficulty: Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>The Spectral Shield &amp; Pack-a-Punch</h4><p>Primis returns to Alcatraz, and the Afterlife is gone — in its place is the <b>Spectral Shield</b>, built from three parts scattered around the prison (one drops from Brutus himself). Its Spirit Blast reveals hidden objects, powers panels, and sees things that aren't there — half this map is invisible without it. Kill <b>Brutus</b> for the <b>Warden's Key</b>, unlock the Power House, and spirit-blast the panel inside to raise Pack-a-Punch. The map is bigger than Mob: the Warden's house, the expanded docks, and the Citadel Tunnels all hide quest steps.</p></div>
+      <div class="block"><h4>Brutus &amp; the gear</h4><ul><li><b>Brutus</b> is meaner than his BO2 self — he locks down machines, sprints, and shows up constantly. Focus his head, and don't let him catch you in the showers or the tunnels.</li><li>Feed the three <b>Cerberus heads</b> again to earn the <b>Hell's Retriever</b> from the lava pit — same ritual as Mob, still worth it every game.</li><li>The <b>Blundergat</b> is earned by spirit-blasting five hidden skulls around the prison, then collecting it in the Warden's office. Take it to the forge in New Industries and complete the temperature-gauge ritual to upgrade it into the <b>Magmagat</b>.</li><li>The <b>Golden Spork</b> returns (cafeteria poster, infirmary spoon sequence) — with Ethereal Razor it one-hit kills absurdly deep.</li><li>Train at the <b>docks</b> and the cafeteria roof route; the cell blocks are Brutus country.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Most Wanted</h4><ol><li>Build the Spectral Shield, unlock Pack-a-Punch, and earn the Hell's Retriever and the Blundergat — upgrade it to the Magmagat at the forge.</li><li><b>Track the spectral bird:</b> with the shield raised, spot the ghostly bird hiding in one of its locations around the prison. You get <b>one sighting per round</b>, and it takes five — this step is the run's clock, so start it early and check for the bird every round.</li><li>Follow the bird's trail through the prison — each sighting reveals the next stage of the Warden's ritual: charge the marked spots with kills and shield blasts as the trail leads you through the docks, the library, and down into the Citadel Tunnels.</li><li><b>Finale:</b> the trail ends in a lockdown fight against heavy waves with multiple Brutus spawns — hold the circle, spend your special weapons, and survive it.</li><li>The ending cutscene is one of the Aether story's biggest gut-punches: Richtofen, the blood vials, and a choice that sets up everything Tag der Toten has to answer for.</li></ol><p style="margin-top:8px"><b>Song:</b> “Where Are We Going” (2018 version) — the Mob of the Dead theme returns; find the hidden radios / 935 bottles around the prison.</p></div>
+    </div>
+  </article>
+
+  <!-- CLASSIFIED -->
+  <article class="map" data-cat="dlc aether ee" data-search="classified five pentagon ultimis defcon teleporter groom lake area 51 winter's howl nova crawlers black ops pass pig war room laboratories">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">CLASS</span><span class="pack">Black Ops Pass · Aether</span></div>
+      <div class="map-title"><h3>Classified</h3><p class="setting">The Pentagon, 1963 · "Five" reimagined, with Groom Lake attached</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapon: Winter's Howl</span><span class="tag red">Special: Nova 6 Crawlers</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>DEFCON, teleporters &amp; Pack-a-Punch</h4><p>The Ultimis crew — the original Dempsey, Nikolai, Takeo and Richtofen — fights through the Pentagon from BO1's "Five," rebuilt and expanded with the laboratories below. Flip the <b>DEFCON switches</b> scattered through the War Room and labs to raise the level to 5, which wakes the main teleporter in the War Room. The teleporter takes you to <b>Groom Lake</b> (Area 51), where Pack-a-Punch waits — you'll bounce back and forth all game, so learn both layouts. Power is a single switch in the labs; the <b>Winter's Howl</b> freeze gun is the box wonder weapon, and it earns its keep against the crowds in the War Room's tight circle.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li><b>Nova 6 crawlers</b> are back — gas-spewing crawlers that burst when shot. Kill them at range or with the Howl; never knife one in a doorway.</li><li>The War Room is the classic training loop, but BO4 zombies are faster than BO1's — the Howl and a charged special weapon are your reset buttons when the circle collapses.</li><li>Groom Lake is a wide, safe loop and a fine place to spend a round regrouping — just remember the teleporter back is your only way home.</li><li>There's a pig in the labs. Long-time players know what to do. New players: leave the pig alone until you're set up.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — the Classified ending</h4><ol><li>Turn on the power, raise DEFCON to 5, and open the teleporter route to Groom Lake to unlock Pack-a-Punch.</li><li>Work the Pentagon's hidden sequence: a chain of system activations and defenses through the War Room and the laboratories — the steps move between floors, so split the crew and call out each completed stage.</li><li>Return to Groom Lake and complete the containment trials there as the teleporter charges — hold the open ground against escalating waves, crawlers included.</li><li>Survive the final Groom Lake lockdown and take the teleporter out. The ending cutscene pulls Ultimis out of the Pentagon — and drops the story straight into the setup for Alpha Omega.</li></ol><p style="margin-top:8px"><b>Note:</b> Classified's quest is the shortest in BO4 and plays more like a "Five" victory lap than a full Chaos-style quest — a good first BO4 Easter egg for a new crew.</p></div>
+    </div>
+  </article>
+
+  <!-- DEAD OF THE NIGHT -->
+  <article class="map" data-cat="dlc chaos ee" data-search="dead of the night rhodes manor england 1912 alistair's folly chaos theory annihilator savage impaler werewolf nosferatu vampire sentinel artifact gideon christina jonathan godfrey dlc 1">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">DOTN</span><span class="pack">DLC 1 · Chaos</span></div>
+      <div class="map-title"><h3>Dead of the Night</h3><p class="setting">Rhodes Manor, England, 1912 · A séance, a full moon, and monsters</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapons: Alistair's Folly + Savage Impaler</span><span class="tag red">Boss: The Werewolf</span><span class="tag">Difficulty: Medium–Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>The Sentinel Artifact &amp; Pack-a-Punch</h4><p>A standalone Chaos chapter with a new cast — vaudeville psychic Gideon Jones, reporter Christina Fowler, ex-cop Jonathan Warwick, and Godfrey the butler — trapped in Alistair Rhodes' manor the night his occult party goes wrong. As on Voyage, a <b>Sentinel Artifact</b> replaces the power switch: activate it in the Grand Hall, then clear the <b>three challenge lockdowns</b> it demands around the manor and grounds to raise Pack-a-Punch inside the house. The map sprawls — manor, greenhouse, cemetery, mausoleum, and the forest beyond the gates — so open routes early and learn the forest path before the quest sends you out there in the dark.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li><b>Alistair's Folly</b> is a heavy revolver from the box that upgrades in stages — feed it elemental Catalyst kills to evolve it into <b>Chaos Theory</b>, then <b>Alistair's Annihilator</b>, one of the strongest hand cannons in BO4.</li><li>The <b>Savage Impaler</b> crossbow is earned through its own quest in the forest and crypt — wooden stakes that pin and burn vampires. Build it before the late quest steps.</li><li><b>Nosferatu</b> are this map's vampires: fast, lunging, and they shrug off body shots — aim high, and keep the Impaler or a shotgun for them. The rarer <b>Crimson Nosferatu</b> hits harder still.</li><li><b>Werewolves</b> stalk the forest on their own rounds — huge health pools, huge damage. Don't fight one in the trees; kite it back to the cemetery or the manor steps where you have room.</li><li>Train in the cemetery or the Grand Hall; the greenhouse is a trap with chandeliers.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — the manor's ritual</h4><ol><li>Activate the Sentinel Artifact, clear its three challenges, unlock Pack-a-Punch, and evolve Alistair's Folly all the way to <b>Alistair's Annihilator</b>. Build the Savage Impaler too — the forest steps demand it.</li><li>Work the manor's hidden trials: the <b>cemetery telescope</b> star step, the <b>library's</b> book-and-symbol puzzle, and the shrine out in the <b>forest</b> — each reveals one piece of the ritual the Rhodes household was performing.</li><li>Charge the three ritual seals with kills inside their marked circles — greenhouse, cemetery, and forest — defending each circle until it locks.</li><li><b>Boss fight:</b> in the forest clearing under the full moon, face the <b>Werewolf</b> itself. Dodge its charges, pour damage in when it rears up between add waves, and save your special weapons for the final phase when the Nosferatu join in.</li></ol><p style="margin-top:8px"><b>Why play it:</b> the most self-contained story in BO4 — a gothic one-off that needs no knowledge of either storyline, and the best-looking map in the game.</p></div>
+    </div>
+  </article>
+
+  <!-- ANCIENT EVIL -->
+  <article class="map" data-cat="dlc chaos ee" data-search="ancient evil delphi greece hand of gaia charon hemera ouranos redeemed hands pegasus gegenees greek tragedy skeletons amphitheater sanctuary of apollo dlc 2 chaos">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">AE</span><span class="pack">DLC 2 · Chaos</span></div>
+      <div class="map-title"><h3>Ancient Evil</h3><p class="setting">Delphi, Greece · The Chaos crew vs. the gods themselves</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapons: The Four Hands of the Gods</span><span class="tag red">Boss: Gegenees, the six-armed giant</span><span class="tag">Difficulty: Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Two artifacts &amp; Pack-a-Punch</h4><p>The Chaos crew follows the Prima Materia trail to the lost city of Delphi, buried under modern Greece. Two <b>Sentinel Artifacts</b> anchor the map — one at the Amphitheater, one at the Sanctuary of Apollo — and awakening both powers the city and raises Pack-a-Punch at the Temple of Apollo. Delphi is vertical: cliff paths, the River of Sorrow below, and the Stoa above. The <b>Pegasus</b> — a winged statue chained in the center of the map — is both a fast-travel option and the heart of the Easter egg.</p></div>
+      <div class="block"><h4>The Hands &amp; survival notes</h4><ul><li>Four wonder weapons, one per god, each earned at its shrine: <b>Hand of Gaia</b> (earth — grows damaging roots), <b>Hand of Charon</b> (the river — a spectral boatman's blast), <b>Hand of Hemera</b> (light — a searing beam), and <b>Hand of Ouranos</b> (wind — a storm vortex). Each upgrades through a second trial into a stronger <b>Redeemed Hand</b>.</li><li>Earn the <b>Pegasus Strike</b> and you can call the winged horse down to flatten a whole area — save it for Gegenees adds and lockdown steps.</li><li><b>Skeletons</b> pour out of smashed pots and urns — break pots for loot, but expect company. Blightfathers and Catalysts both return.</li><li>Train in the Amphitheater — wide, flat, with the artifact steps done it becomes the safest loop in BO4's DLC maps.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Greek Tragedy</h4><ol><li>Awaken both Sentinel Artifacts, unlock Pack-a-Punch, and earn the Hands — at minimum the <b>Hand of Charon</b> and <b>Hand of Gaia</b>, whose trials open the river and the shrine routes the quest needs.</li><li><b>Free Pegasus:</b> complete the chain of trials across the city — the river crossing, the shrine offerings, the amphitheater challenge — to break the chains binding the winged horse, step by step.</li><li>Complete the gods' final trials in the Sanctuary of Apollo and the Amphitheater, charging the artifacts with kills using the Hands until the way to the arena opens.</li><li><b>Boss fight:</b> <b>Gegenees</b>, the six-armed giant of Greek myth. Target the arms and the glowing weak points as they expose themselves, clear the skeleton waves between phases, and use Pegasus Strikes when the adds flood in. Victory frees Pegasus — and ends the Chaos crew's story in BO4 on a genuine high.</li></ol><p style="margin-top:8px"><b>Note:</b> Greek Tragedy is the most "classic Zombies" quest in BO4 — big trials, big boss, no clock-watching. If your crew bounced off Voyage's length, start your Chaos questing here.</p></div>
+    </div>
+  </article>
+
+  <!-- ALPHA OMEGA -->
+  <article class="map" data-cat="dlc aether ee" data-search="alpha omega nuketown camp edward broken arrow ray gun mark ii variants avogadro electromagnetic awakening rushmore bunker primis ultimis dlc 3 apd">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">AO</span><span class="pack">DLC 3 · Aether</span></div>
+      <div class="map-title"><h3>Alpha Omega</h3><p class="setting">Camp Edward, Nevada · Nuketown, massively expanded — with a bunker beneath</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapon: Ray Gun Mark II + 4 variants</span><span class="tag red">Boss: The Avogadro</span><span class="tag">Difficulty: Medium–Hard</span></div>
+    <div class="map-body">
+      <div class="block"><h4>The bunker &amp; Pack-a-Punch</h4><p>Both crews land here: Primis and Ultimis are all playable on the biggest version of Nuketown ever made — the familiar houses and streets on the surface, and the Broken Arrow research facility underneath. Open the bunker, work the generator and ventilation steps to make the facility safe, and Pack-a-Punch waits in the bunker's core. The bunker's AI, <b>Rushmore</b>, talks constantly and hands out side jobs with real rewards — do them; they pay for your setup. Surface or bunker, the map is a loop of loops: learn the house-to-bunker shortcuts early.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li>The <b>Ray Gun Mark II</b> is built, not boxed: find its parts around the houses and facility and assemble it at a bench. Then go further — four <b>variant assembly kits</b> hidden in the bunker rebuild it into elemental variants, each with its own behavior. The Mark II family is Alpha Omega's whole arsenal plan.</li><li>Nova crawlers return, and the bunker adds gas-filled sections — route around green clouds, and never train through the ventilation shafts during a crawler round.</li><li><b>The Avogadro</b> is imprisoned in the APD (American Pyramid Device) at the facility's heart. You'll hear him all game. The Easter egg is about letting him out — decide as a crew if you're ready before you start the release steps.</li><li>Train in the cul-de-sac topside (the classic Nuketown loop, now with room to breathe) or the bunker's central ring.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Electromagnetic Awakening</h4><ol><li>Open the bunker, power the facility, unlock Pack-a-Punch, and build the <b>Ray Gun Mark II</b> — then build at least one of its variants; the quest steps ahead are keyed to them.</li><li>Complete <b>Rushmore's</b> task list: the AI assigns fetch-and-defend jobs across the houses and the bunker. Each finished job opens the next stage of the facility's systems.</li><li>Prepare the release: gather the canister and serum components Rushmore's jobs point you to, and charge the APD containment using the Mark II variants until the device is ready to open.</li><li><b>Boss fight:</b> the <b>Avogadro</b> breaks free in the bunker. He's pure electricity — shoot down his shield, burn him during the exposed windows, and clear the adds he summons between teleports. The ending cutscene merges the two crews' fates and points everyone at Siberia.</li></ol><p style="margin-top:8px"><b>Song:</b> the map's hidden musical Easter egg is activated from the bunker's systems — Rushmore will not stop talking about it. Or anything else.</p></div>
+    </div>
+  </article>
+
+  <!-- TAG DER TOTEN -->
+  <article class="map" data-cat="dlc aether ee" data-search="tag der toten call of the dead siberia lighthouse victis hermit pablo marinus thundergun tundragun wunderwaffe dg-scharfschutze golden pack-a-punch agarthan device salvation lies above dlc 4 finale">
+    <div class="map-head">
+      <div class="map-badge"><span class="abbr">TAG</span><span class="pack">DLC 4 · Aether finale</span></div>
+      <div class="map-title"><h3>Tag der Toten</h3><p class="setting">Siberia, the frozen facility · Call of the Dead reimagined — the last Aether map ever</p></div>
+    </div>
+    <div class="tags"><span class="tag hot">Wonder Weapons: Thundergun + Wunderwaffe DG-Scharfschütze</span><span class="tag red">Finale: The Agarthan Device</span><span class="tag">Difficulty: Medium</span></div>
+    <div class="map-body">
+      <div class="block"><h4>Power, the Hermit &amp; Golden Pack-a-Punch</h4><p>The Victis crew — Misty, Marlton, Russman and Stuhlinger, the TranZit four — closes the Aether story where Call of the Dead began: a frozen Group 935 facility in Siberia, lighthouse and all. There's no George Romero this time. Instead the lighthouse keeper is the <b>Hermit</b>, Pablo Marinus, who trades fetch quests through a pulley system — complete his challenges and he upgrades your Pack-a-Punch into the <b>Golden Pack-a-Punch</b>, which adds extra damage tiers beyond the normal five. Turn on the power (switches at the lighthouse station and the facility), unlock Pack-a-Punch, and start the Hermit's errands early — Golden PaP is a quest-long project, not a purchase.</p></div>
+      <div class="block"><h4>Survival notes</h4><ul><li>The <b>Thundergun</b> returns: pull it from the box, or build it from three parts scattered around the lighthouse, docks and facility. Its quest upgrade, the <b>Tundragun</b>, freezes zombies solid and shatters them — fitting, here.</li><li>The <b>Wunderwaffe DG-Scharfschütze</b> is the box's other prize: a scoped, sniper-format Wunderwaffe that chains lightning at range.</li><li>The frozen lake slides, the ziplines, and the lighthouse stairs are your movement kit — Stamin-Up earns its slot crossing this map. Train on the ice by the docks or the facility courtyard.</li><li>Victis dialogue carries the whole map — this crew hasn't had a map since Buried in 2013, and Tag is written as their goodbye too.</li></ul></div>
+      <div class="block full ee"><h4>Main Easter egg — Salvation Lies Above</h4><ol><li>Turn on the power, unlock Pack-a-Punch, build the <b>Thundergun</b>, and run the Hermit's early fetch quests — his pulley challenges hand you key components and work you toward Golden Pack-a-Punch.</li><li><b>Build the Agarthan Device:</b> gather its pieces through the Hermit's trials and the facility — the Vril vessel, the elemental canisters, and the device housing, each locked behind a small challenge of its own.</li><li><b>Charge the device:</b> fill it with souls at the marked locations across the map — lighthouse, docks, and facility — and clear the seal lockdowns that trigger as it fills.</li><li><b>Finale:</b> carry the charged device to the <b>top of the lighthouse</b> and survive the final defense while it activates.</li><li>Then watch the ending. Eleven years of Aether story — from Nacht der Untoten to here — closes in this cutscene. No spoilers in this guide; it's earned.</li></ol><p style="margin-top:8px"><b>Best played:</b> after Blood of the Dead and Alpha Omega, in that order — Tag's ending lands twice as hard with both fresh in mind.</p></div>
+    </div>
+  </article>
+
+  </div>
+  <div id="empty" class="empty hidden">No map matches that search — try a map name, a wonder weapon, or a perk.</div>
+
+  <h2>High-Round Rules That Work on Every Map</h2>
+  <div class="grid2">
+    <div class="card"><h3>Re-Pack, don't re-box</h3><p>BO4 high rounds run on the Pack-a-Punch machine, not the Mystery Box. Get a strong wall or box gun, then keep re-Packing it — each tier is a real damage jump, up to five, and Golden Pack-a-Punch on Tag der Toten pushes further. Ammo comes from the machine itself for Pack-a-Punched guns, so a max-tier gun plus Bandolier Bandit outlasts any wonder weapon's ammo pool. Your special weapon is the second pillar: it charges on kills, so spend it, don't hoard it — a charged Ragnarok or Path of Sorrows wasted on a quiet round is a Max Ammo's worth of kills you didn't bank. Train wide loops (IX's arena, Tag's ice, Ancient Evil's amphitheater), let the wave fully spawn, then turn and clear.</p></div>
+    <div class="card"><h3>Downs, bosses &amp; recovery</h3><ul><li>BO4's bosses punish campers: the Eye of Odin, Gegenees and the Avogadro all flood you with adds. Keep moving between damage phases and call out add waves before they reach the boss's feet.</li><li><b>Dying Wish is your insurance policy</b> — when it pops, you have 9 invulnerable seconds: use them to escape or finish the revive, not to keep shooting, and remember you come out of it at 1 HP.</li><li>After a revive: shield first, then perks in slot order — your fourth-slot modifier only returns once all four perks are back, so a down costs more in BO4 than in any other game in this set.</li><li>Spend elixirs like you mean it. Cache Back before a boss phase, Temporal Gift when a Max Ammo or Insta-Kill drops, Perkaholic at the start of a quest run — a legendary elixir sitting unused at game over is worth nothing.</li><li>Save a crawler before every quest step, artifact trial and boss portal. Every BO4 quest assumes you have time; the zombies do not care.</li></ul></div>
+  </div>
+
+  <h2>Facebook Posts — Ready to Copy</h2>
+  <p class="section-note">One post per walkthrough, written for the Popnshots4u page. Tap Copy and paste straight into Facebook — plain text only, nothing extra attached.</p>
+  <div id="posts">
+    <div class="post"><h3>Series announcement</h3><p>GUIDE 4 OF 7 IS LIVE 🧟🩸
+The COMPLETE Black Ops 4 Zombies guide — all 8 maps, both storylines, every Easter egg, in release order.
+IX → Voyage of Despair → Blood of the Dead → Classified → Dead of the Night → Ancient Evil → Alpha Omega → Tag der Toten.
+Full guide is live on the site — link in the comments. Chaos or Aether — which BO4 storyline wins?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>IX</h3><p>BO4 ZOMBIES — IX 🏛️🧟
+Four gods, one arena, two war elephants. Ring the gongs, build the Brazen Bull, and grab the Death of Orion.
+Full Venerated Warrior walkthrough + Fury & Wrath boss strategy on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Voyage of Despair</h3><p>BO4 ZOMBIES — VOYAGE OF DESPAIR 🚢🧟
+The Titanic, a stolen artifact, and a Kraken with four elemental forms. Abandon Ship is one of the longest quests in BO4 — we've got every clock, outlet and trial step mapped.
+Full walkthrough on the site now. Who actually finished this one?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Blood of the Dead</h3><p>BO4 ZOMBIES — BLOOD OF THE DEAD 🔒🧟
+Back to Alcatraz. The Spectral Shield, the Magmagat, Brutus at his worst — and a ghost bird that only shows itself once a round.
+Full Most Wanted walkthrough on the site now. That ending still hurts.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Classified</h3><p>BO4 ZOMBIES — CLASSIFIED 🏢🧟
+"Five" rebuilt: DEFCON 5, the War Room, and a teleporter straight to Groom Lake. Ultimis rides again.
+Full guide + Winter's Howl tips on the site now. Best "Five" or best BO4 starter map?</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Dead of the Night</h3><p>BO4 ZOMBIES — DEAD OF THE NIGHT 🌕🧟
+A haunted English manor, vampires in the halls, and a werewolf waiting in the forest. Alistair's Folly evolves into one of the best guns in BO4.
+Full walkthrough on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Ancient Evil</h3><p>BO4 ZOMBIES — ANCIENT EVIL 🏺🧟
+Delphi, Greece. Four gods hand you four wonder weapons, Pegasus is chained in the plaza, and a six-armed giant guards the ending.
+Full Greek Tragedy walkthrough on the site now — the most classic-feeling quest in BO4.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Alpha Omega</h3><p>BO4 ZOMBIES — ALPHA OMEGA ☢️🧟
+Nuketown blown wide open — houses on top, a Broken Arrow bunker below, and the Avogadro screaming inside the APD.
+Ray Gun Mark II build + all four variants + Electromagnetic Awakening walkthrough, on the site now.</p><button class="copy-btn">Copy post</button></div>
+    <div class="post"><h3>Tag der Toten</h3><p>BO4 ZOMBIES — TAG DER TOTEN 🗼🧟
+The end of the Aether story. Victis returns to Siberia, the Thundergun becomes the Tundragun, and the Hermit upgrades your Pack-a-Punch to gold.
+Salvation Lies Above, step by step, on the site now. Eleven years of story ends here — did the ending land for you?</p><button class="copy-btn">Copy post</button></div>
+  </div>
+
+  <h2>Quick Answers</h2>
+  <details><summary>Which BO4 map should a beginner start on?</summary><p>IX. It's the most straightforward big map in BO4 — a clear Pack-a-Punch route, a wide training arena, and a quest that teaches the Chaos systems without Voyage's clock puzzles. For Aether flavor, Classified is the gentlest quest in the game. Save Voyage of Despair and Blood of the Dead until your crew knows the systems.</p></details>
+  <details><summary>There's really no Juggernog?</summary><p>Really. BO4 removed Juggernog (and Speed Cola) entirely and rebuilt survival around higher base health (200 after the tuning update), regenerating health, buildable shields, and defensive perks. If you're dying early, your fixes are: build the shield first, slot Winter's Wail and Dying Wish, and keep your special weapon charged — not a perk machine hunt.</p></details>
+  <details><summary>What is the best wonder weapon in BO4?</summary><p>For raw power, a fully evolved <b>Alistair's Annihilator</b> (Dead of the Night) and the <b>Redeemed Hands</b> on Ancient Evil. For everyday high rounds, the <b>Kraken</b> with the right elemental ammo and a max-tier Pack-a-Punched assault rifle next to it. And the <b>Tundragun</b> on Tag der Toten is the most fun gun in the game — freezing a whole train never gets old.</p></details>
+  <details><summary>Chaos or Aether — which storyline do I play first?</summary><p>They're independent — you can play either without the other. Chaos (IX, Voyage, Dead of the Night, Ancient Evil) is the new story: a 1912-era crew hunting an ancient artifact, self-contained and finished within BO4. Aether (Blood of the Dead, Classified, Alpha Omega, Tag der Toten) is the finale of the story that ran from World at War through BO3 — play those four in release order, and Tag der Toten last, because its ending closes the whole saga.</p></details>
+
+  <footer>
+    <p><b>Popnshots4u · Gamers Guides — Guide 4 of 7.</b> This page is BO4 only, in blood red &amp; charcoal. The rest of the set each get their own page in their own colors: BO1 in olive &amp; gold, BO2 in burnt orange &amp; black, Black Ops Cold War in ice blue &amp; Soviet red, MW3 Zombies in military green &amp; tan, plus Fortnite and Minecraft — so the seven guides never get mixed up.</p>
+    <p>Guide covers Black Ops 4 (2018) Zombies including the Black Ops Pass maps Classified, Dead of the Night, Ancient Evil, Alpha Omega and Tag der Toten. Easter egg steps are condensed routes — every main quest requires Normal difficulty or higher, and exact puzzle solutions (clock times, symbol orders, bird locations) randomize per match.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var maps = Array.prototype.slice.call(document.querySelectorAll('.map'));
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var active = 'all';
+  function apply(){
+    var term = (q.value || '').toLowerCase().trim();
+    var shown = 0;
+    maps.forEach(function(m){
+      var catOk = active === 'all' || m.getAttribute('data-cat').split(' ').indexOf(active) !== -1;
+      var text = (m.textContent + ' ' + (m.getAttribute('data-search') || '')).toLowerCase();
+      var qOk = !term || text.indexOf(term) !== -1;
+      var show = catOk && qOk;
+      m.classList.toggle('hidden', !show);
+      if (show) shown++;
+    });
+    empty.classList.toggle('hidden', shown !== 0);
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      chips.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      c.setAttribute('aria-pressed','true');
+      active = c.getAttribute('data-filter');
+      apply();
+    });
+  });
+  q.addEventListener('input', apply);
+
+  document.querySelectorAll('.post').forEach(function(post){
+    var btn = post.querySelector('.copy-btn');
+    var text = post.querySelector('p').textContent;
+    btn.addEventListener('click', function(){
+      function done(){
+        btn.textContent = 'Copied ✓';
+        btn.classList.add('done');
+        setTimeout(function(){ btn.textContent = 'Copy post'; btn.classList.remove('done'); }, 2200);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(); });
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch(e) { btn.textContent = 'Select the text above to copy'; }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
